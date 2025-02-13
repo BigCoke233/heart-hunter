@@ -9,7 +9,7 @@ function moves.fireSlingshot(x, y, playerX, playerY, shots)
     local sin = vx / length
     local cos = vy / length
 
-    bulletSpeed = 100
+    bulletSpeed = 300
 
     table.insert(shots, {
         type = "redheart",
