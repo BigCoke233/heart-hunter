@@ -1,4 +1,3 @@
-moves = require "moves"
 bullets = require "bullets"
 player = require "player"
 ui = require "ui"
@@ -67,7 +66,7 @@ end
 
 function love.mousereleased(x, y, button, istouch)
     if button == 1 then
-        moves.fireSlingshot(x, y, G.player.x, G.player.y, shots)
+        bullets.shoot(x, y, G.player.x, G.player.y, shots)
     end
 end
 
