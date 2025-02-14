@@ -2,6 +2,7 @@ moves = require "moves"
 bullets = require "bullets"
 player = require "player"
 ui = require "ui"
+enemies = require "enemies"
 
 function initGame()
     G = {
@@ -10,7 +11,15 @@ function initGame()
             size = 20
         },
         shots = {},
-        ammo = { "redheart", "redheart", "redheart" }
+        ammo = { "redheart", "redheart", "redheart" },
+        enemies = {},
+
+        time = 0,
+        lastSummonTime = 0,
+    }
+    config = {
+        enemySummonInterval = 5,
+        safeTime = 2
     }
 end
 
@@ -25,17 +34,21 @@ end
 function love.update(dt)
     player.move(dt)
     bullets.update(dt)
+    enemies.autoSummon()
 
     if not player.isAlive() then
         print("Out of hearts. You died!")
         initGame()
     end
+
+    G.time = G.time + dt
 end
 
 function love.draw()
     player.draw()
     bullets.draw()
     ui.drawAmmoBar()
+    enemies.draw()
 end
 
 function love.mousepressed(x, y, button, istouch)
