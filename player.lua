@@ -24,4 +24,8 @@ function playerObject.draw()
     love.graphics.circle("fill", player.x, player.y, player.size)
 end
 
+function playerObject.isAlive()
+    return #ammo~=0
+end
+
 return playerObject
