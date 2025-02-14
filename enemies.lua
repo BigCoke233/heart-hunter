@@ -10,11 +10,8 @@ function enemies.autoSummon()
 end
 
 function enemies.summon()
-    table.insert(G.enemies, {
-        x = math.random(love.graphics.getWidth()),
-        y = math.random(love.graphics.getHeight()),
-        r = 10
-    })
+    local x, y = utils.randomPosition()
+    table.insert(G.enemies, { x = x, y = y, r = 10 })
     G.lastSummonTime = G.time
     print("here comes the enemy!")
 end

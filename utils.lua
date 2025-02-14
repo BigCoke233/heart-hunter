@@ -8,4 +8,8 @@ function utils.circlesCollide(x1, y1, r1, x2, y2, r2)
     return distanceSquared <= radiusSum * radiusSum
 end
 
+function utils.randomPosition()
+    return math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight())
+end
+
 return utils
