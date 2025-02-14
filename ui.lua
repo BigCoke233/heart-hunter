@@ -7,7 +7,8 @@ function ui.drawAmmoBar()
     local gap = 20
 
     for i, v in pairs(G.ammo) do
-        love.graphics.draw(bulletImage[v], x+gap*(i-1), y)
+        love.graphics.draw(bulletImage[v], x+gap*(i-1), y, 0,
+            15/bulletImage[v]:getWidth(), 15/bulletImage[v]:getHeight())
     end
 end
 

@@ -43,7 +43,9 @@ function bullets.draw()
         love.graphics.draw(
             bulletImage[bullet.type],
             bullet.currentPos.x,bullet.currentPos.y,
-            bullet.orientation
+            bullet.orientation,
+            15/bulletImage[bullet.type]:getWidth(),
+            15/bulletImage[bullet.type]:getHeight()
         )
     end
 end
