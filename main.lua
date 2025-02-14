@@ -33,7 +33,7 @@ function love.load()
     love.window.setIcon(love.image.newImageData("resources/sprites/heart.png"))
     love.window.setTitle("Heart Hunter")
 
-    bulletImage = {
+    sprites = {
         redheart = love.graphics.newImage("resources/sprites/heart.png"),
         blueheart = love.graphics.newImage("resources/sprites/blueheart.png")
     }

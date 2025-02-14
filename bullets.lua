@@ -41,11 +41,11 @@ end
 function bullets.draw()
     for k, bullet in pairs(G.shots) do
         love.graphics.draw(
-            bulletImage[bullet.type],
+            sprites[bullet.type],
             bullet.currentPos.x,bullet.currentPos.y,
             bullet.orientation,
-            15/bulletImage[bullet.type]:getWidth(),
-            15/bulletImage[bullet.type]:getHeight()
+            15/sprites[bullet.type]:getWidth(),
+            15/sprites[bullet.type]:getHeight()
         )
     end
 end

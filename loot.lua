@@ -23,7 +23,7 @@ end
 
 function loot.draw()
     for i, v in pairs(G.loots) do
-       love.graphics.draw(bulletImage[v.type], v.x, v.y)
+       love.graphics.draw(sprites[v.type], v.x, v.y)
     end
 end
 
