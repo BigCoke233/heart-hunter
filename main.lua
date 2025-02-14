@@ -26,6 +26,7 @@ function initGame()
         safeTime = 2,
         playerShieldTime = 3,
         lootSize = 5,
+        heartSize = 15
     }
 end
 

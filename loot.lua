@@ -3,12 +3,14 @@ local loot = {}
 local utils = require "utils"
 local lootTypes = { "redheart", "blueheart" }
 
+function loot.drop(x, y, type)
+    table.insert(G.loots,
+        { x = x, y = y, r = config.lootSize, type = type })
+end
+
 function loot.summon()
     local x, y = utils.randomPosition()
-    table.insert(G.loots, {
-        x = x, y = y, r = config.lootSize,
-        type = lootTypes[math.random(#lootTypes)],
-    })
+    loot.drop(x, y, lootTypes[math.random(#lootTypes)])
 end
 
 function loot.beingPicked()
@@ -23,7 +25,11 @@ end
 
 function loot.draw()
     for i, v in pairs(G.loots) do
-       love.graphics.draw(sprites[v.type], v.x, v.y)
+        local sprite = sprites[v.type]
+        love.graphics.draw(sprite, v.x, v.y, 0,
+            config.heartSize / sprite:getWidth(),
+            config.heartSize / sprite:getHeight()
+        )
     end
 end
 

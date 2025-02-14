@@ -22,8 +22,12 @@ function enemies.beingShot()
                 enemy.x, enemy.y, enemy.r,
                 shot.currentPos.x, shot.currentPos.y, shot.size
             ) then
+                -- kill entities
                 table.remove(G.enemies, i)
                 table.remove(G.shots, j)
+                -- drop loot
+                local loot = require "loot"
+                loot.drop(enemy.x, enemy.y, "blueheart")
             end
         end
     end
