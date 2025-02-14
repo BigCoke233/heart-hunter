@@ -10,7 +10,7 @@ function initGame()
             x = love.graphics.getWidth() / 2,
             y = love.graphics.getHeight() / 2,
             speed = 100,
-            size = 20,
+            r = 20,
             shieldedTill = 0
         },
         shots = {},

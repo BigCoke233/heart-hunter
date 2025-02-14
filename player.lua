@@ -28,7 +28,7 @@ function player.draw()
         love.graphics.setColor(1,1,1)
     end
 
-    love.graphics.circle("fill", G.player.x, G.player.y, G.player.size)
+    love.graphics.circle("fill", G.player.x, G.player.y, G.player.r)
 end
 
 function player.isAlive()

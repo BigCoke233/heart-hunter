@@ -9,7 +9,7 @@ function utils.circlesCollide(x1, y1, r1, x2, y2, r2)
 end
 
 function utils.playerCollideWith(x, y, r)
-    return utils.circlesCollide(G.player.x, G.player.y, G.player.size, x, y, r)
+    return utils.circlesCollide(G.player.x, G.player.y, G.player.r, x, y, r)
 end
 
 function utils.randomPosition()
