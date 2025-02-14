@@ -7,7 +7,9 @@ enemies = require "enemies"
 function initGame()
     G = {
         player = {
-            x = 0, y = 0, speed = 100,
+            x = love.graphics.getWidth() / 2,
+            y = love.graphics.getHeight() / 2,
+            speed = 100,
             size = 20,
             shieldedTill = 0
         },
