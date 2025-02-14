@@ -1,31 +1,26 @@
-local playerObject = {}
+local player = {}
 
-player = {
-    x = 0, y = 0, speed = 100,
-    size = 20
-}
-
-function playerObject.move(dt)
+function player.move(dt)
     if love.keyboard.isDown("d") then
-        player.x = player.x + player.speed * dt
+        G.player.x = G.player.x + G.player.speed * dt
     end
     if love.keyboard.isDown("a") then
-        player.x = player.x - player.speed * dt
+        G.player.x = G.player.x - G.player.speed * dt
     end
     if love.keyboard.isDown("w") then
-        player.y = player.y - player.speed * dt
+        G.player.y = G.player.y - G.player.speed * dt
     end
     if love.keyboard.isDown("s") then
-        player.y = player.y + player.speed * dt
+        G.player.y = G.player.y + G.player.speed * dt
     end
 end
 
-function playerObject.draw()
-    love.graphics.circle("fill", player.x, player.y, player.size)
+function player.draw()
+    love.graphics.circle("fill", G.player.x, G.player.y, G.player.size)
 end
 
-function playerObject.isAlive()
-    return #ammo~=0
+function player.isAlive()
+    return #G.ammo~=0
 end
 
-return playerObject
+return player

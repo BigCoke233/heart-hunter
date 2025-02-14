@@ -1,10 +1,9 @@
 local moves = {}
 
-ammo = { "redheart", "redheart", "redheart" } -- init ammo stack
 bulletSpeed = 300
 
 function moves.fireSlingshot(x, y, playerX, playerY, shots)
-    if (#ammo == 0) then
+    if (#G.ammo == 0) then
         print("out of ammo!")
         return
     end
@@ -22,8 +21,8 @@ function moves.fireSlingshot(x, y, playerX, playerY, shots)
     local sin, cos = calculateShooting()
 
     -- fire the bullet
-    local currentBullet = table.remove(ammo)
-    table.insert(shots, {
+    local currentBullet = table.remove(G.ammo)
+    table.insert(G.shots, {
         type = currentBullet,
         speed = { x = sin*bulletSpeed, y = cos*bulletSpeed },
         orientation = math.asin(sin),
