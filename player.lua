@@ -39,7 +39,7 @@ function player.beingAttacked()
     if (player.isShielded()) then return end
 
     for i, v in pairs(G.enemies) do
-        if utils.circlesCollide(G.player.x, G.player.y, G.player.size, v.x, v.y, v.r) then
+        if utils.playerCollideWith(v.x, v.y, v.r) then
             print("attacked!")
             table.remove(G.ammo)
             -- shield this player
