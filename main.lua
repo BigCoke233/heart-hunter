@@ -8,7 +8,8 @@ function initGame()
     G = {
         player = {
             x = 0, y = 0, speed = 100,
-            size = 20
+            size = 20,
+            shieldedTill = 0
         },
         shots = {},
         ammo = { "redheart", "redheart", "redheart" },
@@ -19,7 +20,8 @@ function initGame()
     }
     config = {
         enemySummonInterval = 5,
-        safeTime = 2
+        safeTime = 2,
+        playerShieldTime = 3,
     }
 end
 
@@ -35,6 +37,7 @@ function love.update(dt)
     player.move(dt)
     bullets.update(dt)
     enemies.autoSummon()
+    player.isAttacked()
 
     if not player.isAlive() then
         print("Out of hearts. You died!")
