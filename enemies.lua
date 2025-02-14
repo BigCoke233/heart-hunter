@@ -3,7 +3,6 @@ local enemies = {}
 local utils = require "utils"
 
 function enemies.autoSummon()
-    print(G.time)
     if G.time>=config.safeTime and G.time-G.lastSummonTime>=config.enemySummonInterval then
         enemies.summon()
     end
