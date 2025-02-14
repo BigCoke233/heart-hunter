@@ -1,7 +1,8 @@
 local playerObject = {}
 
 player = {
-    x = 0, y = 0, speed = 100
+    x = 0, y = 0, speed = 100,
+    size = 20
 }
 
 function playerObject.move(dt)
@@ -20,7 +21,7 @@ function playerObject.move(dt)
 end
 
 function playerObject.draw()
-    love.graphics.draw(player.sprite, player.x, player.y)
+    love.graphics.circle("fill", player.x, player.y, player.size)
 end
 
 return playerObject
