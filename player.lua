@@ -33,7 +33,7 @@ function player.isAlive()
     return #G.ammo~=0
 end
 
-function player.isAttacked()
+function player.beingAttacked()
     if (player.isShielded()) then return end
 
     local function circlesCollide(x1, y1, r1, x2, y2, r2)
