@@ -39,6 +39,7 @@ function love.update(dt)
     enemies.autoSummon()
 
     player.beingAttacked()
+    enemies.beingShot()
 
     if not player.isAlive() then
         print("Out of hearts. You died!")

@@ -1,5 +1,7 @@
 local enemies = {}
 
+local utils = require "utils"
+
 function enemies.autoSummon()
     print(G.time)
     if G.time>=config.safeTime and G.time-G.lastSummonTime>=config.enemySummonInterval then
@@ -15,6 +17,20 @@ function enemies.summon()
     })
     G.lastSummonTime = G.time
     print("here comes the enemy!")
+end
+
+function enemies.beingShot()
+    for i, enemy in pairs(G.enemies) do
+        for j, shot in pairs(G.shots) do
+            if utils.circlesCollide(
+                enemy.x, enemy.y, enemy.r,
+                shot.currentPos.x, shot.currentPos.y, shot.size
+            ) then
+                table.remove(G.enemies, i)
+                table.remove(G.shots, j)
+            end
+        end
+    end
 end
 
 function enemies.draw()
