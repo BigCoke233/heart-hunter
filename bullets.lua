@@ -13,7 +13,8 @@ function bullets.draw()
     for k, bullet in pairs(shots) do
         love.graphics.draw(
             bulletImage[bullet.type],
-            bullet.currentPos.x,bullet.currentPos.y
+            bullet.currentPos.x,bullet.currentPos.y,
+            bullet.orientation
         )
     end
 end

@@ -14,6 +14,7 @@ function moves.fireSlingshot(x, y, playerX, playerY, shots)
     table.insert(shots, {
         type = "redheart",
         speed = { x = sin*bulletSpeed, y = cos*bulletSpeed },
+        orientation = math.asin(sin),
         currentPos = { x = playerX, y = playerY },
     })
 end
