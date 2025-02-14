@@ -1,7 +1,7 @@
 local loot = {}
 
 local utils = require "utils"
-local lootTypes = { "redheart" }
+local lootTypes = { "redheart", "blueheart" }
 
 function loot.summon()
     local x, y = utils.randomPosition()

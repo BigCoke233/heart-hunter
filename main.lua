@@ -27,8 +27,6 @@ function initGame()
         playerShieldTime = 3,
         lootSize = 5,
     }
-
-    loot.summon()
 end
 
 function love.load()
@@ -36,7 +34,8 @@ function love.load()
     love.window.setTitle("Heart Hunter")
 
     bulletImage = {
-        redheart = love.graphics.newImage("resources/sprites/heart.png")
+        redheart = love.graphics.newImage("resources/sprites/heart.png"),
+        blueheart = love.graphics.newImage("resources/sprites/blueheart.png")
     }
 
     initGame()
