@@ -28,6 +28,9 @@ function initGame()
 end
 
 function love.load()
+    love.window.setIcon(love.image.newImageData("resources/sprites/heart.png"))
+    love.window.setTitle("Heart Hunter")
+
     bulletImage = {
         redheart = love.graphics.newImage("resources/sprites/heart.png")
     }
