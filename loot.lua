@@ -1,7 +1,6 @@
 local loot = {}
 
 local utils = require "utils"
-local lootTypes = { "redheart", "blueheart" }
 
 function loot.drop(x, y, type)
     table.insert(G.loots,
@@ -10,7 +9,7 @@ end
 
 function loot.summon()
     local x, y = utils.randomPosition()
-    loot.drop(x, y, lootTypes[math.random(#lootTypes)])
+    loot.drop(x, y, heartTypes[math.random(#heartTypes)])
 end
 
 function loot.beingPicked()

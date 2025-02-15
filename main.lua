@@ -3,6 +3,7 @@ player = require "player"
 ui = require "ui"
 enemies = require "enemies"
 loot = require "loot"
+sprite = require "sprite"
 
 function initGame()
     G = {
@@ -31,14 +32,10 @@ function initGame()
 end
 
 function love.load()
-    love.window.setIcon(love.image.newImageData("resources/sprites/heart.png"))
+    love.window.setIcon(love.image.newImageData("resources/sprites/redheart.png"))
     love.window.setTitle("Heart Hunter")
 
-    sprites = {
-        redheart = love.graphics.newImage("resources/sprites/heart.png"),
-        blueheart = love.graphics.newImage("resources/sprites/blueheart.png")
-    }
-
+    sprite.load()
     initGame()
 end
 
@@ -62,9 +59,9 @@ end
 function love.draw()
     player.draw()
     bullets.draw()
-    ui.drawAmmoBar()
     enemies.draw()
     loot.draw()
+    ui.drawAmmoBar()
 end
 
 function love.mousepressed(x, y, button, istouch)
