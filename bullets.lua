@@ -40,13 +40,7 @@ end
 
 function bullets.draw()
     for k, bullet in pairs(G.shots) do
-        love.graphics.draw(
-            sprites[bullet.type],
-            bullet.currentPos.x,bullet.currentPos.y,
-            bullet.orientation,
-            15/sprites[bullet.type]:getWidth(),
-            15/sprites[bullet.type]:getHeight()
-        )
+        sprite.drawSquareWithAngle(bullet.type, bullet.currentPos, bullet.orientation, 15)
     end
 end
 

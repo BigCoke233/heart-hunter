@@ -7,8 +7,8 @@ function ui.drawAmmoBar()
     local gap = 20
 
     for i, v in pairs(G.ammo) do
-        love.graphics.draw(sprites[v], x+gap*(i-1), y, 0,
-            15/sprites[v]:getWidth(), 15/sprites[v]:getHeight())
+        local position = { x = x+gap*(i-1), y = y }
+        sprite.drawSquare(v, position, config.heartSize)
     end
 end
 

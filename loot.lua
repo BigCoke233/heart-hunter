@@ -24,11 +24,7 @@ end
 
 function loot.draw()
     for i, v in pairs(G.loots) do
-        local sprite = sprites[v.type]
-        love.graphics.draw(sprite, v.x, v.y, 0,
-            config.heartSize / sprite:getWidth(),
-            config.heartSize / sprite:getHeight()
-        )
+        sprite.drawSquare(v.type, v, config.heartSize)
     end
 end
 
