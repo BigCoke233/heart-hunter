@@ -20,7 +20,8 @@ end
 
 -- deal with obstacles
 
-function utils.hitObstacle(axisVal, r, d)
+-- detect if object hit obstacles at a certain direction
+function utils.hitObstacleAt(d, axisVal, r)
     local borders = G.currentRoom.borders
 
     -- if player has reached room border
@@ -39,6 +40,22 @@ function utils.hitObstacle(axisVal, r, d)
     -- ...
 
     return hitRoomBorder
+end
+
+-- detect if object hit obstacles with no specific direction
+function utils.hitObstacle(x, y, r)
+    local borders = G.currentRoom.borders
+
+    -- 检查是否撞到房间边界
+    if x - r <= borders[Direction.LEFT] or x + r >= borders[Direction.RIGHT] or
+       y - r <= borders[Direction.TOP] or y + r >= borders[Direction.BOTTOM] then
+        return true
+    end
+
+    -- 检查是否撞到其他障碍物（例如墙、箱子等）
+    -- ...
+
+    return false
 end
 
 return utils

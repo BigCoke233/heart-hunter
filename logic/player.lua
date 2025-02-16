@@ -14,7 +14,7 @@ function player.move(dt)
 
     for _, move in ipairs(moveDirections) do
         if love.keyboard.isDown(move.key) then
-            if utils.hitObstacle(G.player[move.axis], G.player.r, move.dir) then return end
+            if utils.hitObstacleAt(move.dir, G.player[move.axis], G.player.r) then return end
             G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
         end
     end

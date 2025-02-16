@@ -32,9 +32,16 @@ function bullets.shoot(x, y, playerX, playerY, shots)
 end
 
 function bullets.update(dt)
+    local utils = require "./utils/utils"
     for k, bullet in pairs(G.shots) do
-        bullet.currentPos.x = bullet.currentPos.x + bullet.speed.x * dt
-        bullet.currentPos.y = bullet.currentPos.y + bullet.speed.y * dt
+        local x, y = bullet.currentPos.x, bullet.currentPos.y
+
+        bullet.currentPos.x = x + bullet.speed.x * dt
+        bullet.currentPos.y = y + bullet.speed.y * dt
+
+        if utils.hitObstacle(x, y, bullet.size) then
+            G.shots[k] = nil
+        end
     end
 end
 
