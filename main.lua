@@ -1,3 +1,5 @@
+config = require "config"
+
 bullets = require "logic/bullets"
 player = require "logic/player"
 ui = require "render/ui"
@@ -6,31 +8,6 @@ loot = require "logic/loot"
 sprite = require "render/sprite"
 
 Room = require "objects.room"
-
-function initGame()
-    G = {
-        player = {
-            x = love.graphics.getWidth() / 2,
-            y = love.graphics.getHeight() / 2,
-            speed = 100,
-            r = 20,
-            shieldedTill = 0
-        },
-        shots = {},
-        ammo = { "redheart", "redheart", "redheart" },
-        enemies = {},
-        loots = {},
-
-        time = 0,
-        lastSummonTime = 0,
-        currentRoom = Room:getInitial()
-    }
-    config = {
-        playerShieldTime = 3,
-        lootSize = 5,
-        heartSize = 15
-    }
-end
 
 function love.load()
     love.window.setIcon(love.image.newImageData("resources/sprites/redheart.png"))
