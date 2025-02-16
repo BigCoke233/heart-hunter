@@ -5,6 +5,8 @@ enemies = require "logic/enemies"
 loot = require "logic/loot"
 sprite = require "render/sprite"
 
+Room = require "objects.room"
+
 function initGame()
     G = {
         player = {
@@ -21,6 +23,7 @@ function initGame()
 
         time = 0,
         lastSummonTime = 0,
+        currentRoom = Room:getInitial()
     }
     config = {
         playerShieldTime = 3,

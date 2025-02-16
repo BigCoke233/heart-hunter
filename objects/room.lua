@@ -1,12 +1,38 @@
 Room = {}
 
+local RoomType = {
+    INITIAL = 1,
+    COMBAT = 3,
+    LOOT = 3
+}
+
+local DoorDirection = {
+    LEFT=1, RIGHT=2, TOP=3, BOTTOM=4
+}
+
 function Room:new()
     local room = {
-        -- 1=left, 2=right, 3=top, 4=bottom
-        doors = { false, false, true, false },
+        doors = { false, false, false, false },
         enemies = {},
         isCleared = false,
-        type = "combat"
+        type = RoomType.COMBAT
     }
     return room
 end
+
+function Room:getInitial()
+    local room = Room:new()
+    room.doors[math.random(1,4)] = true
+    room.enemies = {}
+    room.type = RoomType.INITIAL
+end
+
+function Room:switch(to)
+    if type(to) == "table" then
+        G.currentRoom = to
+    elseif type(to) == "number" then
+        G.currentRoom = G.currentRoom.doors[DoorDirection[to]]
+    end
+end
+
+return Room
