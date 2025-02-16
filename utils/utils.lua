@@ -1,5 +1,7 @@
 local utils = {}
 
+-- deal with collision
+
 function utils.circlesCollide(x1, y1, r1, x2, y2, r2)
     local dx = x2 - x1
     local dy = y2 - y1
@@ -14,6 +16,29 @@ end
 
 function utils.randomPosition()
     return math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight())
+end
+
+-- deal with obstacles
+
+function utils.hitObstacle(axisVal, r, d)
+    local borders = G.currentRoom.borders
+
+    -- if player has reached room border
+    local hitRoomBorder = false
+    if d==Direction.RIGHT then
+        hitRoomBorder = axisVal+r >= borders[Direction.RIGHT]
+    elseif d==Direction.LEFT then
+        hitRoomBorder = axisVal-r <= borders[Direction.LEFT]
+    elseif d==Direction.TOP then
+        hitRoomBorder = axisVal-r <= borders[Direction.TOP]
+    elseif d==Direction.BOTTOM then
+        hitRoomBorder = axisVal+r >= borders[Direction.BOTTOM]
+    end
+
+    -- if player has met any blocks
+    -- ...
+
+    return hitRoomBorder
 end
 
 return utils

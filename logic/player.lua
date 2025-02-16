@@ -14,33 +14,10 @@ function player.move(dt)
 
     for _, move in ipairs(moveDirections) do
         if love.keyboard.isDown(move.key) then
-            if player.hitObstacle(move.dir) then return end
+            if utils.hitObstacle(G.player[move.axis], G.player.r, move.dir) then return end
             G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
         end
     end
-end
-
-function player.hitObstacle(d)
-    local borders = G.currentRoom.borders
-    local x = G.player.x
-    local y = G.player.y
-    local r = G.player.r
-    -- if player has reached room border
-    local hitRoomBorder = false
-    if d==Direction.RIGHT then
-        hitRoomBorder = x+r >= borders[Direction.RIGHT]
-    elseif d==Direction.LEFT then
-        hitRoomBorder = x-r <= borders[Direction.LEFT]
-    elseif d==Direction.TOP then
-        hitRoomBorder = y-r <= borders[Direction.TOP]
-    elseif d==Direction.BOTTOM then
-        hitRoomBorder = y+r >= borders[Direction.BOTTOM]
-    end
-
-    -- if player has met any blocks
-    -- ...
-
-    return hitRoomBorder
 end
 
 function player.isShielded()
