@@ -1,6 +1,6 @@
 local ui = {}
 
-function ui.drawAmmoBar()
+function ui.ammoBar()
     local height = 30
     local y = love.graphics.getHeight() - height
     local x = 10

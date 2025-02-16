@@ -11,13 +11,16 @@ local DoorDirection = {
 }
 
 function Room:new()
-    local room = {
+    local obj = {
+        width = 0.85, height = 0.8,
         doors = { false, false, false, false },
         enemies = {},
         isCleared = false,
         type = RoomType.COMBAT
     }
-    return room
+    setmetatable(obj, self)
+    self.__index = self
+    return obj
 end
 
 function Room:getInitial()
@@ -25,6 +28,7 @@ function Room:getInitial()
     room.doors[math.random(1,4)] = true
     room.enemies = {}
     room.type = RoomType.INITIAL
+    return room
 end
 
 function Room:switch(to)
