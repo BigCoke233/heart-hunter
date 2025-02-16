@@ -5,21 +5,18 @@ local utils = require "utils/utils"
 function player.move(dt)
     local room = G.currentRoom
 
-    if love.keyboard.isDown("d") then
-        if player.hitObstacle(Direction.RIGHT) then return end
-        G.player.x = G.player.x + G.player.speed * dt
-    end
-    if love.keyboard.isDown("a") then
-        if player.hitObstacle(Direction.LEFT) then return end
-        G.player.x = G.player.x - G.player.speed * dt
-    end
-    if love.keyboard.isDown("w") then
-        if player.hitObstacle(Direction.TOP) then return end
-        G.player.y = G.player.y - G.player.speed * dt
-    end
-    if love.keyboard.isDown("s") then
-        if player.hitObstacle(Direction.BOTTOM) then return end
-        G.player.y = G.player.y + G.player.speed * dt
+    local moveDirections = {
+        { key = "d", axis = "x", dir = Direction.RIGHT, delta = 1 },
+        { key = "a", axis = "x", dir = Direction.LEFT, delta = -1 },
+        { key = "w", axis = "y", dir = Direction.TOP, delta = -1 },
+        { key = "s", axis = "y", dir = Direction.BOTTOM, delta = 1 }
+    }
+
+    for _, move in ipairs(moveDirections) do
+        if love.keyboard.isDown(move.key) then
+            if player.hitObstacle(move.dir) then return end
+            G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
+        end
     end
 end
 
