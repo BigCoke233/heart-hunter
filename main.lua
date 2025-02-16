@@ -23,8 +23,6 @@ function initGame()
         lastSummonTime = 0,
     }
     config = {
-        enemySummonInterval = 5,
-        safeTime = 2,
         playerShieldTime = 3,
         lootSize = 5,
         heartSize = 15
@@ -42,7 +40,6 @@ end
 function love.update(dt)
     player.move(dt)
     bullets.update(dt)
-    enemies.autoSummon()
 
     player.beingAttacked()
     enemies.beingShot()

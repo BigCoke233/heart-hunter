@@ -2,12 +2,6 @@ local enemies = {}
 
 local utils = require "utils"
 
-function enemies.autoSummon()
-    if G.time>=config.safeTime and G.time-G.lastSummonTime>=config.enemySummonInterval then
-        enemies.summon()
-    end
-end
-
 function enemies.summon()
     local x, y = utils.randomPosition()
     table.insert(G.enemies, { x = x, y = y, r = 10 })
