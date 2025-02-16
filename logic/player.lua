@@ -48,7 +48,7 @@ function player.isShielded()
 end
 
 function player.isAlive()
-    return #G.ammo~=0
+    return #G.player.hearts~=0
 end
 
 function player.beingAttacked()
@@ -57,7 +57,7 @@ function player.beingAttacked()
     for i, v in pairs(G.enemies) do
         if utils.playerCollideWith(v.x, v.y, v.r) then
             print("attacked!")
-            table.remove(G.ammo)
+            table.remove(G.player.hearts)
             -- shield this player
             G.player.shieldedTill = G.time + config.playerShieldTime
         end

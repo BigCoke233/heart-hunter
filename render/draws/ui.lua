@@ -6,7 +6,7 @@ function ui.ammoBar()
     local x = 10
     local gap = 20
 
-    for i, v in pairs(G.ammo) do
+    for i, v in pairs(G.player.hearts) do
         local position = { x = x+gap*(i-1), y = y }
         sprite.drawSquare(v, position, config.heartSize)
     end

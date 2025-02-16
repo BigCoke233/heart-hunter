@@ -3,7 +3,7 @@ local bullets = {}
 bulletSpeed = 300
 
 function bullets.shoot(x, y, playerX, playerY, shots)
-    if (#G.ammo == 0) then
+    if (#G.player.hearts == 0) then
         print("out of ammo!")
         return
     end
@@ -21,7 +21,7 @@ function bullets.shoot(x, y, playerX, playerY, shots)
     local sin, cos = calculateShooting()
 
     -- fire the bullet
-    local currentBullet = table.remove(G.ammo)
+    local currentBullet = table.remove(G.player.hearts)
     table.insert(G.shots, {
         type = currentBullet,
         speed = { x = sin*bulletSpeed, y = cos*bulletSpeed },

@@ -20,10 +20,10 @@ function initGame()
             y = love.graphics.getHeight() / 2,
             speed = 100,
             r = 20,
-            shieldedTill = 0
+            shieldedTill = 0,
+            hearts = { "redheart", "redheart", "redheart" }
         },
         shots = {},
-        ammo = { "redheart", "redheart", "redheart" },
         enemies = {},
         loots = {},
 

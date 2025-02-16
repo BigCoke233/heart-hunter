@@ -16,7 +16,7 @@ function loot.beingPicked()
     for i, v in pairs(G.loots) do
         if utils.playerCollideWith(v.x, v.y, v.r) then
             local pickedLoot = table.remove(G.loots, i)
-            table.insert(G.ammo, pickedLoot.type)
+            table.insert(G.player.hearts, pickedLoot.type)
             table.remove(G.loots, i)
         end
     end
