@@ -23,6 +23,22 @@ function Room:new()
     return obj
 end
 
+function Room:getWidth()
+    return self.width * love.graphics.getWidth()
+end
+
+function Room:getHeight()
+    return self.height * love.graphics.getHeight()
+end
+
+function Room:getX()
+    return (love.graphics.getWidth() - self:getWidth()) / 2
+end
+
+function Room:getY()
+    return (love.graphics.getHeight() - self:getHeight()) / 2
+end
+
 function Room:getInitial()
     local room = Room:new()
     room.doors[math.random(1,4)] = true

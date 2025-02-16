@@ -1,33 +1,16 @@
 local background = {}
 
--- utilities
-
-local function getRoomSize(room)
-    local width = room.width * love.graphics.getWidth()
-    local height = room.height * love.graphics.getHeight()
-    return width, height
-end
-
-local function getRoomGap(room)
-    local width, height = getRoomSize(room)
-    local x = (love.graphics.getWidth() - width) / 2
-    local y = (love.graphics.getHeight() - height) / 2
-    return x, y
-end
-
--- draw functions
-
 function background.room()
     local room = G.currentRoom
-    local width, height = getRoomSize(room)
-    local x, y = getRoomGap(room)
+    local width, height = room:getWidth(), room:getHeight()
+    local x, y = room:getX(), room:getY()
     love.graphics.rectangle("line", x, y, width, height)
 end
 
 function background.doors()
     local room = G.currentRoom
-    local roomX, roomY = getRoomGap(room)
-    local roomW, roomH = getRoomSize(room)
+    local roomX, roomY = room:getX(), room:getY()
+    local roomW, roomH = room:getWidth(), room:getHeight()
     for d, door in ipairs(room.doors) do
         if (door ~= false) then
             local size = config.graphics.doorSize
