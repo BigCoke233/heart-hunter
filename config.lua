@@ -7,6 +7,8 @@ config = {
     graphics = {
       doorSize = 50,
       doorThickness = 5,
+      roomW = 0.85,
+      roomH = 0.8,
     },
 }
 
@@ -27,7 +29,7 @@ function initGame()
 
         time = 0,
         lastSummonTime = 0,
-        currentRoom = Room:getInitial()
+        currentRoom = Room:new()
     }
 end
 
