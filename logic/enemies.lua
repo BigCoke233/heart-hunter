@@ -20,7 +20,6 @@ function enemies.beingShot()
                 table.remove(G.enemies, i)
                 table.remove(G.shots, j)
                 -- drop loot
-                local loot = require "loot"
                 loot.drop(enemy.x, enemy.y, "blueheart")
             end
         end
