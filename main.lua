@@ -41,28 +41,8 @@ function love.draw()
     ui.drawAmmoBar()
 end
 
-function love.mousepressed(x, y, button, istouch)
-
-end
-
 function love.mousereleased(x, y, button, istouch)
     if button == 1 then
         bullets.shoot(x, y, G.player.x, G.player.y, shots)
     end
-end
-
-function love.keypressed(key)
-
-end
-
-function love.keyreleased(key)
-
-end
-
-function love.focus(f)
-
-end
-
-function love.quit()
-  print("Thanks for playing! Come back soon!")
 end
