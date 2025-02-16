@@ -6,21 +6,44 @@ function player.move(dt)
     local room = G.currentRoom
 
     if love.keyboard.isDown("d") then
-        if G.player.x+G.player.r>=room.borders[Direction.RIGHT] then return end
+        if player.hitObstacle(Direction.RIGHT) then return end
         G.player.x = G.player.x + G.player.speed * dt
     end
     if love.keyboard.isDown("a") then
-        if G.player.x-G.player.r<=room.borders[Direction.LEFT] then return end
+        if player.hitObstacle(Direction.LEFT) then return end
         G.player.x = G.player.x - G.player.speed * dt
     end
     if love.keyboard.isDown("w") then
-        if G.player.y-G.player.r<=room.borders[Direction.TOP] then return end
+        if player.hitObstacle(Direction.TOP) then return end
         G.player.y = G.player.y - G.player.speed * dt
     end
     if love.keyboard.isDown("s") then
-        if G.player.y+G.player.r>=room.borders[Direction.BOTTOM] then return end
+        if player.hitObstacle(Direction.BOTTOM) then return end
         G.player.y = G.player.y + G.player.speed * dt
     end
+end
+
+function player.hitObstacle(d)
+    local borders = G.currentRoom.borders
+    local x = G.player.x
+    local y = G.player.y
+    local r = G.player.r
+    -- if player has reached room border
+    local hitRoomBorder = false
+    if d==Direction.RIGHT then
+        hitRoomBorder = x+r >= borders[Direction.RIGHT]
+    elseif d==Direction.LEFT then
+        hitRoomBorder = x-r <= borders[Direction.LEFT]
+    elseif d==Direction.TOP then
+        hitRoomBorder = y-r <= borders[Direction.TOP]
+    elseif d==Direction.BOTTOM then
+        hitRoomBorder = y+r >= borders[Direction.BOTTOM]
+    end
+
+    -- if player has met any blocks
+    -- ...
+
+    return hitRoomBorder
 end
 
 function player.isShielded()
