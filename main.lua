@@ -18,6 +18,9 @@ function love.load()
     renderer = Renderer:new()
     local drawObject = require "render.draws.objects"
     local drawUI = require "render.draws.ui"
+    local drawBackground = require "render.draws.background"
+    renderer:add("background", nil, drawBackground.room)
+    renderer:add("background", nil, drawBackground.doors)
     renderer:add("objects", nil, drawObject.player)
     renderer:add("objects", nil, drawObject.bullets)
     renderer:add("objects", nil, drawObject.enemies)

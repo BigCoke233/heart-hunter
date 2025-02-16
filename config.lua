@@ -2,7 +2,12 @@
 config = {
     playerShieldTime = 3,
     lootSize = 5,
-    heartSize = 15
+    heartSize = 15,
+
+    graphics = {
+      doorSize = 50,
+      doorThickness = 5,
+    },
 }
 
 -- game default states
