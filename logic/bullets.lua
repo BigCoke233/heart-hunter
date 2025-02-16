@@ -38,10 +38,4 @@ function bullets.update(dt)
     end
 end
 
-function bullets.draw()
-    for k, bullet in pairs(G.shots) do
-        sprite.drawSquareWithAngle(bullet.type, bullet.currentPos, bullet.orientation, 15)
-    end
-end
-
 return bullets

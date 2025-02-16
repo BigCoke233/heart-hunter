@@ -22,10 +22,4 @@ function loot.beingPicked()
     end
 end
 
-function loot.draw()
-    for i, v in pairs(G.loots) do
-        sprite.drawSquare(v.type, v, config.heartSize)
-    end
-end
-
 return loot

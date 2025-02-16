@@ -27,13 +27,4 @@ function enemies.beingShot()
     end
 end
 
-function enemies.draw()
-    for i, v in pairs(G.enemies) do
-        local prevR, prevG, prevB = love.graphics.getColor()
-        love.graphics.setColor(0,255,255)
-        love.graphics.circle("fill", v.x, v.y, v.r)
-        love.graphics.setColor(prevR, prevG, prevB)
-    end
-end
-
 return enemies

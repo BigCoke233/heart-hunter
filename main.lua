@@ -1,4 +1,5 @@
 config = require "config"
+draws = require "render/draws"
 
 bullets = require "logic.bullets"
 player = require "logic.player"
@@ -7,14 +8,24 @@ enemies = require "logic.enemies"
 loot = require "logic.loot"
 sprite = require "render.sprite"
 
+
 Room = require "objects.room"
+Renderer = require "render.renderer"
 
 function love.load()
     love.window.setIcon(love.image.newImageData("resources/sprites/redheart.png"))
     love.window.setTitle("Heart Hunter")
 
+    renderer = Renderer:new()
+    renderer:add("objects", nil, draws.player)
+    renderer:add("objects", nil, draws.bullets)
+    renderer:add("objects", nil, draws.enemies)
+    renderer:add("objects", nil, draws.loot)
+    renderer:add("ui", nil, ui.drawAmmoBar)
+
     sprite.load()
     initGame()
+    enemies.summon()
 end
 
 function love.update(dt)
@@ -34,11 +45,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    player.draw()
-    bullets.draw()
-    enemies.draw()
-    loot.draw()
-    ui.drawAmmoBar()
+    renderer:draw()
 end
 
 function love.mousereleased(x, y, button, istouch)

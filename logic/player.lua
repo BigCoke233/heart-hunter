@@ -21,16 +21,6 @@ function player.isShielded()
     return G.player.shieldedTill >= G.time
 end
 
-function player.draw()
-    if player.isShielded() then
-        love.graphics.setColor(0.4,0.4,0.4)
-    else
-        love.graphics.setColor(1,1,1)
-    end
-
-    love.graphics.circle("fill", G.player.x, G.player.y, G.player.r)
-end
-
 function player.isAlive()
     return #G.ammo~=0
 end
