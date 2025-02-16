@@ -1,11 +1,11 @@
 config = require "config"
 
-bullets = require "logic/bullets"
-player = require "logic/player"
-ui = require "render/ui"
-enemies = require "logic/enemies"
-loot = require "logic/loot"
-sprite = require "render/sprite"
+bullets = require "logic.bullets"
+player = require "logic.player"
+ui = require "render.ui"
+enemies = require "logic.enemies"
+loot = require "logic.loot"
+sprite = require "render.sprite"
 
 Room = require "objects.room"
 
