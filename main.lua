@@ -1,9 +1,9 @@
-bullets = require "bullets"
-player = require "player"
-ui = require "ui"
-enemies = require "enemies"
-loot = require "loot"
-sprite = require "sprite"
+bullets = require "logic/bullets"
+player = require "logic/player"
+ui = require "render/ui"
+enemies = require "logic/enemies"
+loot = require "logic/loot"
+sprite = require "render/sprite"
 
 function initGame()
     G = {

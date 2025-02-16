@@ -1,6 +1,6 @@
 local player = {}
 
-local utils = require "utils"
+local utils = require "utils/utils"
 
 function player.move(dt)
     if love.keyboard.isDown("d") then

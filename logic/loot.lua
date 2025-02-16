@@ -1,6 +1,6 @@
 local loot = {}
 
-local utils = require "utils"
+local utils = require "utils/utils"
 
 function loot.drop(x, y, type)
     table.insert(G.loots,
