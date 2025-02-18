@@ -15,16 +15,13 @@ function utils.playerCollideWith(x, y, r)
 end
 
 function utils.circleRectCollide(cx, cy, r, rx, ry, rw, rh)
-    -- 计算圆心到矩形的水平和垂直距离
     local nearestX = math.max(rx, math.min(cx, rx + rw))
     local nearestY = math.max(ry, math.min(cy, ry + rh))
 
-    -- 计算圆心到矩形最近边的距离
     local dx = cx - nearestX
     local dy = cy - nearestY
-    local distanceSquared = dx * dx + dy * dy  -- 避免开方，提高性能
+    local distanceSquared = dx * dx + dy * dy
 
-    -- 如果圆的半径大于或等于这个距离，表示有碰撞
     return distanceSquared <= r * r
 end
 
