@@ -63,15 +63,27 @@ function Room.switch(to)
     end
 end
 
-function Room.generate()
+function Room.generate(roomCount)
+    -- 创建第一个房间并初始化
+    local rooms = {}
     local room1 = Room:new()
-    local room2 = Room:new()
-    Door.connect(room1, room2, "lr")
+    table.insert(rooms, room1)
 
-    local room3 = Room:new()
-    Door.connect(room3, room2, "tb")
+    -- 按照一定的规则生成房间并连接它们
+    for i = 2, roomCount do
+        local newRoom = Room:new()
+        -- 随机决定连接的方向
+        local previousRoom = rooms[math.random(#rooms)]  -- 随机选择一个之前创建的房间
 
-    return room1
+        -- 根据生成的方向连接房间
+        Door.connect(previousRoom, newRoom, math.random(4))
+
+        -- 将新房间添加到房间列表
+        table.insert(rooms, newRoom)
+    end
+
+    -- 返回第一个房间（起点房间）
+    return rooms[1]
 end
 
 return Room
