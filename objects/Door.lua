@@ -1,0 +1,47 @@
+Door = {}
+Door.__index = Door
+
+local function calculateDoorLocation(obj)
+    local roomX, roomY = obj.room:getX(), obj.room:getY()
+    local roomW, roomH = obj.room:getWidth(), obj.room:getHeight()
+    local loc, size, thickness = obj.location, obj.size, obj.thickness
+
+    if loc == Direction.LEFT or loc == Direction.RIGHT then
+        obj.x = (loc == Direction.LEFT) and (roomX - thickness / 2) or (roomX + roomW - thickness / 2)
+        obj.y = (love.graphics.getHeight() - size) / 2
+        obj.width = thickness
+        obj.height = size
+    elseif loc == Direction.TOP or loc == Direction.BOTTOM then
+        obj.x = (love.graphics.getWidth() - size) / 2
+        obj.y = (loc == Direction.TOP) and (roomY - thickness / 2) or (roomY + roomH - thickness / 2)
+        obj.width = size
+        obj.height = thickness
+    end
+end
+
+function Door:new(location, room)
+    local obj = {
+        to = nil,
+        location = location,
+        size = config.graphics.doorSize,
+        thickness = config.graphics.doorThickness,
+        room = room,
+
+        x = nil, -- location and size is calculated afterwards
+        y = nil,
+        width = nil, -- width and height are for graphics, calculated based on size and thickness
+        height = nil,
+    }
+
+    setmetatable(obj, Door)
+
+    calculateDoorLocation(obj)
+
+    return obj
+end
+
+function Door:setTo(room)
+    self.to = room
+end
+
+return Door

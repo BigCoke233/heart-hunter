@@ -7,6 +7,7 @@ loot = require "logic.loot"
 sprite = require "render.sprite"
 
 Room = require "objects.room"
+Door = require "objects.door"
 Renderer = require "render.renderer"
 
 function love.load()

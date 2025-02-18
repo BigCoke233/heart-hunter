@@ -8,25 +8,9 @@ function background.room()
 end
 
 function background.doors()
-    local room = G.currentRoom
-    local roomX, roomY = room:getX(), room:getY()
-    local roomW, roomH = room:getWidth(), room:getHeight()
-
-    for d, door in ipairs(room.doors) do
-        if door ~= false then
-            local size = config.graphics.doorSize
-            local thickness = config.graphics.doorThickness
-            local x, y
-
-            if d == Direction.LEFT or d == Direction.RIGHT then
-                x = (d == Direction.LEFT) and (roomX - thickness / 2) or (roomX - thickness / 2 + roomW)
-                y = (love.graphics.getHeight() - size) / 2
-                love.graphics.rectangle("fill", x, y, thickness, size)
-            elseif d == Direction.TOP or d == Direction.BOTTOM then
-                x = (love.graphics.getWidth() - size) / 2
-                y = (d == Direction.TOP) and (roomY - thickness / 2) or (roomY - thickness / 2 + roomH)
-                love.graphics.rectangle("fill", x, y, size, thickness)
-            end
+    for i, door in ipairs(G.currentRoom.doors) do
+        if door ~= nil then
+            love.graphics.rectangle("fill", door.x, door.y, door.width, door.height)
         end
     end
 end

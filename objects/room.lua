@@ -14,7 +14,7 @@ Direction = {
 function Room:new()
     local obj = {
         width = 0.85, height = 0.8,
-        doors = { false, false, false, false },
+        doors = {},
         borders = {},
         enemies = {},
         isCleared = false,
@@ -23,7 +23,7 @@ function Room:new()
 
     setmetatable(obj, Room)
 
-    obj.doors[math.random(1, 4)] = true
+    table.insert(obj.doors, Door:new(math.random(1,4), obj))
     obj.borders = obj:getBorders()
 
     return obj
