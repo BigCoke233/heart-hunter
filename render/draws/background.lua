@@ -13,24 +13,18 @@ function background.doors()
     local roomW, roomH = room:getWidth(), room:getHeight()
 
     for d, door in ipairs(room.doors) do
-        if (door ~= false) then
+        if door ~= false then
             local size = config.graphics.doorSize
             local thickness = config.graphics.doorThickness
-            if d==Direction.LEFT then
-                local x = roomX - thickness / 2
-                local y = (love.graphics.getHeight() - size) / 2
+            local x, y
+
+            if d == Direction.LEFT or d == Direction.RIGHT then
+                x = (d == Direction.LEFT) and (roomX - thickness / 2) or (roomX - thickness / 2 + roomW)
+                y = (love.graphics.getHeight() - size) / 2
                 love.graphics.rectangle("fill", x, y, thickness, size)
-            elseif d==Direction.RIGHT then
-                local x = roomX - thickness / 2 + roomW
-                local y = (love.graphics.getHeight() - size) / 2
-                love.graphics.rectangle("fill", x, y, thickness, size)
-            elseif d==Direction.TOP then
-                local x = (love.graphics.getWidth() - size) / 2
-                local y = roomY - thickness / 2
-                love.graphics.rectangle("fill", x, y, size, thickness)
-            elseif d==Direction.BOTTOM then
-                local x = (love.graphics.getWidth() - size) / 2
-                local y = roomY - thickness / 2 + roomH
+            elseif d == Direction.TOP or d == Direction.BOTTOM then
+                x = (love.graphics.getWidth() - size) / 2
+                y = (d == Direction.TOP) and (roomY - thickness / 2) or (roomY - thickness / 2 + roomH)
                 love.graphics.rectangle("fill", x, y, size, thickness)
             end
         end
