@@ -29,6 +29,8 @@ function love.load()
     renderer:add("objects", nil, drawObject.loot)
     renderer:add("ui", nil, drawUI.ammoBar)
 
+    math.randomseed(os.time())
+
     initGame()
 end
 
