@@ -14,8 +14,22 @@ function utils.playerCollideWith(x, y, r)
     return utils.circlesCollide(G.player.x, G.player.y, G.player.r, x, y, r)
 end
 
-function utils.randomPosition()
-    return math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight())
+function utils.circleRectCollide(cx, cy, r, rx, ry, rw, rh)
+    -- 计算圆心到矩形的水平和垂直距离
+    local nearestX = math.max(rx, math.min(cx, rx + rw))
+    local nearestY = math.max(ry, math.min(cy, ry + rh))
+
+    -- 计算圆心到矩形最近边的距离
+    local dx = cx - nearestX
+    local dy = cy - nearestY
+    local distanceSquared = dx * dx + dy * dy  -- 避免开方，提高性能
+
+    -- 如果圆的半径大于或等于这个距离，表示有碰撞
+    return distanceSquared <= r * r
+end
+
+function utils.playerCollideWithRect(x, y, w, h)
+    return utils.circleRectCollide(G.player.x, G.player.y, G.player.r, x, y, w, h)
 end
 
 -- deal with obstacles
@@ -56,6 +70,12 @@ function utils.hitObstacle(x, y, r)
     -- ...
 
     return false
+end
+
+-- other utilities
+
+function utils.randomPosition()
+    return math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight())
 end
 
 return utils

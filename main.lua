@@ -8,6 +8,7 @@ sprite = require "render.sprite"
 
 Room = require "objects.room"
 Door = require "objects.door"
+Direction, OppositeDirection = require "objects.direction"
 Renderer = require "render.renderer"
 
 function love.load()
@@ -33,6 +34,8 @@ end
 
 function love.update(dt)
     player.move(dt)
+    player.entering()
+
     bullets.update(dt)
 
     player.beingAttacked()

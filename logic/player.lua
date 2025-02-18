@@ -1,10 +1,8 @@
 local player = {}
 
-local utils = require "utils/utils"
+local utils = require "utils.utils"
 
 function player.move(dt)
-    local room = G.currentRoom
-
     local moveDirections = {
         { key = "d", axis = "x", dir = Direction.RIGHT, delta = 1 },
         { key = "a", axis = "x", dir = Direction.LEFT, delta = -1 },
@@ -16,6 +14,27 @@ function player.move(dt)
         if love.keyboard.isDown(move.key) then
             if utils.hitObstacleAt(move.dir, G.player[move.axis], G.player.r) then return end
             G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
+        end
+    end
+end
+
+function player.entering()
+    for _, door in ipairs(G.currentRoom.doors) do
+        if door ~= false and utils.playerCollideWithRect(door.x, door.y, door.width, door.height) then
+            Room.switch(door.to)
+
+            -- update player position after entering a new room
+            if door.location == Direction.LEFT then
+                G.player.x = G.currentRoom:getX() + G.currentRoom:getWidth() - G.player.r - 1  -- 玩家半径要考虑
+            elseif door.location == Direction.RIGHT then
+                G.player.x = G.currentRoom:getX() + G.player.r + 1  -- 玩家半径要考虑
+            elseif door.location == Direction.TOP then
+                G.player.y = G.currentRoom:getY() + G.currentRoom:getHeight() - G.player.r - 1  -- 玩家半径要考虑
+            elseif door.location == Direction.BOTTOM then
+                G.player.y = G.currentRoom:getY() + G.player.r + 1  -- 玩家半径要考虑
+            end
+
+            break
         end
     end
 end

@@ -29,7 +29,7 @@ function initGame()
 
         time = 0,
         lastSummonTime = 0,
-        currentRoom = Room:new()
+        currentRoom = Room.generate()
     }
 end
 

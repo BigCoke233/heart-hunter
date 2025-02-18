@@ -7,23 +7,21 @@ local RoomType = {
     LOOT = 3
 }
 
-Direction = {
-    LEFT = 1, RIGHT = 2, TOP = 3, BOTTOM = 4
-}
-
-function Room:new()
+function Room:new(type, w, h)
     local obj = {
-        width = 0.85, height = 0.8,
+        type = type or RoomType.INITIAL,
+        width = w or 0.85,
+        height = h or 0.8,
         doors = {},
-        borders = {},
         enemies = {},
         isCleared = false,
-        type = RoomType.INITIAL
+
+        -- borders are automatically caculated afterwards
+        borders = {},
     }
 
     setmetatable(obj, Room)
 
-    table.insert(obj.doors, Door:new(math.random(1,4), obj))
     obj.borders = obj:getBorders()
 
     return obj
@@ -53,12 +51,27 @@ function Room:getBorders()
     return { left, right, top, bottom }
 end
 
-function Room:switch(to)
+function Room:addDoor(door)
+    table.insert(self.doors, door)
+end
+
+function Room.switch(to)
     if type(to) == "table" then
         G.currentRoom = to
     elseif type(to) == "number" then
         G.currentRoom = G.currentRoom.doors[Direction[to]]
     end
+end
+
+function Room.generate()
+    local room1 = Room:new()
+    local room2 = Room:new()
+    Door.connect(room1, room2, "lr")
+
+    local room3 = Room:new()
+    Door.connect(room3, room2, "tb")
+
+    return room1
 end
 
 return Room
