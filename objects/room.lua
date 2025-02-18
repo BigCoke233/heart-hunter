@@ -56,11 +56,15 @@ function Room:addDoor(door)
 end
 
 function Room.switch(to)
+    local destination
     if type(to) == "table" then
-        G.currentRoom = to
+        destination = to
     elseif type(to) == "number" then
-        G.currentRoom = G.currentRoom.doors[Direction[to]]
+        destination = G.currentRoom.doors[Direction[to]]
     end
+
+    G.currentRoom = destination
+    G.enemies = destination.enemies
 end
 
 function Room.generate(roomCount)
@@ -71,6 +75,8 @@ function Room.generate(roomCount)
     for i = 2, roomCount do
         local newRoom = Room:new()
         local previousRoom = rooms[math.random(#rooms)]
+
+        newRoom.enemies = Enemy.generate(math.random(3,6), newRoom)
 
         Door.connect(previousRoom, newRoom, math.random(4))
 

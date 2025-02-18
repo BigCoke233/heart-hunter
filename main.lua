@@ -8,6 +8,7 @@ sprite = require "render.sprite"
 
 Room = require "objects.room"
 Door = require "objects.door"
+Enemy = require "objects.enemy"
 Direction, OppositeDirection = require "objects.direction"
 Renderer = require "render.renderer"
 
