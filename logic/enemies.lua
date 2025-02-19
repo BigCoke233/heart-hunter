@@ -26,4 +26,10 @@ function enemies.beingShot()
     end
 end
 
+function enemies.move(dt)
+    for _, enemy in pairs(G.enemies) do
+        enemy:moveTowardPlayer(dt)
+    end
+end
+
 return enemies

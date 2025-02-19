@@ -39,6 +39,8 @@ function love.update(dt)
     player.move(dt)
     player.entering()
 
+    enemies.move(dt)
+
     bullets.update(dt)
 
     player.beingAttacked()
