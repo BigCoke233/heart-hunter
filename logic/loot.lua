@@ -12,7 +12,7 @@ function loot.summon()
     loot.drop(x, y, heartTypes[math.random(#heartTypes)])
 end
 
-function loot.beingPicked()
+function loot.update()
     for i, v in pairs(G.loots) do
         if utils.playerCollideWith(v.x, v.y, v.r) then
             local pickedLoot = table.remove(G.loots, i)

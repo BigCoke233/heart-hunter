@@ -37,18 +37,10 @@ function love.load()
 end
 
 function love.update(dt)
-    player.move(dt)
-    player.entering()
-
-    enemies.move(dt)
-
-    bullets.update(dt)
-
-    player.beingAttacked()
-    enemies.beingShot()
-    loot.beingPicked()
-
-    map.update()
+    local updates = { player, enemies, bullets, loot, map }
+    for _, entity in ipairs(updates) do
+        entity.update(dt)
+    end
 
     if not player.isAlive() then
         print("Out of hearts. You died!")

@@ -2,7 +2,19 @@ local player = {}
 
 local utils = require "utils.utils"
 
-function player.move(dt)
+-- player state utilities
+
+function player.isShielded()
+    return G.player.shieldedTill >= G.time
+end
+
+function player.isAlive()
+    return #G.player.hearts~=0
+end
+
+-- state update functions
+
+local function playerMoves(dt)
     local moveDirections = {
         { key = "d", axis = "x", dir = Direction.RIGHT, delta = 1 },
         { key = "a", axis = "x", dir = Direction.LEFT, delta = -1 },
@@ -18,7 +30,7 @@ function player.move(dt)
     end
 end
 
-function player.entering()
+local function playerEnters()
     for _, door in ipairs(G.currentRoom.doors) do
         local entersDoor = utils.playerCollideWithRect(door.x, door.y, door.width, door.height) and
             G.currentRoom.isCleared
@@ -41,15 +53,7 @@ function player.entering()
     end
 end
 
-function player.isShielded()
-    return G.player.shieldedTill >= G.time
-end
-
-function player.isAlive()
-    return #G.player.hearts~=0
-end
-
-function player.beingAttacked()
+local function playerBeingAttacked()
     if (player.isShielded()) then return end
 
     for i, v in pairs(G.enemies) do
@@ -60,6 +64,12 @@ function player.beingAttacked()
             G.player.shieldedTill = G.time + config.playerShieldTime
         end
     end
+end
+
+function player.update(dt)
+   playerMoves(dt)
+   playerEnters()
+   playerBeingAttacked()
 end
 
 return player
