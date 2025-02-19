@@ -18,9 +18,10 @@ function draws.bullets()
 end
 
 function draws.enemies()
-    for i, v in pairs(G.enemies) do
-        love.graphics.setColor(0,255,255)
-        love.graphics.circle("fill", v.x, v.y, v.r)
+    for _, enemy in pairs(G.enemies) do
+        local data = EnemyData[enemy.type]
+        love.graphics.setColor(data.appearance.color or {1,1,1})
+        love.graphics.circle("fill", enemy.x, enemy.y, enemy.r)
         utils.resetGraphics()
     end
 end
