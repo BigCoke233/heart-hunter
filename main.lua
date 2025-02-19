@@ -4,15 +4,16 @@ bullets = require "logic.bullets"
 player = require "logic.player"
 enemies = require "logic.enemies"
 loot = require "logic.loot"
-sprite = require "render.sprite"
 map = require "logic.map"
 
 Room = require "objects.room"
 Door = require "objects.door"
 Enemy = require "objects.enemy"
 Direction, OppositeDirection = require "objects.direction"
-Renderer = require "render.renderer"
 
+sprite = require "render.sprite"
+
+Renderer = require "utils.renderer"
 utils = require "utils.utils"
 
 function love.load()
