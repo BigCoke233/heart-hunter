@@ -1,7 +1,5 @@
 local loot = {}
 
-local utils = require "utils/utils"
-
 function loot.drop(x, y, type)
     table.insert(G.loots,
         { x = x, y = y, r = config.lootSize, type = type })

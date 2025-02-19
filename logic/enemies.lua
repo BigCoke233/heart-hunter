@@ -1,7 +1,5 @@
 local enemies = {}
 
-local utils = require "utils/utils"
-
 function enemies.summon()
     local x, y = utils.randomPosition()
     table.insert(G.enemies, { x = x, y = y, r = 10 })

@@ -32,7 +32,6 @@ function bullets.shoot(x, y, playerX, playerY, shots)
 end
 
 function bullets.update(dt)
-    local utils = require "./utils/utils"
     for k, bullet in pairs(G.shots) do
         local x, y = bullet.currentPos.x, bullet.currentPos.y
 

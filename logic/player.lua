@@ -1,7 +1,5 @@
 local player = {}
 
-local utils = require "utils.utils"
-
 -- player state utilities
 
 function player.isShielded()
