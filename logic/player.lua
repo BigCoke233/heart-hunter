@@ -20,18 +20,20 @@ end
 
 function player.entering()
     for _, door in ipairs(G.currentRoom.doors) do
-        if door ~= false and utils.playerCollideWithRect(door.x, door.y, door.width, door.height) then
+        local entersDoor = utils.playerCollideWithRect(door.x, door.y, door.width, door.height) and
+            G.currentRoom.isCleared
+        if door ~= false and entersDoor then
             map.switchRoom(door.to)
 
             -- update player position after entering a new room
             if door.location == Direction.LEFT then
-                G.player.x = G.currentRoom:getX() + G.currentRoom:getWidth() - G.player.r - 1  -- 玩家半径要考虑
+                G.player.x = G.currentRoom:getX() + G.currentRoom:getWidth() - G.player.r - door.width
             elseif door.location == Direction.RIGHT then
-                G.player.x = G.currentRoom:getX() + G.player.r + 1  -- 玩家半径要考虑
+                G.player.x = G.currentRoom:getX() + G.player.r + door.width
             elseif door.location == Direction.TOP then
-                G.player.y = G.currentRoom:getY() + G.currentRoom:getHeight() - G.player.r - 1  -- 玩家半径要考虑
+                G.player.y = G.currentRoom:getY() + G.currentRoom:getHeight() - G.player.r - door.height
             elseif door.location == Direction.BOTTOM then
-                G.player.y = G.currentRoom:getY() + G.player.r + 1  -- 玩家半径要考虑
+                G.player.y = G.currentRoom:getY() + G.player.r + door.height
             end
 
             break

@@ -63,4 +63,10 @@ function map.generate(roomCount)
     return rooms[1]
 end
 
+function map.update()
+    if #G.enemies==0 then
+        G.currentRoom.isCleared = true
+    end
+end
+
 return map

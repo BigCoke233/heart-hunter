@@ -48,6 +48,8 @@ function love.update(dt)
     enemies.beingShot()
     loot.beingPicked()
 
+    map.update()
+
     if not player.isAlive() then
         print("Out of hearts. You died!")
         initGame()
