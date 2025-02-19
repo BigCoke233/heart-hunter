@@ -8,6 +8,7 @@ function draws.player()
     end
 
     love.graphics.circle("fill", G.player.x, G.player.y, G.player.r)
+    utils.resetGraphics()
 end
 
 function draws.bullets()
@@ -18,10 +19,9 @@ end
 
 function draws.enemies()
     for i, v in pairs(G.enemies) do
-        local prevR, prevG, prevB = love.graphics.getColor()
         love.graphics.setColor(0,255,255)
         love.graphics.circle("fill", v.x, v.y, v.r)
-        love.graphics.setColor(prevR, prevG, prevB)
+        utils.resetGraphics()
     end
 end
 

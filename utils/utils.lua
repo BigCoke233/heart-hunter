@@ -75,4 +75,8 @@ function utils.randomPosition()
     return math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight())
 end
 
+function utils.resetGraphics()
+   love.graphics.setColor(1,1,1)
+end
+
 return utils

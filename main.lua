@@ -13,6 +13,8 @@ Enemy = require "objects.enemy"
 Direction, OppositeDirection = require "objects.direction"
 Renderer = require "render.renderer"
 
+utils = require "utils.utils"
+
 function love.load()
     love.window.setIcon(love.image.newImageData("resources/sprites/redheart.png"))
     love.window.setTitle("Heart Hunter")
