@@ -55,35 +55,4 @@ function Room:addDoor(door)
     table.insert(self.doors, door)
 end
 
-function Room.switch(to)
-    local destination
-    if type(to) == "table" then
-        destination = to
-    elseif type(to) == "number" then
-        destination = G.currentRoom.doors[Direction[to]]
-    end
-
-    G.currentRoom = destination
-    G.enemies = destination.enemies
-end
-
-function Room.generate(roomCount)
-    local rooms = {}
-    local room1 = Room:new()
-    table.insert(rooms, room1)
-
-    for i = 2, roomCount do
-        local newRoom = Room:new()
-        local previousRoom = rooms[math.random(#rooms)]
-
-        newRoom.enemies = Enemy.generate(math.random(3,6), newRoom)
-
-        Door.connect(previousRoom, newRoom, math.random(4))
-
-        table.insert(rooms, newRoom)
-    end
-
-    return rooms[1]
-end
-
 return Room

@@ -29,12 +29,4 @@ function Enemy:moveTowardPlayer(dt)
     end
 end
 
-function Enemy.generate(count, room)
-    local enemies = {}
-    for i = 1, count do
-        table.insert(enemies, Enemy:new("normal", room))
-    end
-    return enemies
-end
-
 return Enemy

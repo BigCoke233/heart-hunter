@@ -5,6 +5,7 @@ player = require "logic.player"
 enemies = require "logic.enemies"
 loot = require "logic.loot"
 sprite = require "render.sprite"
+map = require "logic.map"
 
 Room = require "objects.room"
 Door = require "objects.door"

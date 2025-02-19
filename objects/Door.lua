@@ -45,36 +45,4 @@ function Door:setTo(room)
     self.to = room
 end
 
-function Door.connect(room1, room2, way)
-    local door1, door2
-
-    if type(way) == "number" then
-        local ways = {"lr","rl","tb","bt"}
-        way = ways[way]
-    end
-
-    if way == "lr" then
-        door1 = Door:new(Direction.LEFT, room1, room2)
-        door2 = Door:new(Direction.RIGHT, room2, room1)
-        room1:addDoor(door1)
-        room2:addDoor(door2)
-    elseif way == "rl" then
-        door1 = Door:new(Direction.RIGHT, room1, room2)
-        door2 = Door:new(Direction.LEFT, room2, room1)
-        room1:addDoor(door1)
-        room2:addDoor(door2)
-    elseif way == "tb" then
-        door1 = Door:new(Direction.TOP, room1, room2)
-        door2 = Door:new(Direction.BOTTOM, room2, room1)
-        room1:addDoor(door1)
-        room2:addDoor(door2)
-    elseif way == "bt" then
-        door1 = Door:new(Direction.BOTTOM, room1, room2)
-        door2 = Door:new(Direction.TOP, room2, room1)
-        room1:addDoor(door1)
-        room2:addDoor(door2)
-    end
-    return door1, door2
-end
-
 return Door

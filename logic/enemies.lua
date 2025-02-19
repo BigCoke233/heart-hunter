@@ -32,4 +32,12 @@ function enemies.move(dt)
     end
 end
 
+function enemies.generate(count, room)
+    local enemies = {}
+    for i = 1, count do
+        table.insert(enemies, Enemy:new("normal", room))
+    end
+    return enemies
+end
+
 return enemies

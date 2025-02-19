@@ -21,7 +21,7 @@ end
 function player.entering()
     for _, door in ipairs(G.currentRoom.doors) do
         if door ~= false and utils.playerCollideWithRect(door.x, door.y, door.width, door.height) then
-            Room.switch(door.to)
+            map.switchRoom(door.to)
 
             -- update player position after entering a new room
             if door.location == Direction.LEFT then

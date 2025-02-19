@@ -29,7 +29,7 @@ function initGame()
 
         time = 0,
         lastSummonTime = 0,
-        currentRoom = Room.generate(5) -- change amount of rooms here
+        currentRoom = map.generate(7) -- change amount of rooms here
     }
 end
 
