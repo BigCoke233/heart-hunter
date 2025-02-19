@@ -25,10 +25,10 @@ function love.load()
     local drawBackground = require "render.draws.background"
     renderer:add("background", nil, drawBackground.room)
     renderer:add("background", nil, drawBackground.doors)
-    renderer:add("objects", nil, drawObject.player)
-    renderer:add("objects", nil, drawObject.bullets)
-    renderer:add("objects", nil, drawObject.enemies)
     renderer:add("objects", nil, drawObject.loot)
+    renderer:add("objects", nil, drawObject.player)
+    renderer:add("objects", nil, drawObject.enemies)
+    renderer:add("objects", nil, drawObject.bullets)
     renderer:add("ui", nil, drawUI.ammoBar)
 
     math.randomseed(os.time())
