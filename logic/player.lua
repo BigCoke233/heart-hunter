@@ -1,4 +1,4 @@
-local player = {}
+player = {}
 
 -- player state utilities
 
@@ -69,5 +69,3 @@ function player.update(dt)
    playerEnters()
    playerBeingAttacked()
 end
-
-return player

@@ -1,30 +1,11 @@
-local sprite = {}
+sprite = {}
 
-heartTypes = {
-    "arrowheart",
-    "bigheart",
-    "blockheart",
-    "blueheart",
-    "brokenheart",
-    "brownheart",
-    "giftheart",
-    "greenheart",
-    "mendingheart",
-    "purpleheart",
-    "radiantheart",
-    "redheart",
-    "shinyheart",
-    "twinheart",
-    "whiteheart",
-    "yellowheart"
-}
-
-spriteTypes = heartTypes
+local spriteTypes = heartTypes
 
 function sprite.load()
     sprites = {}
 
-    for _, sprite in pairs(spriteTypes) do
+    for _, sprite in ipairs(spriteTypes) do
         local filename = "resources/sprites/" .. sprite .. ".png"
         sprites[sprite] = love.graphics.newImage(filename)
     end
@@ -49,5 +30,3 @@ end
 function sprite.drawSquareWithAngle(type, position, angle, size)
     sprite.drawObject(type, position, angle, size, size)
 end
-
-return sprite

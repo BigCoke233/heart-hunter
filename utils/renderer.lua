@@ -1,4 +1,4 @@
-local Renderer = {}
+Renderer = {}
 
 function Renderer:new()
     local obj = { layers = {} }
@@ -26,5 +26,3 @@ function Renderer:draw()
         end
     end
 end
-
-return Renderer

@@ -10,6 +10,8 @@ config = {
       roomW = 0.85,
       roomH = 0.8,
     },
+
+    bulletSpeed = 300,
 }
 
 -- game default states
@@ -32,5 +34,3 @@ function initGame()
         currentRoom = map.generate(7) -- change amount of rooms here
     }
 end
-
-return config

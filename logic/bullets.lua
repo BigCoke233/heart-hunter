@@ -1,6 +1,4 @@
-local bullets = {}
-
-bulletSpeed = 300
+bullets = {}
 
 function bullets.shoot(x, y, playerX, playerY, shots)
     if (#G.player.hearts == 0) then
@@ -24,7 +22,7 @@ function bullets.shoot(x, y, playerX, playerY, shots)
     local currentBullet = table.remove(G.player.hearts)
     table.insert(G.shots, {
         type = currentBullet,
-        speed = { x = sin*bulletSpeed, y = cos*bulletSpeed },
+        speed = { x = sin*config.bulletSpeed, y = cos*config.bulletSpeed },
         orientation = math.asin(sin),
         currentPos = { x = playerX, y = playerY },
         size = 5
@@ -43,5 +41,3 @@ function bullets.update(dt)
         end
     end
 end
-
-return bullets

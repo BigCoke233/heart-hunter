@@ -44,5 +44,3 @@ end
 function Door:setTo(room)
     self.to = room
 end
-
-return Door

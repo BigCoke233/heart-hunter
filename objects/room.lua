@@ -54,5 +54,3 @@ end
 function Room:addDoor(door)
     table.insert(self.doors, door)
 end
-
-return Room

@@ -1,20 +1,22 @@
-config = require "config"
+require "config"
+require "data.enemyData"
+require "data.heartTypes"
 
-bullets = require "logic.bullets"
-player = require "logic.player"
-enemies = require "logic.enemies"
-loot = require "logic.loot"
-map = require "logic.map"
+require "logic.bullets"
+require "logic.player"
+require "logic.enemies"
+require "logic.loot"
+require "logic.map"
 
-Room = require "objects.room"
-Door = require "objects.door"
-Enemy = require "objects.enemy"
-Direction, OppositeDirection = require "objects.direction"
+require "objects.room"
+require "objects.door"
+require "objects.enemy"
+require "objects.direction"
 
-sprite = require "render.sprite"
+require "render.sprite"
 
-Renderer = require "utils.renderer"
-utils = require "utils.utils"
+require "utils.renderer"
+require "utils.utils"
 
 function love.load()
     love.window.setIcon(love.image.newImageData("resources/sprites/redheart.png"))

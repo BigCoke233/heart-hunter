@@ -1,4 +1,4 @@
-local map = {}
+map = {}
 
 function map.switchRoom(to)
     local destination
@@ -68,5 +68,3 @@ function map.update()
         G.currentRoom.isCleared = true
     end
 end
-
-return map

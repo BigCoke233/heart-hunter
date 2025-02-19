@@ -1,4 +1,4 @@
-local utils = {}
+utils = {}
 
 -- deal with collision
 
@@ -78,5 +78,3 @@ end
 function utils.resetGraphics()
    love.graphics.setColor(1,1,1)
 end
-
-return utils

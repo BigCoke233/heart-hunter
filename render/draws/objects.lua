@@ -19,7 +19,7 @@ end
 
 function draws.enemies()
     for _, enemy in pairs(G.enemies) do
-        local data = EnemyData[enemy.type]
+        local data = enemyData[enemy.type]
         love.graphics.setColor(data.appearance.color or {1,1,1})
         love.graphics.circle("fill", enemy.x, enemy.y, enemy.r)
         utils.resetGraphics()

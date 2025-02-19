@@ -1,4 +1,4 @@
-local enemies = {}
+enemies = {}
 
 function enemies.summon()
     local x, y = utils.randomPosition()
@@ -10,7 +10,7 @@ end
 function enemies.generate(count, room)
     local enemies = {}
     for i = 1, count do
-        table.insert(enemies, Enemy:new(EnemyTypes[math.random(#EnemyTypes)], room))
+        table.insert(enemies, Enemy:new(enemyTypes[math.random(#enemyTypes)], room))
     end
     return enemies
 end
@@ -28,7 +28,7 @@ local function enemiesBeingShot()
                 table.remove(G.enemies, i)
                 table.remove(G.shots, j)
                 -- drop loot
-                for i, item in ipairs(EnemyData[enemy.type].drops) do
+                for i, item in ipairs(enemyData[enemy.type].drops) do
                     local temp = math.random(10) / 10
                     if temp <= item.chances then
                         local offset = (i - 1) * 5
@@ -50,5 +50,3 @@ function enemies.update(dt)
     enemiesMove(dt)
     enemiesBeingShot()
 end
-
-return enemies

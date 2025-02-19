@@ -8,5 +8,3 @@ OppositeDirection = {
     [Direction.TOP] = Direction.BOTTOM,
     [Direction.BOTTOM] = Direction.TOP
 }
-
-return Direction, OppositeDirection

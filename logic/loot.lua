@@ -1,4 +1,4 @@
-local loot = {}
+loot = {}
 
 function loot.drop(x, y, type)
     table.insert(G.loots,
@@ -19,5 +19,3 @@ function loot.update()
         end
     end
 end
-
-return loot
