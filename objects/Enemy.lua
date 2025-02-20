@@ -1,13 +1,14 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy:new(type, x, y)
+function Enemy:new(name, location)
     local obj = {
-        type = type,
-        x = x,
-        y = y,
-        r = enemyData[type].size,
-        speed = enemyData[type].speed,
+        type = name,
+        presetLocation = (type(location) == "string" and location) or nil,
+        x = (type(location) == "table" and location.x) or nil,
+        y = (type(location) == "table" and location.y) or nil,
+        r = enemyData[name] and enemyData[name].size or nil,
+        speed = enemyData[name] and enemyData[name].speed or nil,
     }
 
     setmetatable(obj, Enemy)

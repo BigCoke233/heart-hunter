@@ -19,10 +19,10 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("lancer"),
-            Enemy:new("lancer"),
-            Enemy:new("lancer"),
-            Enemy:new("lancer"),
+            Enemy:new("lancer", "topRight"),
+            Enemy:new("lancer", "topLeft"),
+            Enemy:new("lancer", "bottomRight"),
+            Enemy:new("lancer", "bottomLeft"),
         }
     },
     combatRoom2 = {
@@ -30,11 +30,11 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("lancer"),
-            Enemy:new("lancer"),
-            Enemy:new("fairy"),
-            Enemy:new("fairy"),
-            Enemy:new("fairy"),
+            Enemy:new("lancer", "leftCenter"),
+            Enemy:new("lancer", "rightCenter"),
+            Enemy:new("fairy", "center"),
+            Enemy:new("fairy", "center"),
+            Enemy:new("fairy", "center"),
         }
     },
     combatRoom3 = {
@@ -42,9 +42,9 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("gorilla"),
-            Enemy:new("gorilla"),
-            Enemy:new("gorilla"),
+            Enemy:new("gorilla", "leftCenter"),
+            Enemy:new("gorilla", "rightCenter"),
+            Enemy:new("gorilla", "center"),
         }
     },
 }

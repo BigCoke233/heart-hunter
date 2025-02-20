@@ -48,10 +48,56 @@ function Room:getBorders()
     return { left, right, top, bottom }
 end
 
-function Room:getRandomPosition(offset)
-    local x = math.random(self:getX() + offset, self:getX() + self:getWidth() - offset)
-    local y = math.random(self:getY() + offset, self:getY() + self:getHeight() - offset)
-    return x, y
+function Room:getLocation(location, offset)
+    print("getLocation 的两个参数：", location, offset)
+    if type(location) ~= "string" then
+        error("Invalid location type: " .. type(location))
+    end
+
+    local preset = {
+        topLeft = {
+            x = self:getX() + offset,
+            y = self:getY() + offset
+        },
+        topRight = {
+            x = self:getX() + self:getWidth() - offset,
+            y = self:getY() + offset
+        },
+        bottomLeft = {
+            x = self:getX() + offset,
+            y = self:getY() + self:getHeight() - offset
+        },
+        bottomRight = {
+            x = self:getX() + self:getWidth() - offset,
+            y = self:getY() + self:getHeight() - offset
+        },
+        center = {
+            x = self:getX() + self:getWidth() / 2,
+            y = self:getY() + self:getHeight() / 2
+        },
+        topCenter = {
+            x = self:getX() + self:getWidth() / 2,
+            y = self:getY() + offset
+        },
+        bottomCenter = {
+            x = self:getX() + self:getWidth() / 2,
+            y = self:getY() + self:getHeight() - offset
+        },
+        leftCenter = {
+            x = self:getX() + offset,
+            y = self:getY() + self:getHeight() / 2
+        },
+        rightCenter = {
+            x = self:getX() + self:getWidth() - offset,
+            y = self:getY() + self:getHeight() / 2
+        },
+        random = {
+            x = math.random(self:getX() + offset, self:getX() + self:getWidth() - offset),
+            y = math.random(self:getY() + offset, self:getY() + self:getHeight() - offset),
+        }
+    }
+
+    return preset[location].x, preset[location].y
 end
 
 function Room:addDoor(door)
