@@ -11,11 +11,11 @@ function loot.summon()
 end
 
 function loot.update()
-    for i, v in pairs(G.loots) do
+    for i = #G.loots, 1, -1 do
+        local v = G.loots[i]
         if utils.playerCollideWith(v.x, v.y, v.r) then
             local pickedLoot = table.remove(G.loots, i)
             table.insert(G.player.hearts, pickedLoot.type)
-            table.remove(G.loots, i)
         end
     end
 end
