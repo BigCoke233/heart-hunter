@@ -1,16 +1,9 @@
 enemies = {}
 
-function enemies.summon()
-    local x, y = utils.randomPosition()
-    table.insert(G.enemies, { x = x, y = y, r = 10 })
-    G.lastSummonTime = G.time
-    print("here comes the enemy!")
-end
-
-function enemies.generate(count, room)
+function enemies.generate(count)
     local enemies = {}
     for i = 1, count do
-        table.insert(enemies, Enemy:new(enemyTypes[math.random(#enemyTypes)], room))
+        table.insert(enemies, Enemy:new(enemyTypes[math.random(#enemyTypes)]))
     end
     return enemies
 end

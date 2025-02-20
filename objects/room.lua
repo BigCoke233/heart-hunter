@@ -1,15 +1,11 @@
+require "data.roomData"
+
 Room = {}
 Room.__index = Room
 
-local RoomType = {
-    INITIAL = 1,
-    COMBAT = 2,
-    LOOT = 3
-}
-
 function Room:new(type, w, h)
     local obj = {
-        type = type or RoomType.INITIAL,
+        type = type or roomType.INITIAL,
         width = w or 0.85,
         height = h or 0.8,
         doors = {},
@@ -49,6 +45,12 @@ function Room:getBorders()
     local left = self:getX()
     local right = self:getX() + self:getWidth()
     return { left, right, top, bottom }
+end
+
+function Room:getRandomPosition(offset)
+    local x = math.random(self:getX() + offset, self:getX() + self:getWidth() - offset)
+    local y = math.random(self:getY() + offset, self:getY() + self:getHeight() - offset)
+    return x, y
 end
 
 function Room:addDoor(door)

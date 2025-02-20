@@ -1,11 +1,11 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy:new(type, room, x, y)
+function Enemy:new(type, x, y)
     local obj = {
         type = type,
-        x = x or math.random(room:getX(), room:getX() + room:getWidth()),
-        y = y or math.random(room:getY(), room:getY() + room:getHeight()),
+        x = x,
+        y = y,
         r = enemyData[type].size,
         speed = enemyData[type].speed,
     }

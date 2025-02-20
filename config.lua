@@ -11,6 +11,9 @@ config = {
       roomH = 0.8,
     },
 
+    defaultRoomW = 0.85,
+    defaultRoomH = 0.8,
+
     bulletSpeed = 300,
 }
 
