@@ -1,23 +1,24 @@
 map = {}
 
 function map.switchRoom(to)
-    -- switch room data
     local destination
     if type(to) == "table" then
         destination = to
     elseif type(to) == "number" then
         destination = G.currentRoom.doors[Direction[to]]
     end
-    G.currentRoom = destination
 
     -- deal with enemies data
     -- if no position set, get random position for each enemyData
     for _, enemy in ipairs(destination.enemies) do
         if not enemy.x or not enemy.y then
-            enemy.x, enemy.y = G.currentRoom:getRandomPosition(enemy.r+G.player.r)
+            enemy.x, enemy.y = destination:getRandomPosition(enemy.r+G.player.r)
         end
     end
-    G.enemies = destination.enemies
+
+    -- switch room data
+    G.currentRoom = destination
+    G.enemies = G.currentRoom.enemies
 end
 
 function map.connectRoom(room1, room2, way)
@@ -54,14 +55,12 @@ end
 
 function map.generate(roomCount)
     local rooms = {}
-    local room1 = Room:new()
+    local room1 = Room:new("initialRoom")
     table.insert(rooms, room1)
 
     for i = 2, roomCount do
-        local newRoom = Room:new()
+        local newRoom = Room:new(roomNames[math.random(#roomNames)])
         local previousRoom = rooms[math.random(#rooms)]
-
-        newRoom.enemies = enemies.generate(math.random(3,6))
 
         map.connectRoom(previousRoom, newRoom, math.random(4))
 

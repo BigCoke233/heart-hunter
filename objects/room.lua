@@ -3,15 +3,16 @@ require "data.roomData"
 Room = {}
 Room.__index = Room
 
-function Room:new(type, w, h)
+function Room:new(name, w, h)
     local obj = {
-        type = type or roomType.INITIAL,
-        width = w or 0.85,
-        height = h or 0.8,
-        doors = {},
-        enemies = {},
-        isCleared = false,
+        name = name or "defaultRoom",
+        type = roomData[name].type or roomType.INITIAL,
+        width = roomData[name].width or 0.85,
+        height = roomData[name].height or 0.8,
+        enemies = roomData[name].enemies or {},
 
+        doors = {},
+        isCleared = false,
         -- borders are automatically caculated afterwards
         borders = {},
     }
