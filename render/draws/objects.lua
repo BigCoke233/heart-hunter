@@ -12,7 +12,8 @@ end
 
 function draws.bullets()
     for k, bullet in pairs(G.shots) do
-        sprite.drawSquareWithAngle(bullet.type, bullet.currentPos, bullet.orientation, 15)
+        local x, y, angle = bullet.currentPos.x, bullet.currentPos.y, bullet.orientation
+        bullet.body:drawSprite(bullet.type, x, y, angle, config.bulletSize)
     end
 end
 

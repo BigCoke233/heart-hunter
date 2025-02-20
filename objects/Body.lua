@@ -40,10 +40,18 @@ end
 
 function Body:draw(x, y)
     if self.shape == "circle" then
-        -- 绘制圆形
         love.graphics.circle("fill", x, y, self.r)
     elseif self.shape == "rectangle" then
-        -- 绘制矩形
         love.graphics.rectangle("fill", x - self.w / 2, y - self.h / 2, self.w, self.h)
     end
+end
+
+function Body:drawSprite(spriteName, x, y, angle)
+    local sprite = sprites[spriteName]
+    local w, h = (self.shape == "circle" and self.r or self.w), (self.shape == "circle" and self.r or self.h)
+
+    love.graphics.draw(sprite, x, y, angle,
+        w / sprite:getWidth(),
+        h / sprite:getHeight()
+    )
 end

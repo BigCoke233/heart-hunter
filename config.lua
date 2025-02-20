@@ -15,7 +15,7 @@ config = {
     defaultRoomH = 0.8,
 
     bulletSpeed = 300,
-    bulletSize = 5
+    bulletSize = 15
 }
 
 -- game default states

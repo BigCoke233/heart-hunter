@@ -8,14 +8,14 @@ require "logic.enemies"
 require "logic.loot"
 require "logic.map"
 
+require "render.sprite"
+
 require "objects.body"
 require "objects.room"
 require "objects.door"
 require "objects.enemy"
 require "objects.direction"
 require "objects.obstacle"
-
-require "render.sprite"
 
 require "utils.renderer"
 require "utils.utils"
