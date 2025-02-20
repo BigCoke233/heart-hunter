@@ -9,13 +9,11 @@ local function calculateDoorLocation(obj)
     if loc == Direction.LEFT or loc == Direction.RIGHT then
         obj.x = (loc == Direction.LEFT) and (roomX - thickness / 2) or (roomX + roomW - thickness / 2)
         obj.y = (love.graphics.getHeight() - size) / 2
-        obj.width = thickness
-        obj.height = size
+        obj.body = Body:new("rectangle", thickness, size)
     elseif loc == Direction.TOP or loc == Direction.BOTTOM then
         obj.x = (love.graphics.getWidth() - size) / 2
         obj.y = (loc == Direction.TOP) and (roomY - thickness / 2) or (roomY + roomH - thickness / 2)
-        obj.width = size
-        obj.height = thickness
+        obj.body = Body:new("rectangle", size, thickness)
     end
 end
 
@@ -30,8 +28,7 @@ function Door:new(location, within, to)
 
         x = nil, -- location and size is calculated afterwards
         y = nil,
-        width = nil, -- width and height are for graphics, calculated based on size and thickness
-        height = nil,
+        body = nil,
     }
 
     setmetatable(obj, Door)

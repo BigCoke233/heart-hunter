@@ -22,7 +22,7 @@ local function playerMoves(dt)
 
     for _, move in ipairs(moveDirections) do
         if love.keyboard.isDown(move.key) then
-            if utils.hitObstacleAt(move.dir, G.player[move.axis], G.player.r) then return end
+            if utils.hitObstacleAt(move.dir, G.player[move.axis], G.player.body.r) then return end
             G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
         end
     end
@@ -30,20 +30,22 @@ end
 
 local function playerEnters()
     for _, door in ipairs(G.currentRoom.doors) do
-        local entersDoor = utils.playerCollideWithRect(door.x, door.y, door.width, door.height) and
+        local entersDoor = door.body:collide(G.player.body, door.x, door.y, G.player.x, G.player.y) and
             G.currentRoom.isCleared
         if door ~= false and entersDoor then
             map.switchRoom(door.to)
 
             -- update player position after entering a new room
+            local doorH, doorW, playerR = door.body.h, door.body.w, G.player.body.r
+            local roomX, roomY, roomW, roomH = G.currentRoom:getX(), G.currentRoom:getY(), G.currentRoom:getWidth(), G.currentRoom:getHeight()
             if door.location == Direction.LEFT then
-                G.player.x = G.currentRoom:getX() + G.currentRoom:getWidth() - G.player.r - door.width
+                G.player.x = roomX + roomW - playerR - doorW
             elseif door.location == Direction.RIGHT then
-                G.player.x = G.currentRoom:getX() + G.player.r + door.width
+                G.player.x = roomX + playerR + doorW
             elseif door.location == Direction.TOP then
-                G.player.y = G.currentRoom:getY() + G.currentRoom:getHeight() - G.player.r - door.height
+                G.player.y = roomY + roomH - playerR - doorH
             elseif door.location == Direction.BOTTOM then
-                G.player.y = G.currentRoom:getY() + G.player.r + door.height
+                G.player.y = roomY + playerR + doorH
             end
 
             break
@@ -54,8 +56,8 @@ end
 local function playerBeingAttacked()
     if (player.isShielded()) then return end
 
-    for i, v in pairs(G.enemies) do
-        if utils.playerCollideWith(v.x, v.y, v.r) then
+    for _, enemy in pairs(G.enemies) do
+        if enemy.body:collide(G.player.body, enemy.x, enemy.y, G.player.x, G.player.y) then
             print("attacked!")
             table.remove(G.player.hearts)
             -- shield this player

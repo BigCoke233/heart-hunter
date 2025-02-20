@@ -10,7 +10,7 @@ end
 function background.doors()
     for i, door in ipairs(G.currentRoom.doors) do
         if door ~= nil then
-            love.graphics.rectangle("fill", door.x, door.y, door.width, door.height)
+            door.body:draw(door.x, door.y)
         end
     end
 end

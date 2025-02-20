@@ -15,6 +15,7 @@ config = {
     defaultRoomH = 0.8,
 
     bulletSpeed = 300,
+    bulletSize = 5
 }
 
 -- game default states
@@ -23,8 +24,8 @@ function initGame()
         player = {
             x = love.graphics.getWidth() / 2,
             y = love.graphics.getHeight() / 2,
+            body = Body:new("circle", 20),
             speed = 100,
-            r = 20,
             shieldedTill = 0,
             hearts = { "redheart", "redheart", "redheart" }
         },

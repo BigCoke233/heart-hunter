@@ -6,8 +6,7 @@ function draws.player()
     else
         love.graphics.setColor(1,1,1)
     end
-
-    love.graphics.circle("fill", G.player.x, G.player.y, G.player.r)
+    G.player.body:draw(G.player.x, G.player.y)
     utils.resetGraphics()
 end
 
@@ -21,7 +20,7 @@ function draws.enemies()
     for _, enemy in pairs(G.enemies) do
         local data = enemyData[enemy.type]
         love.graphics.setColor(data.appearance.color or {1,1,1})
-        love.graphics.circle("fill", enemy.x, enemy.y, enemy.r)
+        enemy.body:draw(enemy.x, enemy.y)
         utils.resetGraphics()
     end
 end

@@ -7,7 +7,7 @@ function Enemy:new(name, location)
         presetLocation = (type(location) == "string" and location) or nil,
         x = (type(location) == "table" and location.x) or nil,
         y = (type(location) == "table" and location.y) or nil,
-        r = enemyData[name] and enemyData[name].size or nil,
+        body = Body:new("circle", enemyData[name] and enemyData[name].size or nil),
         speed = enemyData[name] and enemyData[name].speed or nil,
     }
 

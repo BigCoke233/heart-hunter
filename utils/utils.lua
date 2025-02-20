@@ -1,34 +1,5 @@
 utils = {}
 
--- deal with collision
-
-function utils.circlesCollide(x1, y1, r1, x2, y2, r2)
-    local dx = x2 - x1
-    local dy = y2 - y1
-    local distanceSquared = dx * dx + dy * dy  -- 避免开方，提高性能
-    local radiusSum = r1 + r2
-    return distanceSquared <= radiusSum * radiusSum
-end
-
-function utils.playerCollideWith(x, y, r)
-    return utils.circlesCollide(G.player.x, G.player.y, G.player.r, x, y, r)
-end
-
-function utils.circleRectCollide(cx, cy, r, rx, ry, rw, rh)
-    local nearestX = math.max(rx, math.min(cx, rx + rw))
-    local nearestY = math.max(ry, math.min(cy, ry + rh))
-
-    local dx = cx - nearestX
-    local dy = cy - nearestY
-    local distanceSquared = dx * dx + dy * dy
-
-    return distanceSquared <= r * r
-end
-
-function utils.playerCollideWithRect(x, y, w, h)
-    return utils.circleRectCollide(G.player.x, G.player.y, G.player.r, x, y, w, h)
-end
-
 -- deal with obstacles
 
 -- detect if object hit obstacles at a certain direction

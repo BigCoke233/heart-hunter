@@ -13,8 +13,9 @@ end
 local function enemiesBeingShot()
     for i, enemy in pairs(G.enemies) do
         for j, shot in pairs(G.shots) do
-            if utils.circlesCollide(
-                enemy.x, enemy.y, enemy.r,
+            if enemy.body:collide(
+                shot.body,
+                enemy.x, enemy.y,
                 shot.currentPos.x, shot.currentPos.y, shot.size
             ) then
                 -- kill entities

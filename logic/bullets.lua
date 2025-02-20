@@ -25,7 +25,7 @@ function bullets.shoot(x, y, playerX, playerY, shots)
         speed = { x = sin*config.bulletSpeed, y = cos*config.bulletSpeed },
         orientation = math.asin(sin),
         currentPos = { x = playerX, y = playerY },
-        size = 5
+        body = Body:new("circle", config.bulletSize)
     })
 end
 
@@ -36,7 +36,7 @@ function bullets.update(dt)
         bullet.currentPos.x = x + bullet.speed.x * dt
         bullet.currentPos.y = y + bullet.speed.y * dt
 
-        if utils.hitObstacle(x, y, bullet.size) then
+        if utils.hitObstacle(x, y, bullet.body.r) then
             G.shots[k] = nil
         end
     end

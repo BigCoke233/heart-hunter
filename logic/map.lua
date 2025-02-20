@@ -11,7 +11,7 @@ function map.switchRoom(to)
     -- deal with enemies data
     -- if no position set, get random position for each enemyData
     for _, enemy in ipairs(destination.enemies) do
-        local offset = enemy.r + G.player.r
+        local offset = enemy.body.r + G.player.body.r
         if not enemy.x or not enemy.y then
             enemy.x, enemy.y = destination:getLocation(enemy.presetLocation or "random", offset)
         end
