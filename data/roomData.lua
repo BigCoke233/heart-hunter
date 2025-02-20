@@ -23,7 +23,10 @@ roomData = {
             Enemy:new("lancer", "topLeft"),
             Enemy:new("lancer", "bottomRight"),
             Enemy:new("lancer", "bottomLeft"),
-        }
+        },
+        obstacles = {
+            Obstacle:new("pillar", "center")
+        },
     },
     combatRoom2 = {
         type = roomType.COMBAT,
@@ -35,7 +38,13 @@ roomData = {
             Enemy:new("fairy", "center"),
             Enemy:new("fairy", "center"),
             Enemy:new("fairy", "center"),
-        }
+        },
+        obstacles = {
+            Obstacle:new("pillar", "topRight"),
+            Obstacle:new("pillar", "bottomLeft"),
+            Obstacle:new("pillar", "topLeft"),
+            Obstacle:new("pillar", "bottomRight"),
+        },
     },
     combatRoom3 = {
         type = roomType.COMBAT,
@@ -45,7 +54,11 @@ roomData = {
             Enemy:new("gorilla", "leftCenter"),
             Enemy:new("gorilla", "rightCenter"),
             Enemy:new("gorilla", "center"),
-        }
+        },
+        obstacles = {
+            Obstacle:new("pillar", "topCenter"),
+            Obstacle:new("pillar", "bottomCenter"),
+        },
     },
 }
 

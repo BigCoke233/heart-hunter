@@ -17,6 +17,14 @@ function map.switchRoom(to)
         end
     end
 
+    -- the same for obstacles
+    for _, obstacle in ipairs(destination.obstacles) do
+        local offset = obstacle.body.w + G.player.body.r
+        if not obstacle.x or not obstacle.y then
+            obstacle.x, obstacle.y = destination:getLocation(obstacle.presetLocation or "random", offset)
+        end
+    end
+
     -- switch room data
     G.currentRoom = destination
     G.enemies = G.currentRoom.enemies

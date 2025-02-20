@@ -18,9 +18,6 @@ function utils.hitObstacleAt(d, axisVal, r)
         hitRoomBorder = axisVal+r >= borders[Direction.BOTTOM]
     end
 
-    -- if player has met any blocks
-    -- ...
-
     return hitRoomBorder
 end
 
@@ -35,7 +32,11 @@ function utils.hitObstacle(x, y, r)
     end
 
     -- 检查是否撞到其他障碍物（例如墙、箱子等）
-    -- ...
+    for _, obstacle in ipairs(G.currentRoom.obstacles) do
+        if obstacle.body:collide(G.player.body, obstacle.x, obstacle.y, x, y) then
+            return true
+        end
+    end
 
     return false
 end

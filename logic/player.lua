@@ -23,6 +23,13 @@ local function playerMoves(dt)
     for _, move in ipairs(moveDirections) do
         if love.keyboard.isDown(move.key) then
             if utils.hitObstacleAt(move.dir, G.player[move.axis], G.player.body.r) then return end
+
+            for _, obstacle in ipairs(G.currentRoom.obstacles) do
+                if obstacle.body:collide(G.player.body, obstacle.x, obstacle.y, G.player.x, G.player.y) then
+                    G.player[move.axis] = G.player[move.axis] - G.player.speed * dt * move.delta
+                end
+            end
+
             G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
         end
     end

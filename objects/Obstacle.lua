@@ -7,7 +7,7 @@ function Obstacle:new(name, location, body)
         presetLocation = (type(location) == "string" and location) or nil,
         x = (type(location) == "table" and location.x) or nil,
         y = (type(location) == "table" and location.y) or nil,
-        body = body or Body:new("rectangle", 10, 10)
+        body = body or Body:new("rectangle", 50, 50)
     }
 
     setmetatable(obj, Obstacle)

@@ -15,4 +15,12 @@ function background.doors()
     end
 end
 
+function background.obstacles()
+    for _, obstacle in ipairs(G.currentRoom.obstacles) do
+        if obstacle ~= nil then
+            obstacle.body:draw(obstacle.x, obstacle.y)
+        end
+    end
+end
+
 return background

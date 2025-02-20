@@ -1,14 +1,4 @@
 require "config"
-require "data.enemyData"
-require "data.heartTypes"
-
-require "logic.bullets"
-require "logic.player"
-require "logic.enemies"
-require "logic.loot"
-require "logic.map"
-
-require "render.sprite"
 
 require "objects.body"
 require "objects.room"
@@ -16,6 +6,18 @@ require "objects.door"
 require "objects.enemy"
 require "objects.direction"
 require "objects.obstacle"
+
+require "data.enemyData"
+require "data.heartTypes"
+require "data.roomData"
+
+require "render.sprite"
+
+require "logic.bullets"
+require "logic.player"
+require "logic.enemies"
+require "logic.loot"
+require "logic.map"
 
 require "utils.renderer"
 require "utils.utils"
@@ -32,6 +34,7 @@ function love.load()
     local drawBackground = require "render.draws.background"
     renderer:add("background", nil, drawBackground.room)
     renderer:add("background", nil, drawBackground.doors)
+    renderer:add("background", nil, drawBackground.obstacles)
     renderer:add("objects", nil, drawObject.loot)
     renderer:add("objects", nil, drawObject.player)
     renderer:add("objects", nil, drawObject.enemies)
