@@ -18,7 +18,7 @@ end
 function background.obstacles()
     for _, obstacle in ipairs(G.currentRoom.obstacles) do
         if obstacle ~= nil then
-            obstacle.body:draw(obstacle.x, obstacle.y, true)
+            obstacle.body:draw(obstacle.x, obstacle.y)
         end
     end
 end

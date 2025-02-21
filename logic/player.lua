@@ -12,6 +12,49 @@ end
 
 -- state update functions
 
+local function meetWall(d, axis)
+    local borders = G.currentRoom.borders
+    local r, axisVal = G.player.body.r, G.player[axis]
+
+    local hitRoomBorder = false
+    if d==Direction.RIGHT then
+        hitRoomBorder = axisVal+r >= borders[Direction.RIGHT]
+    elseif d==Direction.LEFT then
+        hitRoomBorder = axisVal-r <= borders[Direction.LEFT]
+    elseif d==Direction.TOP then
+        hitRoomBorder = axisVal-r <= borders[Direction.TOP]
+    elseif d==Direction.BOTTOM then
+        hitRoomBorder = axisVal+r >= borders[Direction.BOTTOM]
+    end
+
+    return hitRoomBorder
+end
+
+local function meetObstacle(d)
+    local x1, y1, r = G.player.x, G.player.y, G.player.body.r
+
+    for _, obstacle in ipairs(G.currentRoom.obstacles) do
+        local x2, y2 = obstacle.x, obstacle.y
+        local push = 1
+
+        if G.player.body:collide(obstacle.body, x1, y1, x2, y2) then
+            -- if collision occurs, adjust player position based on direction
+            if d == Direction.LEFT then
+                G.player.x = x1 + push
+            elseif d == Direction.RIGHT then
+                G.player.x = x1 - push
+            elseif d == Direction.TOP then
+                G.player.y = y1 + push
+            elseif d == Direction.BOTTOM then
+                G.player.y = y1 - push
+            end
+            return true
+        end
+    end
+
+    return false
+end
+
 local function playerMoves(dt)
     local moveDirections = {
         { key = "d", axis = "x", dir = Direction.RIGHT, delta = 1 },
@@ -22,15 +65,7 @@ local function playerMoves(dt)
 
     for _, move in ipairs(moveDirections) do
         if love.keyboard.isDown(move.key) then
-            if utils.hitObstacleAt(move.dir, G.player[move.axis], G.player.body.r) then return end
-
-            -- TODO NEED FIX --
-            -- for _, obstacle in ipairs(G.currentRoom.obstacles) do
-            --     if obstacle.body:collide(G.player.body, obstacle.x, obstacle.y, G.player.x, G.player.y) then
-            --         G.player[move.axis] = G.player[move.axis] - G.player.speed * dt * move.delta
-            --     end
-            -- end
-
+            if meetWall(move.dir, move.axis) or meetObstacle(move.dir) then return end
             G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
         end
     end

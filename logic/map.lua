@@ -21,7 +21,8 @@ function map.switchRoom(to)
     for _, obstacle in ipairs(destination.obstacles) do
         local offset = obstacle.body.w + G.player.body.r
         if not obstacle.x or not obstacle.y then
-            obstacle.x, obstacle.y = destination:getLocation(obstacle.presetLocation or "random", offset)
+            local x, y = destination:getLocation(obstacle.presetLocation or "random", offset)
+            obstacle.x, obstacle.y = x - obstacle.body.w / 2, y - obstacle.body.h / 2
         end
     end
 

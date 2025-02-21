@@ -14,3 +14,12 @@ function Obstacle:new(name, location, body)
 
     return obj
 end
+
+function Obstacle:getBorders()
+    local left = self.x
+    local right = self.x + self.body.w
+    local top = self.y
+    local bottom = self.y + self.body.h
+
+    return { left, right, top, bottom }
+end
