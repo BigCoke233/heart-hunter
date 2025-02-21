@@ -11,7 +11,7 @@ function map.switchRoom(to)
     -- deal with enemies data
     -- if no position set, get random position for each enemyData
     for _, enemy in ipairs(destination.enemies) do
-        local offset = enemy.body.r + G.player.body.r
+        local offset = enemy.body.r*2 + G.player.body.r*2 + config.summonMargin
         if not enemy.x or not enemy.y then
             enemy.x, enemy.y = destination:getLocation(enemy.presetLocation or "random", offset)
         end
@@ -19,7 +19,7 @@ function map.switchRoom(to)
 
     -- the same for obstacles
     for _, obstacle in ipairs(destination.obstacles) do
-        local offset = obstacle.body.w + G.player.body.r
+        local offset = obstacle.body.w + G.player.body.r*2 + config.summonMargin
         if not obstacle.x or not obstacle.y then
             local x, y = destination:getLocation(obstacle.presetLocation or "random", offset)
             obstacle.x, obstacle.y = x - obstacle.body.w / 2, y - obstacle.body.h / 2
