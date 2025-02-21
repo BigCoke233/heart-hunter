@@ -49,7 +49,6 @@ function Room:getBorders()
 end
 
 function Room:getLocation(location, offset)
-    print("getLocation 的两个参数：", location, offset)
     if type(location) ~= "string" then
         error("Invalid location type: " .. type(location))
     end

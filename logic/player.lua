@@ -101,7 +101,6 @@ local function playerBeingAttacked()
 
     for _, enemy in pairs(G.enemies) do
         if enemy.body:collide(G.player.body, enemy.x, enemy.y, G.player.x, G.player.y) then
-            print("attacked!")
             table.remove(G.player.hearts)
             -- shield this player
             G.player.shieldedTill = G.time + config.playerShieldTime

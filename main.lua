@@ -53,7 +53,6 @@ function love.update(dt)
     end
 
     if not player.isAlive() then
-        print("Out of hearts. You died!")
         initGame()
     end
 
