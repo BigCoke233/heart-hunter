@@ -38,11 +38,14 @@ function Body:collide(other, x1, y1, x2, y2)
     return false
 end
 
-function Body:draw(x, y)
+function Body:draw(x, y, offsetFix)
     if self.shape == "circle" then
-        love.graphics.circle("fill", x, y, self.r)
+        local offset = offsetFix and - self.r / 2 or 0
+        love.graphics.circle("fill", x + offset, y + offset, self.r)
     elseif self.shape == "rectangle" then
-        love.graphics.rectangle("fill", x - self.w / 2, y - self.h / 2, self.w, self.h)
+        local offsetX = offsetFix and - self.w / 2 or 0
+        local offsetY = offsetFix and - self.h / 2 or 0
+        love.graphics.rectangle("fill", x + offsetX, y + offsetY, self.w, self.h)
     end
 end
 
