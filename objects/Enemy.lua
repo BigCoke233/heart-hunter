@@ -16,16 +16,30 @@ function Enemy:new(name, location)
     return obj
 end
 
+function Enemy:isBlocked()
+
+end
+
 function Enemy:moveTowardPlayer(dt)
-    if self.x < G.player.x then
-        self.x = self.x + self.speed*dt
-    elseif self.x > G.player.x then
-        self.x = self.x - self.speed*dt
+    local dv = self.speed * dt
+    local dx, dy = 0, 0
+
+    local function getDirection(axis, playerPos, direction, blockAxis)
+        if self[axis] < playerPos then
+            if not utils.isBlocked(self.body, self.x, self.y, direction, blockAxis, dv) then
+                return 1
+            end
+        elseif self[axis] > playerPos then
+            if not utils.isBlocked(self.body, self.x, self.y, direction, blockAxis, dv) then
+                return -1
+            end
+        end
+        return 0
     end
 
-    if self.y < G.player.y then
-        self.y = self.y + self.speed*dt
-    elseif self.y > G.player.y then
-        self.y = self.y - self.speed*dt
-    end
+    dx = getDirection("x", G.player.x, Direction.RIGHT, "x")
+    dy = getDirection("y", G.player.y, Direction.DOWN, "y")
+
+    self.x = self.x + dx * dv
+    self.y = self.y + dy * dv
 end
