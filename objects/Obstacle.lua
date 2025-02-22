@@ -23,3 +23,12 @@ function Obstacle:getBorders()
 
     return { left, right, top, bottom }
 end
+
+function Obstacle:isMet(body, currentX, currentY, dv)
+    -- x,y should be the predicted next location of this body
+    -- dv = speed * dt * direction
+    local x = currentX + dv
+    local y = currentY + dv
+
+    return self.body:collide(body, self.x, self.y, x, y)
+end

@@ -12,9 +12,9 @@ end
 
 -- state update functions
 
-local function meetWall(d, axis)
+local function meetWall(d, axis, dv)
     local borders = G.currentRoom.borders
-    local r, axisVal = G.player.body.r, G.player[axis]
+    local r, axisVal = G.player.body.r, G.player[axis]+dv
 
     local hitRoomBorder = false
     if d==Direction.RIGHT then
@@ -30,28 +30,12 @@ local function meetWall(d, axis)
     return hitRoomBorder
 end
 
-local function meetObstacle(d)
-    local x1, y1, r = G.player.x, G.player.y, G.player.body.r
-
+local function meetObstacle(d, dv)
     for _, obstacle in ipairs(G.currentRoom.obstacles) do
-        local x2, y2 = obstacle.x, obstacle.y
-        local push = 1
-
-        if G.player.body:collide(obstacle.body, x1, y1, x2, y2) then
-            -- if collision occurs, adjust player position based on direction
-            if d == Direction.LEFT then
-                G.player.x = x1 + push
-            elseif d == Direction.RIGHT then
-                G.player.x = x1 - push
-            elseif d == Direction.TOP then
-                G.player.y = y1 + push
-            elseif d == Direction.BOTTOM then
-                G.player.y = y1 - push
-            end
+        if obstacle:isMet(G.player.body, G.player.x, G.player.y, dv) then
             return true
         end
     end
-
     return false
 end
 
@@ -64,8 +48,9 @@ local function playerMoves(dt)
     }
 
     for _, move in ipairs(moveDirections) do
+        local dv = G.player.speed * dt * move.delta
         if love.keyboard.isDown(move.key) then
-            if meetWall(move.dir, move.axis) or meetObstacle(move.dir) then return end
+            if meetWall(move.dir, move.axis, dv) or meetObstacle(move.dir, dv) then return end
             G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
         end
     end
