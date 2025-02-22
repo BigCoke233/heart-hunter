@@ -12,37 +12,6 @@ end
 
 -- state update functions
 
-local function isBlocked(dir, axis, dv)
-    local function meetWall(d, axis, dv)
-        local borders = G.currentRoom.borders
-        local r, axisVal = G.player.body.r, G.player[axis]+dv
-
-        local hitRoomBorder = false
-        if d==Direction.RIGHT then
-            hitRoomBorder = axisVal+r >= borders[Direction.RIGHT]
-        elseif d==Direction.LEFT then
-            hitRoomBorder = axisVal-r <= borders[Direction.LEFT]
-        elseif d==Direction.TOP then
-            hitRoomBorder = axisVal-r <= borders[Direction.TOP]
-        elseif d==Direction.BOTTOM then
-            hitRoomBorder = axisVal+r >= borders[Direction.BOTTOM]
-        end
-
-        return hitRoomBorder
-    end
-
-    local function meetObstacle(dv, dir)
-        for _, obstacle in ipairs(G.currentRoom.obstacles) do
-            if obstacle:isMet(G.player.body, G.player.x, G.player.y, dv, dir) then
-                return true
-            end
-        end
-        return false
-    end
-
-    return meetWall(dir, axis, dv) or meetObstacle(dv, dir)
-end
-
 local function playerMoves(dt)
     local moveDirections = {
         { key = "d", axis = "x", dir = Direction.RIGHT, delta = 1 },
@@ -55,7 +24,7 @@ local function playerMoves(dt)
         local dv = G.player.speed * dt * move.delta
         if love.keyboard.isDown(move.key) then
             local delta = G.player.speed * dt * move.delta
-            if isBlocked(move.dir, move.axis, dv) then
+            if utils.isBlocked(G.player.body, G.player.x, G.player.y, move.dir, move.axis, dv) then
                 delta = 0
             end
             G.player[move.axis] = G.player[move.axis] + delta
