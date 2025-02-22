@@ -30,9 +30,9 @@ local function meetWall(d, axis, dv)
     return hitRoomBorder
 end
 
-local function meetObstacle(d, dv)
+local function meetObstacle(dv, dir)
     for _, obstacle in ipairs(G.currentRoom.obstacles) do
-        if obstacle:isMet(G.player.body, G.player.x, G.player.y, dv) then
+        if obstacle:isMet(G.player.body, G.player.x, G.player.y, dv, dir) then
             return true
         end
     end
@@ -50,7 +50,7 @@ local function playerMoves(dt)
     for _, move in ipairs(moveDirections) do
         local dv = G.player.speed * dt * move.delta
         if love.keyboard.isDown(move.key) then
-            if meetWall(move.dir, move.axis, dv) or meetObstacle(move.dir, dv) then return end
+            if meetWall(move.dir, move.axis, dv) or meetObstacle(dv, move.dir) then return end
             G.player[move.axis] = G.player[move.axis] + G.player.speed * dt * move.delta
         end
     end

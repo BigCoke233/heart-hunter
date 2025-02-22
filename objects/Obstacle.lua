@@ -24,11 +24,17 @@ function Obstacle:getBorders()
     return { left, right, top, bottom }
 end
 
-function Obstacle:isMet(body, currentX, currentY, dv)
+function Obstacle:isMet(body, currentX, currentY, dv, dir)
     -- x,y should be the predicted next location of this body
     -- dv = speed * dt * direction
-    local x = currentX + dv
-    local y = currentY + dv
+    local x, y
+    if dir == Direction.LEFT or dir == Direction.RIGHT then
+        x = currentX + dv
+        y = currentY
+    elseif dir == Direction.UP or dir == Direction.DOWN then
+        x = currentX
+        y = currentY + dv
+    end
 
     return self.body:collide(body, self.x, self.y, x, y)
 end
