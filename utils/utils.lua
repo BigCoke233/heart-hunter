@@ -60,3 +60,17 @@ end
 function utils.resetGraphics()
    love.graphics.setColor(1,1,1)
 end
+
+function utils.copy(t, deep)
+    local copy = {}
+
+    for k, v in pairs(t) do
+        if deep and type(v) == "table" then
+            copy[k] = utils.copy(v, true)
+        else
+            copy[k] = v
+        end
+    end
+
+    return copy
+end

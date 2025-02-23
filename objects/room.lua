@@ -8,8 +8,8 @@ function Room:new(name, w, h)
         type = data.type or roomType.INITIAL,
         width = data.width or 0.85,
         height = data.height or 0.8,
-        enemies = data.enemies or {},
-        obstacles = data.obstacles or {},
+        enemies = utils.copy(data.enemies or {}),
+        obstacles = utils.copy(data.obstacles or {}),
 
         doors = {},
         isCleared = false,
