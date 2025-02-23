@@ -23,11 +23,16 @@ local function playerMoves(dt)
     for _, move in ipairs(moveDirections) do
         local dv = G.player.speed * dt * move.delta
         if love.keyboard.isDown(move.key) then
+            G.player.facing = move.dir
+            G.player.moving = true
+
             local delta = G.player.speed * dt * move.delta
             if utils.isBlocked(G.player.body, G.player.x, G.player.y, move.dir, move.axis, dv) then
                 delta = 0
             end
             G.player[move.axis] = G.player[move.axis] + delta
+        else
+            G.player.moving = false
         end
     end
 end

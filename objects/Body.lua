@@ -55,3 +55,13 @@ function Body:drawSprite(spriteName, x, y, angle)
         h / sprite:getHeight()
     )
 end
+
+function Body:drawQuad(sheet, index, x, y, angle)
+    local quad = quads[sheet][index]
+    local w, h = (self.shape == "circle" and self.r or self.w), (self.shape == "circle" and self.r or self.h)
+
+    love.graphics.draw(sprites[sheet], quad, x, y, angle or 0,
+        w / 16,
+        h / 16
+    )
+end

@@ -6,7 +6,21 @@ function draws.player()
     else
         love.graphics.setColor(1,1,1)
     end
-    G.player.body:draw(G.player.x, G.player.y)
+
+    local facing = { [Direction.UP] = 4, [Direction.DOWN] = 1, [Direction.LEFT] = 10, [Direction.RIGHT] = 7 }
+    local moving = { [Direction.UP] = { 5,6 }, [Direction.DOWN] = { 1,2 }, [Direction.LEFT] = { 9,10 }, [Direction.RIGHT] = { 11,12 } }
+    local index = facing[G.player.facing]
+
+    local movingFrame = 1
+    if G.player.moving then
+        movingFrame = (movingFrame == 1) and 2 or 1
+        index = moving[G.player.facing][movingFrame]
+    else
+        index = facing[G.player.facing]
+    end
+
+    local x, y = G.player.x - G.player.body.r, G.player.y - G.player.body.r
+    G.player.body:drawQuad("apple", index, x, y)
     utils.resetGraphics()
 end
 

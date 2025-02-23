@@ -17,7 +17,7 @@ config = {
     bulletSpeed = 300,
     bulletSize = 15,
 
-    summonMargin = 30
+    summonMargin = 30,
 }
 
 -- game default states
@@ -29,7 +29,9 @@ function initGame()
             body = Body:new("circle", 20),
             speed = 100,
             shieldedTill = 0,
-            hearts = { "redheart", "redheart", "redheart" }
+            hearts = { "redheart", "redheart", "redheart" },
+            facing = Direction.DOWN,
+            moving = false,
         },
         shots = {},
         enemies = {},
