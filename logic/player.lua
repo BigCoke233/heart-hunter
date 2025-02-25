@@ -10,6 +10,16 @@ function player.isAlive()
     return #G.player.hearts~=0
 end
 
+function player.shoot(x, y)
+    if (#G.player.hearts == 0) then
+        print("out of ammo!")
+        return
+    end
+
+    local currentBullet = table.remove(G.player.hearts)
+    bullets.fire(currentBullet, x, y, G.player.x, G.player.y)
+end
+
 -- state update functions
 
 local function playerMoves(dt)

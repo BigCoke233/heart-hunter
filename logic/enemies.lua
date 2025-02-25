@@ -18,8 +18,6 @@ local function enemiesBeingShot()
                 enemy.x, enemy.y,
                 shot.currentPos.x, shot.currentPos.y, shot.size
             ) then
-                -- bullet effect
-                bullets.hit(shot.type)
                 -- kill entities
                 table.remove(G.enemies, i)
                 table.remove(G.shots, j)
@@ -31,6 +29,8 @@ local function enemiesBeingShot()
                         loot.drop(enemy.x + offset, enemy.y + offset, item.type)
                     end
                 end
+                -- bullet effect
+                bullets.hit(shot.type, enemy.x, enemy.y, enemy.type)
             end
         end
     end

@@ -65,6 +65,6 @@ end
 
 function love.mousereleased(x, y, button, istouch)
     if button == 1 then
-        bullets.shoot(x, y, G.player.x, G.player.y, shots)
+        player.shoot(x, y)
     end
 end

@@ -2,40 +2,30 @@ bullets = {}
 
 local bulletData = require "data.bulletData"
 
-function bullets.shoot(x, y, playerX, playerY)
-    if (#G.player.hearts == 0) then
-        print("out of ammo!")
-        return
-    end
+function bullets.fire(bulletType, targetX, targetY, fireX, fireY)
+    local vx = targetX - fireX
+    local vy = targetY - fireY
+    local length = math.sqrt(vx*vx + vy*vy)
+    local sin, cos = vx / length, vy / length
 
-    -- essential calculation
-    local function calculateShooting()
-        local vx = x - playerX
-        local vy = y - playerY
-        local length = math.sqrt(vx*vx + vy*vy)
-
-        if length==0 then return end
-
-        return vx / length, vy / length
-    end
-    local sin, cos = calculateShooting()
-
-    -- fire the bullet
-    local currentBullet = table.remove(G.player.hearts)
     table.insert(G.shots, {
-        type = currentBullet,
+        type = bulletType,
         speed = { x = sin*config.bulletSpeed, y = cos*config.bulletSpeed },
         orientation = math.asin(sin),
-        currentPos = { x = playerX, y = playerY },
+        currentPos = { x = fireX, y = fireY },
         body = Body:new("circle", config.bulletSize)
     })
 
-    -- callback
-    bulletData[currentBullet].afterShot()
+    if(bulletData[bulletType]) then
+        bulletData[bulletType].afterShot()
+    end
 end
 
-function bullets.hit(name)
-    bulletData[name].afterHit()
+function bullets.hit(name, x, y, enemyType)
+    -- x, y represents the position of the bullet when it hit the target
+    if bulletData[name] then
+        bulletData[name].afterHit(x, y, enemyType)
+    end
 end
 
 function bullets.update(dt)
