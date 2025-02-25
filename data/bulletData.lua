@@ -1,5 +1,6 @@
 local bulletData = {
     bigheart = {
+        damage = 200,
         afterShot = function ()
         end,
         afterHit = function (x, y, enemyType)
@@ -13,6 +14,7 @@ local bulletData = {
         end
     },
     shinyheart = {
+        damage = 80,
         afterShot = function ()
             player.speedUp(30, 10)
         end,

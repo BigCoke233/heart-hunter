@@ -29,16 +29,12 @@ local function enemiesBeingShot()
                 shot.currentPos.x, shot.currentPos.y, shot.size
             ) then
                 -- kill entities
-                table.remove(G.enemies, i)
-                table.remove(G.shots, j)
-                -- drop loot
-                for i, item in ipairs(enemyData[enemy.type].drops) do
-                    local temp = math.random(10) / 10
-                    if temp <= item.chances then
-                        local offset = (i - 1) * 5
-                        loot.drop(enemy.x + offset, enemy.y + offset, item.type)
-                    end
+                enemy:getsAttacked(shot.damage)
+                if (enemy:isDead()) then
+                    table.remove(G.enemies, i)
                 end
+                -- kill shot
+                table.remove(G.shots, j)
                 -- bullet effect
                 bullets.hit(shot.type, enemy.x, enemy.y, enemy.type)
             end

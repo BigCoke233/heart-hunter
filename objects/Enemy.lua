@@ -9,6 +9,7 @@ function Enemy:new(name, location)
         y = (type(location) == "table" and location.y) or nil,
         body = Body:new("circle", enemyData[name] and enemyData[name].size or nil),
         speed = enemyData[name] and enemyData[name].speed or nil,
+        health = enemyData[name] and enemyData[name].health or nil,
         stunned = false,
     }
 
@@ -48,6 +49,28 @@ function Enemy:moveTowardPlayer(dt)
 
     self.x = self.x + dx * dv
     self.y = self.y + dy * dv
+end
+
+function Enemy:getsAttacked(damage)
+    self.health = self.health - damage
+    if self:isDead() then
+        self:die()
+    end
+end
+
+function Enemy:isDead()
+    return self.health <= 0
+end
+
+function Enemy:die()
+    -- drop loots
+    for i, item in ipairs(enemyData[self.type].drops) do
+        local temp = math.random(10) / 10
+        if temp <= item.chances then
+            local offset = (i - 1) * 5
+            loot.drop(self.x + offset, self.y + offset, item.type)
+        end
+    end
 end
 
 function Enemy:stun(duration)

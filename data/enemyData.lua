@@ -2,6 +2,7 @@ enemyData = {
     lancer = {
         size = 12,
         speed = 25,
+        health = 100,
         appearance = {
             color = { 0, 1, 1 }
         },
@@ -13,6 +14,7 @@ enemyData = {
     gorilla = {
         size = 25,
         speed = 10,
+        health = 150,
         appearance = {
             color = { 224/255, 122/255, 95/255 }
         }
@@ -24,6 +26,7 @@ enemyData = {
     fairy = {
         size = 8,
         speed = 60,
+        health = 50,
         appearance = {
             color = { 251/255, 243/255, 185/255 }
         }
