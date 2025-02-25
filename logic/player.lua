@@ -20,6 +20,11 @@ function player.shoot(x, y)
     bullets.fire(currentBullet, x, y, G.player.x, G.player.y)
 end
 
+function player.speedUp(increment, duration)
+    G.player.speed = G.player.speed + increment
+    G.player.speedUpTill = G.time + duration
+end
+
 -- state update functions
 
 local function playerMoves(dt)
@@ -88,4 +93,9 @@ function player.update(dt)
    playerMoves(dt)
    playerEnters()
    playerBeingAttacked()
+
+   if G.player.speedUpTill and G.player.speedUpTill < G.time then
+        G.player.speed = config.defaultPlayerSpeed
+        G.player.speedUpTill = nil
+    end
 end

@@ -18,6 +18,8 @@ config = {
     bulletSize = 15,
 
     summonMargin = 30,
+
+    defaultPlayerSpeed = 100,
 }
 
 -- game default states
@@ -27,9 +29,9 @@ function initGame()
             x = love.graphics.getWidth() / 2,
             y = love.graphics.getHeight() / 2,
             body = Body:new("circle", 20),
-            speed = 100,
+            speed = config.defaultPlayerSpeed,
             shieldedTill = 0,
-            hearts = { "redheart", "redheart", "redheart" },
+            hearts = { "redheart", "redheart", "redheart", "shinyheart", "shinyheart" },
             facing = Direction.DOWN,
             moving = false,
         },
