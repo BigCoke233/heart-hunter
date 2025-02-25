@@ -1,6 +1,8 @@
 bullets = {}
 
-function bullets.shoot(x, y, playerX, playerY, shots)
+local bulletData = require "data.bulletData"
+
+function bullets.shoot(x, y, playerX, playerY)
     if (#G.player.hearts == 0) then
         print("out of ammo!")
         return
@@ -27,6 +29,13 @@ function bullets.shoot(x, y, playerX, playerY, shots)
         currentPos = { x = playerX, y = playerY },
         body = Body:new("circle", config.bulletSize)
     })
+
+    -- callback
+    bulletData[currentBullet].afterShot()
+end
+
+function bullets.hit(name)
+    bulletData[name].afterHit()
 end
 
 function bullets.update(dt)
