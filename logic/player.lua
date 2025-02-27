@@ -94,7 +94,10 @@ function player.keypressed(key)
     -- rearrange heart sequence with number keys
     local i = tonumber(key)
     local hearts = G.player.hearts
+    local length = #hearts
     if i ~= nil and hearts[i] then
-        hearts[i], hearts[#hearts] = hearts[#hearts], hearts[i]
+        -- move selected heart to the end
+        local temp = table.remove(hearts, i)
+        table.insert(hearts, temp)
     end
 end
