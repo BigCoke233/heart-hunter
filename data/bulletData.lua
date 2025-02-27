@@ -7,10 +7,20 @@ local bulletData = {
             local w, h = love.graphics.getWidth(), love.graphics.getHeight()
             local r = enemyData[enemyType].size + 10
 
-            bullets.fire("redheart", 0, 0, x-r, y-r)
-            bullets.fire("redheart", w, h, x+r, y+r)
-            bullets.fire("redheart", 0, h, x-r, y+r)
-            bullets.fire("redheart", w, 0, x+r, y-r)
+            -- split heart and shoot at 4 different angle
+            if math.random(2) == 1 then
+                -- shoot like a X
+                bullets.fire("redheart", 0, 0, x-r, y-r)
+                bullets.fire("redheart", w, h, x+r, y+r)
+                bullets.fire("redheart", 0, h, x-r, y+r)
+                bullets.fire("redheart", w, 0, x+r, y-r)
+            else
+                -- shoot like a cross
+                bullets.fire("redheart", w/2, 0, x, y-r)
+                bullets.fire("redheart", w/2, h, x, y+r)
+                bullets.fire("redheart", 0, h/2, x-r, y)
+                bullets.fire("redheart", w, h/2, x+r, y)
+            end
         end
     },
     shinyheart = {
