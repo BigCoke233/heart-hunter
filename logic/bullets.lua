@@ -14,7 +14,7 @@ function bullets.fire(bulletType, targetX, targetY, fireX, fireY)
         orientation = math.asin(sin),
         currentPos = { x = fireX, y = fireY },
         body = Body:new("circle", config.bulletSize),
-        damage = bulletData[bulletType].damage or 100,
+        damage = (bulletData[bulletType] and bulletData[bulletType].damage) or 100,
     })
 
     if(bulletData[bulletType]) then
