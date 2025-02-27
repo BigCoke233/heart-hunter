@@ -1,7 +1,10 @@
 sprite = {}
 
 local spriteTypes = heartTypes
-local spriteSheets = { "apple" }
+local spriteSheets = {
+    { name = "apple", w = 32, h = 32 },
+    { name = "lancer", w = 32, h = 32 },
+}
 
 function sprite.load()
     sprites = {}
@@ -9,31 +12,34 @@ function sprite.load()
 
     love.graphics.setDefaultFilter("nearest", "nearest")
 
-    -- 加载普通的单一图片精灵
+    -- load single-image sprite
     for _, sprite in ipairs(spriteTypes) do
         local filename = "resources/sprites/" .. sprite .. ".png"
         sprites[sprite] = love.graphics.newImage(filename)
     end
 
-    -- 加载精灵表，并为每个精灵表中的每个精灵创建对应的 Quad
+    -- load sprite sheets and create quads for each sprite in the sheet
     for _, sheet in ipairs(spriteSheets) do
-        local filename = "resources/sheets/" .. sheet .. ".png"
+        local filename = "resources/sheets/" .. sheet.name .. ".png"
         local image = love.graphics.newImage(filename)
-        sprites[sheet] = love.graphics.newImage(filename)
+        sprites[sheet.name] = love.graphics.newImage(filename)
 
         local sheetQuads = {}
-        local spriteWidth, spriteHeight = 32, 32
 
-        local rows = math.floor(image:getHeight() / spriteHeight)
-        local columns = math.floor(image:getWidth() / spriteWidth)
+        local rows = math.floor(image:getHeight() / sheet.h)
+        local columns = math.floor(image:getWidth() / sheet.w)
 
         for row = 0, rows - 1 do
             for col = 0, columns - 1 do
                 local index = row * columns + col
-                sheetQuads[index] = love.graphics.newQuad(col * spriteWidth, row * spriteHeight, spriteWidth, spriteHeight, image:getWidth(), image:getHeight())
+                sheetQuads[index] = love.graphics.newQuad(
+                    col * sheet.w, row * sheet.h,
+                    sheet.w, sheet.h,
+                    image:getWidth(), image:getHeight()
+                )
             end
         end
-        quads[sheet] = sheetQuads
+        quads[sheet.name] = sheetQuads
     end
 end
 

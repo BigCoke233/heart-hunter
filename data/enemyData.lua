@@ -3,8 +3,17 @@ enemyData = {
         size = 12,
         speed = 25,
         health = 100,
-        appearance = {
-            color = { 0, 1, 1 }
+        sprite = {
+            type = "spritesheet",
+            name = "lancer",
+            sheet = { row = 2, col = 8, width = 32, height = 32 },
+            frames = {
+                [Direction.LEFT] = { 5, 6 },
+                [Direction.RIGHT] = { 3, 4 },
+                [Direction.DOWN] = { 1, 2 },
+                [Direction.UP] = { 7, 8 }
+            },
+            zoom = 32 / 16,
         },
         drops = {
             { type = "blueheart", amount = 1, chances = 1 },

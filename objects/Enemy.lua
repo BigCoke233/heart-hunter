@@ -51,6 +51,26 @@ function Enemy:moveTowardPlayer(dt)
     self.y = self.y + dy * dv
 end
 
+function Enemy:facing()
+    local dx = self.x - G.player.x
+    local dy = self.y - G.player.y
+    local angle = math.atan2(dy, dx)  -- 计算角度，弧度制
+
+    -- 判断方向
+    local dir
+    if angle >= -math.pi / 4 and angle < math.pi / 4 then
+        dir = Direction.LEFT
+    elseif angle >= math.pi / 4 and angle < 3 * math.pi / 4 then
+        dir = Direction.UP
+    elseif angle >= -3 * math.pi / 4 and angle < -math.pi / 4 then
+        dir = Direction.DOWN
+    else
+        dir = Direction.RIGHT
+    end
+
+    return dir
+end
+
 function Enemy:getsAttacked(damage)
     self.health = self.health - damage
     if self:isDead() then

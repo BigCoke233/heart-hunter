@@ -34,8 +34,13 @@ end
 function draws.enemies()
     for _, enemy in pairs(G.enemies) do
         local data = enemyData[enemy.type]
-        love.graphics.setColor(data.appearance.color or {1,1,1})
-        enemy.body:draw(enemy.x, enemy.y)
+        if data.sprite then
+            local index = data.sprite.frames[enemy:facing()][math.random(1)]
+            enemy.body:drawQuad(data.sprite.name, index, enemy.x, enemy.y, nil, data.sprite.zoom)
+        elseif data.appearance.color then
+            love.graphics.setColor(data.appearance.color or {1,1,1})
+            enemy.body:draw(enemy.x, enemy.y)
+        end
         utils.resetGraphics()
     end
 end
