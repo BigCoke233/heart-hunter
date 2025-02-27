@@ -1,15 +1,5 @@
 player = {}
 
--- player state utilities
-
-function player.isShielded()
-    return G.player.shieldedTill >= G.time
-end
-
-function player.isAlive()
-    return #G.player.hearts~=0
-end
-
 function player.shoot(x, y)
     if (#G.player.hearts == 0) then
         print("out of ammo!")
@@ -86,7 +76,7 @@ local function playerEnters()
 end
 
 local function playerBeingAttacked()
-    if (player.isShielded()) then return end
+    if (G.player:isShielded()) then return end
 
     for _, enemy in pairs(G.enemies) do
         if enemy.body:collide(G.player.body, enemy.x, enemy.y, G.player.x, G.player.y) then

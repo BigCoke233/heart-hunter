@@ -4,6 +4,7 @@ require "objects.body"
 require "objects.room"
 require "objects.door"
 require "objects.shot"
+require "objects.player"
 require "objects.enemy"
 require "objects.direction"
 require "objects.obstacle"
@@ -53,7 +54,7 @@ function love.update(dt)
         entity.update(dt)
     end
 
-    if not player.isAlive() then
+    if not G.player:isAlive() then
         initGame()
     end
 

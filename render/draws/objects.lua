@@ -1,7 +1,7 @@
 local draws = {}
 
 function draws.player()
-    if player.isShielded() then
+    if G.player:isShielded() then
         love.graphics.setColor(0.4,0.4,0.4)
     else
         love.graphics.setColor(1,1,1)

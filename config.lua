@@ -25,16 +25,7 @@ config = {
 -- game default states
 function initGame()
     G = {
-        player = {
-            x = love.graphics.getWidth() / 2,
-            y = love.graphics.getHeight() / 2,
-            body = Body:new("circle", 20),
-            speed = config.defaultPlayerSpeed,
-            shieldedTill = 0,
-            hearts = { "redheart", "redheart", "redheart", "shinyheart", "shinyheart" },
-            facing = Direction.DOWN,
-            moving = false,
-        },
+        player = Player:new(),
         shots = {},
         enemies = {},
         loots = {},
