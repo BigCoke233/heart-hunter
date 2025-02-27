@@ -72,5 +72,5 @@ function love.mousereleased(x, y, button, istouch)
 end
 
 function love.keypressed(key)
-    player.rearrangeHearts(key)
+    player.keypressed(key)
 end
