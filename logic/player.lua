@@ -52,6 +52,14 @@ local function playerMoves(dt)
     end
 end
 
+function player.rearrangeHearts(key)
+    local i = tonumber(key)
+    local hearts = G.player.hearts
+    if i ~= nil and hearts[i] then
+        hearts[i], hearts[#hearts] = hearts[#hearts], hearts[i]
+    end
+end
+
 local function playerEnters()
     for _, door in ipairs(G.currentRoom.doors) do
         local entersDoor = door.body:collide(G.player.body, door.x, door.y, G.player.x, G.player.y) and
