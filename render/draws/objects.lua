@@ -26,7 +26,7 @@ end
 
 function draws.bullets()
     for k, bullet in pairs(G.shots) do
-        local x, y, angle = bullet.currentPos.x, bullet.currentPos.y, bullet.orientation
+        local x, y, angle = bullet.x, bullet.y, bullet.orientation
         bullet.body:drawSprite(bullet.type, x, y, angle, config.bulletSize)
     end
 end

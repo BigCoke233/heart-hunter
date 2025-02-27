@@ -26,7 +26,7 @@ local function enemiesBeingShot()
             if enemy.body:collide(
                 shot.body,
                 enemy.x, enemy.y,
-                shot.currentPos.x, shot.currentPos.y, shot.size
+                shot.x, shot.y, shot.size
             ) then
                 -- kill entities
                 enemy:getsAttacked(shot.damage)
