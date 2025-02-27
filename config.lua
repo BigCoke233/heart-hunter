@@ -20,6 +20,7 @@ config = {
     summonMargin = 30,
 
     defaultPlayerSpeed = 100,
+    playerShootCooldown = 0.2
 }
 
 -- game default states

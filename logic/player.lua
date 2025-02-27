@@ -1,13 +1,17 @@
 player = {}
 
 function player.shoot(x, y)
-    if (#G.player.hearts == 0) then
-        print("out of ammo!")
+    if (#G.player.hearts == 0) then return end
+
+    local hearts = G.player.hearts
+
+    local currentBullet = hearts[#hearts]
+    if currentBullet == "redheart" or #hearts == 1 then
         return
     end
 
-    local currentBullet = table.remove(G.player.hearts)
     bullets.fire(currentBullet, x, y, G.player.x, G.player.y)
+    table.remove(hearts)
 end
 
 function player.speedUp(increment, duration)
@@ -79,10 +83,48 @@ local function playerBeingAttacked()
     end
 end
 
+local function playerShoot(dt)
+    if love.mouse.isDown(1) then
+        if G.player.shootCooldown and G.player.shootCooldown > G.time then return end
+
+        local hearts = G.player.hearts
+        local currentBullet = hearts[#hearts]
+
+        if currentBullet == "redheart" or #hearts == 1 then
+            -- set a charging time to warn the player that this is a deadly move
+            -- if no charging time is set, then set it and shoot no bullet
+            if not G.player.chargingStarted then
+                G.player.chargingStarted = G.time
+                return
+            end
+            -- if charging time is set, then check if it's over 1 second
+            -- if not, shoot no bullet
+            if G.time - G.player.chargingStarted <= 1 then return
+            -- if time's up, reset timer and continue shooting
+            else
+                G.player.chargingStarted = nil
+            end
+        end
+
+        -- shoot bullet
+        local targetX, targetY = love.mouse.getX(), love.mouse.getY()
+        bullets.fire(currentBullet, targetX, targetY, G.player.x, G.player.y)
+        table.remove(hearts)
+
+        -- set shooting cooldown
+        G.player.shootCooldown = G.time + config.playerShootCooldown
+    else
+        -- if player stopped pressing mouse
+        -- reset charging timer
+        G.player.chargingStarted = nil
+    end
+end
+
 function player.update(dt)
    playerMoves(dt)
    playerEnters()
    playerBeingAttacked()
+   playerShoot(dt)
 
    if G.player.speedUpTill and G.player.speedUpTill < G.time then
         G.player.speed = config.defaultPlayerSpeed

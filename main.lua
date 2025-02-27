@@ -65,12 +65,6 @@ function love.draw()
     renderer:draw()
 end
 
-function love.mousereleased(x, y, button, istouch)
-    if button == 1 then
-        player.shoot(x, y)
-    end
-end
-
 function love.keypressed(key)
     player.keypressed(key)
 end
