@@ -42,7 +42,7 @@ function draws.enemies()
                 utils.resetGraphics()
             end
             -- draw sprite
-            local index = data.sprite.frames[enemy:facing()][1]
+            local index = data.sprite.frames[enemy:facing()][enemy.frameTimer.currentFrame]
             enemy.body:drawQuad(data.sprite.name, index, enemy.x, enemy.y, nil, data.sprite.zoom)
         elseif data.appearance.color then
             love.graphics.setColor(data.appearance.color or {1,1,1})

@@ -51,4 +51,8 @@ end
 function enemies.update(dt)
     enemiesMove(dt)
     enemiesBeingShot()
+
+    for _, enemy in pairs(G.enemies) do
+        enemy.frameTimer:update(dt)
+    end
 end

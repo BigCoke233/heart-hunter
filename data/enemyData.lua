@@ -8,6 +8,7 @@ enemyData = {
             type = "spritesheet",
             name = "lancer",
             sheet = { row = 2, col = 8, width = 32, height = 32 },
+            totalFrames = 2,
             frames = {
                 [Direction.LEFT] = { 5, 6 },
                 [Direction.RIGHT] = { 3, 4 },
@@ -29,6 +30,7 @@ enemyData = {
             type = "spritesheet",
             name = "spiger",
             sheet = { row = 4, col = 6, width = 32, height = 32 },
+            totalFrames = 6,
             frames = {
                 [Direction.LEFT] = { 19, 20, 21, 22, 23, 24 },
                 [Direction.RIGHT] = { 13, 14, 15, 16, 17, 18 },

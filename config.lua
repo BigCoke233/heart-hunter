@@ -1,10 +1,12 @@
 -- global configurations
 config = {
-    debug = true,
+    debug = false,
 
     playerShieldTime = 3,
     lootSize = 5,
     heartSize = 15,
+
+    frameRate = 10,
 
     graphics = {
       doorSize = 50,

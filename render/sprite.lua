@@ -43,14 +43,15 @@ function sprite.load()
         local rows = math.floor(image:getHeight() / sheet.h)
         local columns = math.floor(image:getWidth() / sheet.w)
 
+        local index = 1
         for row = 0, rows - 1 do
             for col = 0, columns - 1 do
-                local index = row * columns + col
                 sheetQuads[index] = love.graphics.newQuad(
                     col * sheet.w, row * sheet.h,
                     sheet.w, sheet.h,
                     image:getWidth(), image:getHeight()
                 )
+                index = index + 1
             end
         end
         quads[sheet.name] = sheetQuads

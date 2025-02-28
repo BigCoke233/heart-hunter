@@ -1,6 +1,8 @@
 Enemy = {}
 Enemy.__index = Enemy
 
+local FrameTimer = require "utils.frameTimer"
+
 function Enemy:new(name, location)
     local data = enemyData[name]
     local obj = {
@@ -15,6 +17,8 @@ function Enemy:new(name, location)
         speed = data.speed or nil,
         health = data.health or nil,
         stunned = false,
+        frameTimer = FrameTimer:new(config.frameRate,
+            (data.sprite and data.sprite.totalFrames) or 1)
     }
 
     setmetatable(obj, Enemy)
