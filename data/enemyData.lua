@@ -1,6 +1,7 @@
 enemyData = {
     lancer = {
-        size = 12,
+        size = 20,
+        zoom = 1/16,
         speed = 25,
         health = 100,
         sprite = {
@@ -13,7 +14,6 @@ enemyData = {
                 [Direction.DOWN] = { 1, 2 },
                 [Direction.UP] = { 7, 8 }
             },
-            zoom = 32 / 16,
         },
         drops = {
             { type = "blueheart", amount = 1, chances = 1 },

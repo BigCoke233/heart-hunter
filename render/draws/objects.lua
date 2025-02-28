@@ -19,7 +19,7 @@ function draws.player()
         index = facing[G.player.facing]
     end
 
-    local x, y = G.player.x - G.player.body.r, G.player.y - G.player.body.r
+    local x, y = G.player.x, G.player.y
     G.player.body:drawQuad("apple", index, x, y)
     utils.resetGraphics()
 end
@@ -35,7 +35,14 @@ function draws.enemies()
     for _, enemy in pairs(G.enemies) do
         local data = enemyData[enemy.type]
         if data.sprite then
-            local index = data.sprite.frames[enemy:facing()][math.random(1)]
+            -- show enemy size
+            if config.debug then
+                love.graphics.setColor({0.5,0.5,0.5})
+                enemy.body:draw(enemy.x, enemy.y)
+                utils.resetGraphics()
+            end
+            -- draw sprite
+            local index = data.sprite.frames[enemy:facing()][1]
             enemy.body:drawQuad(data.sprite.name, index, enemy.x, enemy.y, nil, data.sprite.zoom)
         elseif data.appearance.color then
             love.graphics.setColor(data.appearance.color or {1,1,1})

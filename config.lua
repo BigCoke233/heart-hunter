@@ -1,5 +1,7 @@
 -- global configurations
 config = {
+    debug = true,
+
     playerShieldTime = 3,
     lootSize = 5,
     heartSize = 15,
@@ -20,7 +22,8 @@ config = {
     summonMargin = 30,
 
     defaultPlayerSpeed = 100,
-    playerShootCooldown = 0.2
+    playerShootCooldown = 0.2,
+    playerSize = 20,
 }
 
 -- game default states

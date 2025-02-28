@@ -78,10 +78,7 @@ function sprite.drawSquareWithAngle(type, position, angle, size)
     sprite.drawObject(type, position, angle, size, size)
 end
 
-function sprite.drawQuad(sheet, index, x, y, width, height, angle)
+function sprite.drawQuad(sheet, index, x, y, w, h, angle)
     local quad = quads[sheet][index]  -- 根据精灵表名称和索引获取 Quad
-    love.graphics.draw(sprites[sheet], quad, x, y, angle or 0,
-        width / quad:getWidth(),
-        height / quad:getHeight()
-    )
+    love.graphics.draw(sprites[sheet], quad, x, y, angle or 0, w, h)
 end

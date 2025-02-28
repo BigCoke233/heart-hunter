@@ -1,12 +1,13 @@
 Body = {}
 Body.__index = Body
 
-function Body:new(shape, sizeA, sizeB, sizeC)
+function Body:new(shape, sizeA, sizeB, zoom)
     local obj = {
         shape = shape,
         r = (shape == "circle" and sizeA or nil),
         w = (shape == "rectangle" and sizeA or nil),
-        h = (shape == "rectangle" and sizeB or nil)
+        h = (shape == "rectangle" and sizeB or nil),
+        zoom = zoom or 1
     }
 
     setmetatable(obj, Body)
@@ -56,12 +57,14 @@ function Body:drawSprite(spriteName, x, y, angle)
     )
 end
 
-function Body:drawQuad(sheet, index, x, y, angle, zoom)
-    local quad = sprite.getQuad(sheet, index)
-
-    local w, h = (self.shape == "circle" and self.r or self.w), (self.shape == "circle" and self.r or self.h)
-    w, h = w / 16 * (zoom or 1), h / 16 * (zoom or 1)
-
-    love.graphics.draw(sprite.get(sheet), quad, x - w / 2, y - h / 2, angle or 0, w, h
-    )
+function Body:drawQuad(sheet, index, x, y, angle)
+    if self.shape == "circle" then
+        local r = self.r
+        local graphicR = r * self.zoom
+        sprite.drawQuad(sheet, index, x - r, y - r, graphicR, graphicR, angle or 0)
+    else
+        local w, h = self.w, self.h
+        local graphicW, graphicH = w * self.zoom, h * self.zoom
+        sprite.drawQuad(sheet, index, x - w/2, y - h/2, graphicW, graphicH, angle or 0)
+    end
 end
