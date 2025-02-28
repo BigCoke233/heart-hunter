@@ -48,8 +48,14 @@ function love.load()
     initGame()
 end
 
+function love.draw()
+    renderer:draw()
+end
+
+local controller = require "logic.controller"
+
 function love.update(dt)
-    local updates = { player, enemies, bullets, loot, map }
+    local updates = { player, enemies, bullets, loot, map, controller }
     for _, entity in ipairs(updates) do
         entity.update(dt)
     end
@@ -61,10 +67,6 @@ function love.update(dt)
     G.time = G.time + dt
 end
 
-function love.draw()
-    renderer:draw()
-end
-
 function love.keypressed(key)
-    player.keypressed(key)
+    controller.keypressed(key)
 end
