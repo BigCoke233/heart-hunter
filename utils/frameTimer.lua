@@ -3,7 +3,7 @@ FrameTimer.__index = FrameTimer
 
 function FrameTimer:new(frameRate, totalFrames)
     local obj = {
-        frameRate = frameRate or 10, -- 默认每秒10帧
+        frameRate = frameRate or 10,
         elapsedTime = 0,
         currentFrame = 1,
         totalFrames = totalFrames or 1
@@ -21,7 +21,7 @@ function FrameTimer:update(dt)
         self.elapsedTime = self.elapsedTime - self.frameTime
         self.currentFrame = self.currentFrame + 1
         if self.currentFrame > self.totalFrames then
-            self.currentFrame = 1  -- 循环播放
+            self.currentFrame = 1   -- repeat
         end
     end
 end
