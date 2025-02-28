@@ -1,6 +1,8 @@
 Player = {}
 Player.__index = Player
 
+local FrameTimer = require "utils.frameTimer"
+
 function Player.new()
     local player = setmetatable({
         x = love.graphics.getWidth() / 2,
@@ -11,6 +13,7 @@ function Player.new()
         hearts = { "redheart", "redheart", "redheart", "shinyheart", "shinyheart" },
         facing = Direction.DOWN,
         moving = false,
+        frameTimer = FrameTimer:new(config.frameRate, 2)
     }, Player)
 
     return player

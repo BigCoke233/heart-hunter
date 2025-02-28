@@ -20,9 +20,11 @@ local function playerPressKeysToMoves(dt)
         { key = "s", axis = "y", dir = Direction.BOTTOM, delta = 1 }
     }
 
+    local keydown = love.keyboard.isDown
+
     for _, move in ipairs(moveDirections) do
         local dv = G.player.speed * dt * move.delta
-        if love.keyboard.isDown(move.key) then
+        if keydown(move.key) then
             G.player.facing = move.dir
             G.player.moving = true
 
@@ -31,9 +33,11 @@ local function playerPressKeysToMoves(dt)
                 delta = 0
             end
             G.player[move.axis] = G.player[move.axis] + delta
-        else
-            G.player.moving = false
         end
+    end
+
+    if not keydown("a") and not keydown("s") and not keydown("d") and not keydown("w") then
+        G.player.moving = false
     end
 end
 

@@ -7,20 +7,17 @@ function draws.player()
         love.graphics.setColor(1,1,1)
     end
 
+    local cf = G.player.frameTimer.currentFrame
     local facing = { [Direction.UP] = 4, [Direction.DOWN] = 1, [Direction.LEFT] = 10, [Direction.RIGHT] = 7 }
-    local moving = { [Direction.UP] = { 5,6 }, [Direction.DOWN] = { 1,2 }, [Direction.LEFT] = { 9,10 }, [Direction.RIGHT] = { 11,12 } }
+    local moving = { [Direction.UP] = { 5,6 }, [Direction.DOWN] = { 2,3 }, [Direction.LEFT] = { 11,12 }, [Direction.RIGHT] = { 8,9 } }
     local index = facing[G.player.facing]
 
-    local movingFrame = 1
     if G.player.moving then
-        movingFrame = (movingFrame == 1) and 2 or 1
-        index = moving[G.player.facing][movingFrame]
-    else
-        index = facing[G.player.facing]
+        print(cf)
+        index = moving[G.player.facing][cf]
     end
 
-    local x, y = G.player.x, G.player.y
-    G.player.body:drawQuad("apple", index, x, y)
+    G.player.body:drawQuad("apple", index, G.player.x, G.player.y)
     utils.resetGraphics()
 end
 

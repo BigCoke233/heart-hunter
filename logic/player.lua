@@ -62,8 +62,10 @@ function player.update(dt)
    playerEnters()
    playerBeingAttacked()
 
-   if G.player.speedUpTill and G.player.speedUpTill < G.time then
+    if G.player.speedUpTill and G.player.speedUpTill < G.time then
         G.player.speed = config.defaultPlayerSpeed
         G.player.speedUpTill = nil
     end
+
+    G.player.frameTimer:update(dt)
 end
