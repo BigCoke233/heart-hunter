@@ -1,15 +1,28 @@
 sprite = {}
 
+-- sprite resource management
+
+local sprites = {}
+local quads = {}
+
 local spriteTypes = heartTypes
 local spriteSheets = {
     { name = "apple", w = 32, h = 32 },
     { name = "lancer", w = 32, h = 32 },
 }
 
-function sprite.load()
-    sprites = {}
-    quads = {}
+function sprite.get(type)
+    return sprites[type]
+end
 
+function sprite.getQuad(type, index)
+    if index then
+        return quads[type][index]
+    else return quads[type]
+    end
+end
+
+function sprite.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
 
     -- load single-image sprite
@@ -42,6 +55,8 @@ function sprite.load()
         quads[sheet.name] = sheetQuads
     end
 end
+
+-- sprite drawer
 
 function sprite.draw(type, x, y, angle, width, height)
     local sprite = sprites[type]

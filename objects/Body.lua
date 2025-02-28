@@ -47,7 +47,7 @@ function Body:draw(x, y)
 end
 
 function Body:drawSprite(spriteName, x, y, angle)
-    local sprite = sprites[spriteName]
+    local sprite = sprite.get(spriteName)
     local w, h = (self.shape == "circle" and self.r or self.w), (self.shape == "circle" and self.r or self.h)
 
     love.graphics.draw(sprite, x, y, angle,
@@ -57,11 +57,11 @@ function Body:drawSprite(spriteName, x, y, angle)
 end
 
 function Body:drawQuad(sheet, index, x, y, angle, zoom)
-    local quad = quads[sheet][index]
+    local quad = sprite.getQuad(sheet, index)
 
     local w, h = (self.shape == "circle" and self.r or self.w), (self.shape == "circle" and self.r or self.h)
     w, h = w / 16 * (zoom or 1), h / 16 * (zoom or 1)
 
-    love.graphics.draw(sprites[sheet], quad, x - w / 2, y - h / 2, angle or 0, w, h
+    love.graphics.draw(sprite.get(sheet), quad, x - w / 2, y - h / 2, angle or 0, w, h
     )
 end
