@@ -2,31 +2,14 @@ map = {}
 
 function map.switchRoom(to)
     local destination
+
     if type(to) == "table" then
         destination = to
     elseif type(to) == "number" then
         destination = G.currentRoom.doors[Direction[to]]
     end
 
-    -- deal with enemies data
-    -- if no position set, get random position for each enemyData
-    for _, enemy in ipairs(destination.enemies) do
-        local offset = enemy.body.r*2 + G.player.body.r*2 + config.summonMargin
-        if not enemy.x or not enemy.y then
-            enemy.x, enemy.y = destination:getLocation(enemy.presetLocation or "random", offset)
-        end
-    end
-
-    -- the same for obstacles
-    for _, obstacle in ipairs(destination.obstacles) do
-        local offset = obstacle.body.w + G.player.body.r*2 + config.summonMargin
-        if not obstacle.x or not obstacle.y then
-            local x, y = destination:getLocation(obstacle.presetLocation or "random", offset)
-            obstacle.x, obstacle.y = x - obstacle.body.w / 2, y - obstacle.body.h / 2
-        end
-    end
-
-    -- switch room data
+    destination:init()
     G.currentRoom = destination
     G.enemies = G.currentRoom.enemies
 end
