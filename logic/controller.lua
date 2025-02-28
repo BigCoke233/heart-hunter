@@ -37,7 +37,7 @@ local function playerPressKeysToMoves(dt)
     end
 end
 
-function playerClickMouseToShoot(dt)
+local function playerClickMouseToShoot(dt)
     if love.mouse.isDown(1) then
         if G.player.shootCooldown and G.player.shootCooldown > G.time then return end
 
