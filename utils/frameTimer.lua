@@ -16,7 +16,6 @@ function FrameTimer:new(frameRate, totalFrames)
 end
 
 function FrameTimer:update(dt)
-    print("totalFrames:", self.totalFrames)
     self.elapsedTime = self.elapsedTime + dt
     if self.elapsedTime >= self.frameTime then
         self.elapsedTime = self.elapsedTime - self.frameTime
