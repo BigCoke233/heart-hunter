@@ -20,14 +20,22 @@ enemyData = {
             { type = "blueheart", amount = 1, chances = 0.25 }
         },
     },
-    gorilla = {
-        size = 25,
+    spiger = {
+        size = 35,
+        zoom = 1/16,
         speed = 10,
         health = 150,
-        appearance = {
-            color = { 224/255, 122/255, 95/255 }
-        }
-        ,
+        sprite = {
+            type = "spritesheet",
+            name = "spiger",
+            sheet = { row = 4, col = 6, width = 32, height = 32 },
+            frames = {
+                [Direction.LEFT] = { 19, 20, 21, 22, 23, 24 },
+                [Direction.RIGHT] = { 13, 14, 15, 16, 17, 18 },
+                [Direction.DOWN] = { 1, 2, 3, 4, 5, 6 },
+                [Direction.UP] = { 7, 8, 9, 10, 11, 12 }
+            },
+        },
         drops = {
             { type = "bigheart", amount = 1, chances = 1 }
         },

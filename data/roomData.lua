@@ -51,9 +51,9 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("gorilla", "leftCenter"),
-            Enemy:new("gorilla", "rightCenter"),
-            Enemy:new("gorilla", "center"),
+            Enemy:new("spiger", "leftCenter"),
+            Enemy:new("spiger", "rightCenter"),
+            Enemy:new("spiger", "center"),
         },
         obstacles = {
             Obstacle:new("pillar", "topCenter"),
