@@ -28,4 +28,8 @@ function ui.ammoBar()
     end
 end
 
+function ui.roomClearedCounter()
+    love.graphics.print("Room Cleared: " .. G.roomCleared, 0, 0)
+end
+
 return ui

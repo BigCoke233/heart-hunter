@@ -81,7 +81,11 @@ function map.generate(roomCount)
 end
 
 function map.update()
-    if #G.enemies==0 then
-        G.currentRoom.isCleared = true
+    local room = G.currentRoom
+    if #G.enemies==0 and not room.isCleared then
+        room.isCleared = true
+        if room.type ~= roomType.INITIAL then
+            G.roomCleared = G.roomCleared + 1
+        end
     end
 end

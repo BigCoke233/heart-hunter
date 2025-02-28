@@ -42,6 +42,7 @@ function love.load()
     renderer:add("objects", nil, drawObject.enemies)
     renderer:add("objects", nil, drawObject.bullets)
     renderer:add("ui", nil, drawUI.ammoBar)
+    renderer:add("ui", nil, drawUI.roomClearedCounter)
 
     math.randomseed(os.time())
 
