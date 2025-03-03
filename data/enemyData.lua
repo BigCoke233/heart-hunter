@@ -45,7 +45,7 @@ enemyData = {
     librarian = {
         size = 30,
         zoom = 1/16,
-        speed = 40,
+        speed = 90,
         health = 100,
         sprite = {
             type = "spritesheet",
@@ -63,6 +63,7 @@ enemyData = {
             { type = "greenheart", amount = 1, chances = 1 },
             { type = "greenheart", amount = 1, chances = 0.25 }
         },
+        movePattern = "vertical",
     },
     fairy = {
         size = 8,

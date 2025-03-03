@@ -44,7 +44,7 @@ end
 
 local function enemiesMove(dt)
     for _, enemy in pairs(G.enemies) do
-        enemy:moveTowardPlayer(dt)
+        enemy:move(dt)
     end
 end
 

@@ -18,7 +18,8 @@ function Enemy:new(name, location)
         health = data.health or nil,
         stunned = false,
         frameTimer = FrameTimer:new(config.frameRate,
-            (data.sprite and data.sprite.totalFrames) or 1)
+            (data.sprite and data.sprite.totalFrames) or 1),
+        movePattern = data.movePattern or nil,
     }
 
     setmetatable(obj, Enemy)
@@ -30,12 +31,18 @@ function Enemy:isBlocked()
 
 end
 
-function Enemy:moveTowardPlayer(dt)
+function Enemy:move(dt)
     if self.stunned and self.stunned > 0 then
         self.stunned = self.stunned - dt
         return false
     end
+    if self.movePattern == "vertical" then
+        self:moveVertical(G.player.x, dt)
+    else self:moveTo(G.player.x, G.player.y, dt)
+    end
+end
 
+function Enemy:moveTo(x, y, dt)
     local dv = self.speed * dt
     local dx, dy = 0, 0
 
@@ -52,11 +59,15 @@ function Enemy:moveTowardPlayer(dt)
         return 0
     end
 
-    dx = getDirection("x", G.player.x, Direction.RIGHT, "x")
-    dy = getDirection("y", G.player.y, Direction.DOWN, "y")
+    dx = getDirection("x", x, Direction.RIGHT, "x")
+    dy = getDirection("y", y, Direction.DOWN, "y")
 
     self.x = self.x + dx * dv
     self.y = self.y + dy * dv
+end
+
+function Enemy:moveVertical(toX, dt)
+    self:moveTo(toX, self.y, dt)
 end
 
 function Enemy:facing()
