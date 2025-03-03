@@ -5,7 +5,7 @@ local bulletData = {
         end,
         afterHit = function (x, y, enemyType)
             local w, h = love.graphics.getWidth(), love.graphics.getHeight()
-            local r = enemyData[enemyType].size + 10
+            local r = enemyData[enemyType].size + 20
 
             -- split heart and shoot at 4 different angle
             if math.random(2) == 1 then
