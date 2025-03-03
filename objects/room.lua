@@ -117,6 +117,8 @@ function Room:initObstacles()
         local offset = obstacle.body.w + G.player.body.r*2 + config.summonMargin
         if not obstacle.x or not obstacle.y then
             obstacle.x, obstacle.y = self:getLocation(obstacle.presetLocation or "random", offset)
+            obstacle.x = obstacle.x - obstacle.body.w / 2
+            obstacle.y = obstacle.y - obstacle.body.h / 2
         end
     end
 end
