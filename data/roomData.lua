@@ -60,6 +60,36 @@ roomData = {
             Obstacle:new("pillar", "bottomCenter"),
         },
     },
+    library = {
+        type = roomType.COMBAT,
+        width = config.defaultRoomW,
+        height = config.defaultRoomH,
+        enemies = {
+            Enemy:new("librarian", "topCenter"),
+            Enemy:new("librarian", "bottomCenter"),
+            Enemy:new("lancer", "center")
+        },
+        obstacles = {
+            Obstacle:new("pillar", "topRight"),
+            Obstacle:new("pillar", "bottomLeft"),
+            Obstacle:new("pillar", "topLeft"),
+            Obstacle:new("pillar", "bottomRight"),
+        },
+    },
+    bookstore = {
+        type = roomType.COMBAT,
+        width = config.defaultRoomW,
+        height = config.defaultRoomH,
+        enemies = {
+            Enemy:new("librarian", "topRight"),
+            Enemy:new("librarian", "bottomRight"),
+            Enemy:new("librarian", "topLeft"),
+            Enemy:new("librarian", "bottomLeft"),
+        },
+        obstacles = {
+            Obstacle:new("pillar", "center"),
+        },
+    },
 }
 
 roomNames = {}

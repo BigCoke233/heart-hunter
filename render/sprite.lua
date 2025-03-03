@@ -10,6 +10,7 @@ local spriteSheets = {
     { name = "apple", w = 32, h = 32 },
     { name = "lancer", w = 32, h = 32 },
     { name = "spiger", w = 32, h = 32 },
+    { name = "librarian", w = 32, h = 32 },
 }
 
 function sprite.get(type)

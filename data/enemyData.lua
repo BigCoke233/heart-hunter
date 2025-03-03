@@ -42,6 +42,28 @@ enemyData = {
             { type = "bigheart", amount = 1, chances = 1 }
         },
     },
+    librarian = {
+        size = 30,
+        zoom = 1/16,
+        speed = 40,
+        health = 100,
+        sprite = {
+            type = "spritesheet",
+            name = "librarian",
+            sheet = { row = 1, col = 6 },
+            totalFrames = 3,
+            frames = {
+                [Direction.LEFT] = { 4, 5, 6 },
+                [Direction.RIGHT] = { 1, 2, 3 },
+                [Direction.DOWN] = { 1, 2, 3 },
+                [Direction.UP] = { 4, 5, 6 }
+            },
+        },
+        drops = {
+            { type = "greenheart", amount = 1, chances = 1 },
+            { type = "greenheart", amount = 1, chances = 0.25 }
+        },
+    },
     fairy = {
         size = 8,
         speed = 60,
