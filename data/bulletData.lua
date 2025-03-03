@@ -31,7 +31,18 @@ local bulletData = {
         afterHit = function (x, y, enemyType)
             local stunned = enemies.getWithinRage(x, y, 100)
             for _, enemy in ipairs(stunned) do
-                enemy:stun(5)
+                enemy:stun(1)
+            end
+        end
+    },
+    greenheart = {
+        damage = 100,
+        afterShot = function ()
+        end,
+        afterHit = function (x, y, enemyType)
+            local stunned = enemies.getWithinRage(x, y, 100)
+            for _, enemy in ipairs(stunned) do
+                enemy.movePattern = "vertical"
             end
         end
     }
