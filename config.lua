@@ -30,7 +30,7 @@ config = {
 
 -- game default states
 function initGame()
-    local intialMap = map.generate(7)
+    local intialMap = map.generate(7, true)
     G = {
         player = Player:new(),
         shots = {},

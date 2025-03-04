@@ -16,10 +16,16 @@ function map.switchRoom(to)
     G.enemies = G.currentRoom.enemies
 end
 
-function map.generate(roomCount)
+function map.generate(roomCount, initial)
     local rooms = {}
-    local room1 = Room:new("initialRoom")
-    table.insert(rooms, room1)
+
+    local firstRoom
+    if initial then
+        firstRoom = Room:new("initialRoom")
+    else
+        firstRoom = Room:new(utils.any(roomNames))
+    end
+    table.insert(rooms, firstRoom)
 
     for i = 2, roomCount do
         local newRoom = Room:new(utils.any(roomNames))
