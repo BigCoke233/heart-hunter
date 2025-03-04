@@ -148,12 +148,17 @@ function Room:getDoorlessDirections()
 end
 
 function Room:connect(anotherRoom, way)
-    local door1, door2
-
     if type(way) == "number" then
+        -- if number (Direction enums)
         way = Ways[way]
+    elseif not way then
+        -- if no way set, randomly choose a doorless direction
+        local doorless = self:getDoorlessDirections()
+        if #doorless == 0 then return false end
+        way = Ways[utils.any(doorless)]
     end
 
+    -- connect room with determined direction
     local door1, door2
     if Way[way] then
         local dir1, dir2 = Way[way][1], Way[way][2]

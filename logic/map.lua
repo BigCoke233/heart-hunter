@@ -1,5 +1,7 @@
 map = {}
 
+-- control functions
+
 function map.switchRoom(to)
     local destination
 
@@ -29,8 +31,7 @@ function map.generate(roomCount)
         until not previousRoom:isDoorFull()
 
         -- connect rooms
-        local doorless = previousRoom:getDoorlessDirections()
-        previousRoom:connect(newRoom, utils.any(doorless))
+        previousRoom:connect(newRoom)
 
         table.insert(rooms, newRoom)
     end
@@ -38,7 +39,9 @@ function map.generate(roomCount)
     return rooms
 end
 
-function map.continue()
+-- boolean functions
+
+function map.allCleared()
     local allCleared = true
     for _, room in ipairs(G.allRooms) do
         if not room.isCleared then
@@ -46,11 +49,10 @@ function map.continue()
             break
         end
     end
-
-    local room = G.currentRoom
-    local newRoom = map.generate(5)
-    -- WIP
+    return allCleared
 end
+
+-- entry functions
 
 function map.update()
     local room = G.currentRoom
