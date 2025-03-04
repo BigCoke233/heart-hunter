@@ -147,6 +147,25 @@ function Room:getDoorlessDirections()
     return doorless
 end
 
+function Room:connect(anotherRoom, way)
+    local door1, door2
+
+    if type(way) == "number" then
+        way = Ways[way]
+    end
+
+    local door1, door2
+    if Way[way] then
+        local dir1, dir2 = Way[way][1], Way[way][2]
+        door1 = Door:new(dir1, self, anotherRoom)
+        door2 = Door:new(dir2, anotherRoom, self)
+        self:addDoor(door1)
+        anotherRoom:addDoor(door2)
+    end
+
+    return door1, door2
+end
+
 function Room:init()
     self:initEnemies()
     self:initObstacles()

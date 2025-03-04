@@ -14,25 +14,6 @@ function map.switchRoom(to)
     G.enemies = G.currentRoom.enemies
 end
 
-function map.connectRoom(room1, room2, way)
-    local door1, door2
-
-    if type(way) == "number" then
-        way = Ways[way]
-    end
-
-    local door1, door2
-    if Way[way] then
-        local dir1, dir2 = table.unpack(directions[way])
-        door1 = Door:new(dir1, room1, room2)
-        door2 = Door:new(dir2, room2, room1)
-        room1:addDoor(door1)
-        room2:addDoor(door2)
-    end
-
-    return door1, door2
-end
-
 function map.generate(roomCount)
     local rooms = {}
     local room1 = Room:new("initialRoom")
@@ -49,13 +30,12 @@ function map.generate(roomCount)
 
         -- connect rooms
         local doorless = previousRoom:getDoorlessDirections()
-        map.connectRoom(previousRoom, newRoom, utils.any(doorless))
+        previousRoom:connect(newRoom, utils.any(doorless))
 
         table.insert(rooms, newRoom)
     end
 
-    G.allRooms = rooms
-    return rooms[1]
+    return rooms
 end
 
 function map.continue()

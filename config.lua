@@ -30,6 +30,7 @@ config = {
 
 -- game default states
 function initGame()
+    local intialMap = map.generate(7)
     G = {
         player = Player:new(),
         shots = {},
@@ -38,7 +39,9 @@ function initGame()
 
         time = 0,
         lastSummonTime = 0,
-        currentRoom = map.generate(7), -- change amount of rooms here
+
+        allRooms = intialMap,
+        currentRoom = intialMap[1], -- change amount of rooms here
         roomCleared = 0,
     }
 end
