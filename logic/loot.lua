@@ -1,13 +1,7 @@
 loot = {}
 
-function loot.drop(x, y, type)
-    table.insert(G.loots,
-        { x = x, y = y, body = Body:new("circle", config.lootSize), type = type })
-end
-
-function loot.summon()
-    local x, y = utils.randomPosition()
-    loot.drop(x, y, heartTypes[math.random(#heartTypes)])
+function loot.drop(x, y, name)
+    table.insert(G.loots, Loot:new(name, x, y))
 end
 
 function loot.update()
