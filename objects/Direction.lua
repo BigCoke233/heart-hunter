@@ -10,3 +10,12 @@ OppositeDirection = {
     [Direction.UP] = Direction.DOWN,
     [Direction.DOWN] = Direction.UP
 }
+
+Ways = {"lr","rl","tb","bt"}
+
+Way = {
+    lr = {Direction.LEFT, Direction.RIGHT},
+    rl = {Direction.RIGHT, Direction.LEFT},
+    tb = {Direction.TOP, Direction.BOTTOM},
+    bt = {Direction.BOTTOM, Direction.TOP}
+}

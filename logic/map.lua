@@ -18,31 +18,18 @@ function map.connectRoom(room1, room2, way)
     local door1, door2
 
     if type(way) == "number" then
-        local ways = {"lr","rl","tb","bt"}
-        way = ways[way]
+        way = Ways[way]
     end
 
-    if way == "lr" then
-        door1 = Door:new(Direction.LEFT, room1, room2)
-        door2 = Door:new(Direction.RIGHT, room2, room1)
-        room1:addDoor(door1)
-        room2:addDoor(door2)
-    elseif way == "rl" then
-        door1 = Door:new(Direction.RIGHT, room1, room2)
-        door2 = Door:new(Direction.LEFT, room2, room1)
-        room1:addDoor(door1)
-        room2:addDoor(door2)
-    elseif way == "tb" then
-        door1 = Door:new(Direction.TOP, room1, room2)
-        door2 = Door:new(Direction.BOTTOM, room2, room1)
-        room1:addDoor(door1)
-        room2:addDoor(door2)
-    elseif way == "bt" then
-        door1 = Door:new(Direction.BOTTOM, room1, room2)
-        door2 = Door:new(Direction.TOP, room2, room1)
+    local door1, door2
+    if Way[way] then
+        local dir1, dir2 = table.unpack(directions[way])
+        door1 = Door:new(dir1, room1, room2)
+        door2 = Door:new(dir2, room2, room1)
         room1:addDoor(door1)
         room2:addDoor(door2)
     end
+
     return door1, door2
 end
 
