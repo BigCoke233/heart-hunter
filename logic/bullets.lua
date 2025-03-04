@@ -1,3 +1,5 @@
+local Shot = require "objects.shot"
+
 bullets = {}
 
 local bulletData = require "data.bulletData"

@@ -1,3 +1,5 @@
+require "data.directions"
+
 player = {}
 
 function player.shoot(x, y)

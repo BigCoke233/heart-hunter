@@ -1,6 +1,6 @@
 local Body = require "objects.Body"
 
-Loot = {}
+local Loot = {}
 Loot.__index = Loot
 
 function Loot:new(name, x, y)
@@ -15,3 +15,5 @@ function Loot:new(name, x, y)
 
     return obj
 end
+
+return Loot

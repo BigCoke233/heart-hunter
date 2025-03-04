@@ -1,3 +1,5 @@
+local Player = require "objects.player"
+
 -- global configurations
 config = {
     debug = false,

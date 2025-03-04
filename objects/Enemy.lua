@@ -1,7 +1,9 @@
+require "data.directions"
+
 local Body = require "objects.Body"
 local enemyData = require "data.enemyData"
 
-Enemy = {}
+local Enemy = {}
 Enemy.__index = Enemy
 
 local FrameTimer = require "utils.frameTimer"
@@ -118,3 +120,5 @@ end
 function Enemy:stun(duration)
     self.stunned = duration
 end
+
+return Enemy

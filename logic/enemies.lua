@@ -1,3 +1,4 @@
+local Enemy = require "objects.enemy"
 local enemyNames = require "data.enemyNames"
 
 enemies = {}

@@ -1,3 +1,5 @@
+local Loot = require "objects.loot"
+
 loot = {}
 
 function loot.drop(x, y, name)

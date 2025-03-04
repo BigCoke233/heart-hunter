@@ -1,14 +1,5 @@
 require "config"
 
-require "objects.room"
-require "objects.door"
-require "objects.shot"
-require "objects.loot"
-require "objects.player"
-require "objects.enemy"
-require "objects.direction"
-require "objects.obstacle"
-
 require "render.sprite"
 
 require "logic.bullets"

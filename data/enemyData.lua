@@ -1,4 +1,5 @@
-require "objects.direction"
+require "data.directions"
+
 local enemyData = {
     lancer = {
         size = 20,

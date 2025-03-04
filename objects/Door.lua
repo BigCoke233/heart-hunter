@@ -1,6 +1,7 @@
 local Body = require "objects.Body"
+require "data.directions"
 
-Door = {}
+local Door = {}
 Door.__index = Door
 
 local function calculateDoorLocation(obj)
@@ -43,3 +44,5 @@ end
 function Door:setTo(room)
     self.to = room
 end
+
+return Door

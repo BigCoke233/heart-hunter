@@ -1,6 +1,11 @@
+require "data.directions"
 local roomData = require "data.roomData"
 
-Room = {}
+local Enemy = require "objects.enemy"
+local Door = require "objects.door"
+local Obstacle = require "objects.obstacle"
+
+local Room = {}
 Room.__index = Room
 
 function Room:new(name, w, h)
@@ -185,3 +190,5 @@ function Room:connect(anotherRoom, way)
 
     return door1, door2
 end
+
+return Room

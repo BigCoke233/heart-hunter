@@ -1,3 +1,5 @@
+require "data.directions"
+
 local controller = {}
 
 local function playerPressKeysToArrangeHearts(key)

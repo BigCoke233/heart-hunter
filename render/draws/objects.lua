@@ -1,4 +1,5 @@
 local enemyData = require "data.enemyData"
+require "data.directions"
 
 local draws = {}
 

@@ -1,3 +1,5 @@
+require "data.directions"
+
 utils = {}
 
 -- deal with obstacles

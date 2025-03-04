@@ -1,3 +1,6 @@
+local Room = require "objects.room"
+
+require "data.directions"
 local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
 

@@ -1,6 +1,7 @@
 local Body = require "objects.Body"
+require "data.directions"
 
-Player = {}
+local Player = {}
 Player.__index = Player
 
 local FrameTimer = require "utils.frameTimer"
@@ -28,3 +29,5 @@ end
 function Player:isAlive()
     return #self.hearts ~= 0
 end
+
+return Player
