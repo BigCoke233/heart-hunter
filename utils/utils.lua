@@ -84,3 +84,12 @@ end
 function utils.any(tbl)
     return tbl[math.random(#tbl)]
 end
+
+function utils.indexof(tbl, value)
+    for i, v in ipairs(tbl) do
+        if v == value then
+            return i
+        end
+    end
+    return nil
+end

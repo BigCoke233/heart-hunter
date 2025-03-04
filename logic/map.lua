@@ -18,6 +18,7 @@ end
 
 function map.generate(roomCount, initial)
     local rooms = {}
+    local availableRooms = {}
 
     local firstRoom
     if initial then
@@ -26,20 +27,22 @@ function map.generate(roomCount, initial)
         firstRoom = Room:new(utils.any(roomNames))
     end
     table.insert(rooms, firstRoom)
+    table.insert(availableRooms, firstRoom)
 
     for i = 2, roomCount do
         local newRoom = Room:new(utils.any(roomNames))
 
-        -- select an available room
-        local previousRoom
-        repeat
-            previousRoom = utils.any(rooms)
-        until not previousRoom:isDoorFull()
-
-        -- connect rooms
-        previousRoom:connect(newRoom)
+        -- select an available room and connect
+        local prevRoom = utils.any(availableRooms)
+        if not newRoom:connect(prevRoom) then
+            print("room connection failed")
+        end
+        if prevRoom:isDoorFull() then
+            table.remove(availableRooms, utils.indexof(availableRooms, prevRoom))
+        end
 
         table.insert(rooms, newRoom)
+        table.insert(availableRooms, newRoom)
     end
 
     return rooms
