@@ -13,7 +13,6 @@ function draws.player()
     local index = facing[G.player.facing]
 
     if G.player.moving then
-        print(cf)
         index = moving[G.player.facing][cf]
     end
 
