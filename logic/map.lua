@@ -39,6 +39,25 @@ function map.generate(roomCount)
     return rooms
 end
 
+function map.continue(roomCount, from)
+    -- continue game by extending the map
+    local newMap = map.generate(roomCount or 5)
+    if not from then from = G.currentRoom end
+
+    -- try extend from the last room
+    if not from.connect(newMap[1]) then
+        -- if not doorless direction available in this room
+        -- try extend from a random Room
+        repeat
+            local room = utils.any(G.allRooms)
+            if room ~= from and not room:isDoorFull() then
+                room:connect(newMap[1])
+                break
+            end
+        until false
+    end
+end
+
 -- boolean functions
 
 function map.allCleared()
@@ -56,10 +75,17 @@ end
 
 function map.update()
     local room = G.currentRoom
+
+    -- check if room is cleared
     if #G.enemies==0 and not room.isCleared then
         room.isCleared = true
         if room.type ~= roomType.INITIAL then
             G.roomCleared = G.roomCleared + 1
         end
+    end
+
+    -- extend map if all rooms are cleared
+    if map.allCleared() then
+        map.continue(5)
     end
 end
