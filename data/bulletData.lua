@@ -10,16 +10,16 @@ local bulletData = {
             -- split heart and shoot at 4 different angle
             if math.random(2) == 1 then
                 -- shoot like a X
-                bullets.fire("redheart", 0, 0, x-r, y-r)
-                bullets.fire("redheart", w, h, x+r, y+r)
-                bullets.fire("redheart", 0, h, x-r, y+r)
-                bullets.fire("redheart", w, 0, x+r, y-r)
+                bullets.fire("redheart", x-2*r, y-2*r, x-r, y-r)
+                bullets.fire("redheart", x+2*r, y+2*r, x+r, y+r)
+                bullets.fire("redheart", x-2*r, y+2*r, x-r, y+r)
+                bullets.fire("redheart", x+2*r, y-2*r, x+r, y-r)
             else
                 -- shoot like a cross
-                bullets.fire("redheart", w/2, 0, x, y-r)
-                bullets.fire("redheart", w/2, h, x, y+r)
-                bullets.fire("redheart", 0, h/2, x-r, y)
-                bullets.fire("redheart", w, h/2, x+r, y)
+                bullets.fire("redheart", x, 0, x, y-r)
+                bullets.fire("redheart", x, h, x, y+r)
+                bullets.fire("redheart", 0, y, x-r, y)
+                bullets.fire("redheart", w, y, x+r, y)
             end
         end
     },

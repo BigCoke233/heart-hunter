@@ -10,7 +10,7 @@ function Player.new()
         body = Body:new("circle", config.playerSize, nil, 1/16),
         speed = config.defaultPlayerSpeed,
         shieldedTill = 0,
-        hearts = { "redheart", "redheart", "redheart", "shinyheart", "shinyheart" },
+        hearts = { "redheart", "redheart", "redheart", "shinyheart", "shinyheart", "bigheart" },
         facing = Direction.DOWN,
         moving = false,
         frameTimer = FrameTimer:new(config.frameRate, 2)
