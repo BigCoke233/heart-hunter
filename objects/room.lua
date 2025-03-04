@@ -1,18 +1,18 @@
 Room = {}
 Room.__index = Room
 
-local function readObjectList(data, objectName)
-    local list = {}
-    for _, object in ipairs(data) do
-        local objectType = object[1]
-        local objectPosition = object[2]
-        local obj = objectName == "enemy" and Enemy:new(objectType, objectPosition) or objectName == "obstacle" and Obstacle:new(objectType, objectPosition) or objectName == "item" and Item:new(objectType, objectPosition)
-        table.insert(list, obj)
-    end
-    return list
-end
-
 function Room:new(name, w, h)
+    local function readObjectList(data, objectName)
+        local list = {}
+        for _, object in ipairs(data) do
+            local objectType = object[1]
+            local objectPosition = object[2]
+            local obj = objectName == "enemy" and Enemy:new(objectType, objectPosition) or objectName == "obstacle" and Obstacle:new(objectType, objectPosition) or objectName == "item" and Item:new(objectType, objectPosition)
+            table.insert(list, obj)
+        end
+        return list
+    end
+
     local data = roomData[name]
     local obj = {
         name = name or "defaultRoom",
@@ -35,6 +35,8 @@ function Room:new(name, w, h)
 
     return obj
 end
+
+-- getters
 
 function Room:getWidth()
     return self.width * love.graphics.getWidth()
@@ -111,9 +113,19 @@ function Room:getLocation(location, offset)
     return preset[location].x, preset[location].y
 end
 
-function Room:addDoor(door)
-    table.insert(self.doors, door)
+function Room:isDoorFull()
+    return #self.doors >= 4
 end
+
+function Room:getDoorlessDirections()
+    local doorless = { Direction.LEFT, Direction.RIGHT, Direction.TOP, Direction.BOTTOM }
+    for _, door in ipairs(self.doors) do
+        table.remove(doorless, door.direction)
+    end
+    return doorless
+end
+
+-- initializers
 
 function Room:initEnemies()
     for _, enemy in ipairs(self.enemies) do
@@ -135,16 +147,15 @@ function Room:initObstacles()
     end
 end
 
-function Room:isDoorFull()
-    return #self.doors >= 4
+function Room:init()
+    self:initEnemies()
+    self:initObstacles()
 end
 
-function Room:getDoorlessDirections()
-    local doorless = { Direction.LEFT, Direction.RIGHT, Direction.TOP, Direction.BOTTOM }
-    for _, door in ipairs(self.doors) do
-        table.remove(doorless, door.direction)
-    end
-    return doorless
+-- control functions
+
+function Room:addDoor(door)
+    table.insert(self.doors, door)
 end
 
 function Room:connect(anotherRoom, way)
@@ -169,9 +180,4 @@ function Room:connect(anotherRoom, way)
     end
 
     return door1, door2
-end
-
-function Room:init()
-    self:initEnemies()
-    self:initObstacles()
 end
