@@ -1,3 +1,5 @@
+local enemyData = require "data.enemyData"
+
 local bulletData = {
     bigheart = {
         damage = 200,

@@ -1,3 +1,5 @@
+local roomData = require "data.roomData"
+
 Room = {}
 Room.__index = Room
 

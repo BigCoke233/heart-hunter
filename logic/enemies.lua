@@ -1,9 +1,11 @@
+local enemyNames = require "data.enemyNames"
+
 enemies = {}
 
 function enemies.generate(count)
     local enemies = {}
     for i = 1, count do
-        table.insert(enemies, Enemy:new(enemyTypes[math.random(#enemyTypes)]))
+        table.insert(enemies, Enemy:new(utils.any(enemyNames)))
     end
     return enemies
 end

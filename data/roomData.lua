@@ -1,12 +1,7 @@
 require "objects.Enemy"
+local roomType = require "data.roomType"
 
-roomType = {
-    INITIAL = 1,
-    COMBAT = 2,
-    LOOT = 3
-}
-
-roomData = {
+local roomData = {
     initialRoom = {
         type = roomType.INITIAL,
         width = config.defaultRoomW,
@@ -92,9 +87,4 @@ roomData = {
     },
 }
 
-roomNames = {}
-for name, data in pairs(roomData) do
-    if not data.manualPlacementOnly then
-        table.insert(roomNames, name)
-    end
-end
+return roomData

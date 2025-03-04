@@ -1,3 +1,6 @@
+local roomNames = require "data.roomNames"
+local roomType = require "data.roomType"
+
 map = {}
 
 -- control functions

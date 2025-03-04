@@ -10,10 +10,6 @@ require "objects.enemy"
 require "objects.direction"
 require "objects.obstacle"
 
-require "data.enemyData"
-require "data.heartTypes"
-require "data.roomData"
-
 require "render.sprite"
 
 require "logic.bullets"

@@ -1,3 +1,5 @@
+local enemyData = require "data.enemyData"
+
 local draws = {}
 
 function draws.player()

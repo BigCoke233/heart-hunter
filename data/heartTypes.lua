@@ -1,4 +1,4 @@
-heartTypes = {
+local heartTypes = {
     "arrowheart",
     "bigheart",
     "blockheart",
@@ -16,3 +16,5 @@ heartTypes = {
     "whiteheart",
     "yellowheart"
 }
+
+return heartTypes

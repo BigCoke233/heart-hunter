@@ -1,4 +1,5 @@
-enemyData = {
+require "objects.direction"
+local enemyData = {
     lancer = {
         size = 20,
         zoom = 1/16,
@@ -80,7 +81,4 @@ enemyData = {
     }
 }
 
-enemyTypes = {}
-for type, _ in pairs(enemyData) do
-   table.insert(enemyTypes, type)
-end
+return enemyData

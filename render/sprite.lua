@@ -1,3 +1,4 @@
+local heartTypes = require "data.heartTypes"
 sprite = {}
 
 -- sprite resource management
