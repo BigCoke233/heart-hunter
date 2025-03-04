@@ -1,3 +1,5 @@
+local Body = require "objects.Body"
+
 Player = {}
 Player.__index = Player
 

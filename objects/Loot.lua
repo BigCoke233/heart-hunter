@@ -1,3 +1,5 @@
+local Body = require "objects.Body"
+
 Loot = {}
 Loot.__index = Loot
 

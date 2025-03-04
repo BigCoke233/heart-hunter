@@ -1,4 +1,4 @@
-Body = {}
+local Body = {}
 Body.__index = Body
 
 function Body:new(shape, sizeA, sizeB, zoom)
@@ -68,3 +68,5 @@ function Body:drawQuad(sheet, index, x, y, angle)
         sprite.drawQuad(sheet, index, x - w/2, y - h/2, graphicW, graphicH, angle or 0)
     end
 end
+
+return Body

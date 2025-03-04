@@ -1,7 +1,8 @@
+local Body = require "objects.Body"
+local bulletData = require "data.bulletData"
+
 Shot = {}
 Shot.__index = Shot
-
-local bulletData = require "data.bulletData"
 
 function Shot:new(bulletType, targetX, targetY, fireX, fireY)
     local vx = targetX - fireX

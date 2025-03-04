@@ -1,3 +1,5 @@
+local Body = require "objects.Body"
+
 Door = {}
 Door.__index = Door
 

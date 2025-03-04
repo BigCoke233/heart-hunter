@@ -1,3 +1,5 @@
+local Body = require "objects.Body"
+
 Obstacle = {}
 Obstacle.__index = Obstacle
 

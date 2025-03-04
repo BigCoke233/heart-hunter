@@ -1,6 +1,5 @@
 require "config"
 
-require "objects.body"
 require "objects.room"
 require "objects.door"
 require "objects.shot"

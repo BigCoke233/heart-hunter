@@ -1,3 +1,4 @@
+local Body = require "objects.Body"
 local enemyData = require "data.enemyData"
 
 Enemy = {}
