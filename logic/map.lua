@@ -53,9 +53,23 @@ function map.generate(roomCount)
 
     for i = 2, roomCount do
         local newRoom = Room:new(roomNames[math.random(#roomNames)])
-        local previousRoom = rooms[math.random(#rooms)]
 
-        map.connectRoom(previousRoom, newRoom, math.random(4))
+        -- select an available room
+        local previousRoom
+        local full = false
+        repeat
+            previousRoom = rooms[math.random(#rooms)]
+            full = #previousRoom.doors >= 4
+        until not full
+
+        -- filter available directions
+        local ad = { Direction.LEFT, Direction.RIGHT, Direction.TOP, Direction.BOTTOM }
+        for _, door in ipairs(previousRoom.doors) do
+            table.remove(ad, door.direction)
+        end
+
+        -- connect rooms
+        map.connectRoom(previousRoom, newRoom, ad[math.random(#ad)])
 
         table.insert(rooms, newRoom)
     end
