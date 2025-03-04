@@ -1,43 +1,56 @@
 require "config"
 
-require "render.sprite"
-
 require "logic.bullets"
 require "logic.player"
 require "logic.enemies"
 require "logic.loot"
 require "logic.map"
 
-require "utils.renderer"
 require "utils.utils"
+
+require "render.sprite"
+local Renderer = require "render.renderer"
+
+-- initializers
+
+local function initRenderer()
+    RenderManager = Renderer:new()
+    local drawObject = require "render.draws.objects"
+    local drawUI = require "render.draws.ui"
+    local drawBackground = require "render.draws.background"
+
+    local renderees = {
+        {"background", drawBackground.room},
+        {"background", drawBackground.doors},
+        {"background", drawBackground.obstacles},
+        {"objects", drawObject.loot},
+        {"objects", drawObject.player},
+        {"objects", drawObject.enemies},
+        {"objects", drawObject.bullets},
+        {"ui", drawUI.ammoBar},
+        {"ui", drawUI.roomClearedCounter}
+    }
+
+    for _, renderee in ipairs(renderees) do
+        RenderManager:add(renderee[1], nil, renderee[2])
+    end
+end
+
+-- entry functions
 
 function love.load()
     love.window.setIcon(love.image.newImageData("resources/sprites/redheart.png"))
     love.window.setTitle("Heart Hunter")
 
     sprite.load()
-
-    renderer = Renderer:new()
-    local drawObject = require "render.draws.objects"
-    local drawUI = require "render.draws.ui"
-    local drawBackground = require "render.draws.background"
-    renderer:add("background", nil, drawBackground.room)
-    renderer:add("background", nil, drawBackground.doors)
-    renderer:add("background", nil, drawBackground.obstacles)
-    renderer:add("objects", nil, drawObject.loot)
-    renderer:add("objects", nil, drawObject.player)
-    renderer:add("objects", nil, drawObject.enemies)
-    renderer:add("objects", nil, drawObject.bullets)
-    renderer:add("ui", nil, drawUI.ammoBar)
-    renderer:add("ui", nil, drawUI.roomClearedCounter)
+    initRenderer()
 
     math.randomseed(os.time())
-
     initGame()
 end
 
 function love.draw()
-    renderer:draw()
+    RenderManager:draw()
 end
 
 local controller = require "logic.controller"
