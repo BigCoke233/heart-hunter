@@ -1,6 +1,17 @@
 Room = {}
 Room.__index = Room
 
+local function readObjectList(data, objectName)
+    local list = {}
+    for _, object in ipairs(data) do
+        local objectType = object[1]
+        local objectPosition = object[2]
+        local obj = objectName == "enemy" and Enemy:new(objectType, objectPosition) or objectName == "obstacle" and Obstacle:new(objectType, objectPosition) or objectName == "item" and Item:new(objectType, objectPosition)
+        table.insert(list, obj)
+    end
+    return list
+end
+
 function Room:new(name, w, h)
     local data = roomData[name]
     local obj = {
@@ -8,8 +19,9 @@ function Room:new(name, w, h)
         type = data.type or roomType.INITIAL,
         width = data.width or 0.85,
         height = data.height or 0.8,
-        enemies = utils.copy(data.enemies or {}),
-        obstacles = utils.copy(data.obstacles or {}),
+        enemies = data.enemies and readObjectList(data.enemies, "enemy") or {},
+        obstacles = data.obstacles and readObjectList(data.obstacles, "obstacle") or {},
+        loots = data.loots and readObjectList(data.loots, "loot") or {},
 
         doors = {},
         isCleared = false,

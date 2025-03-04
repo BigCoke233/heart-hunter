@@ -19,13 +19,13 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("lancer", "topRight"),
-            Enemy:new("lancer", "topLeft"),
-            Enemy:new("lancer", "bottomRight"),
-            Enemy:new("lancer", "bottomLeft"),
+            {"lancer", "topRight"},
+            {"lancer", "topLeft"},
+            {"lancer", "bottomRight"},
+            {"lancer", "bottomLeft"},
         },
         obstacles = {
-            Obstacle:new("pillar", "center")
+            {"pillar", "center"}
         },
     },
     combatRoom2 = {
@@ -33,17 +33,17 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("lancer", "leftCenter"),
-            Enemy:new("lancer", "rightCenter"),
-            Enemy:new("fairy", "center"),
-            Enemy:new("fairy", "center"),
-            Enemy:new("fairy", "center"),
+            {"lancer", "leftCenter"},
+            {"lancer", "rightCenter"},
+            {"fairy", "center"},
+            {"fairy", "center"},
+            {"fairy", "center"},
         },
         obstacles = {
-            Obstacle:new("pillar", "topRight"),
-            Obstacle:new("pillar", "bottomLeft"),
-            Obstacle:new("pillar", "topLeft"),
-            Obstacle:new("pillar", "bottomRight"),
+            {"pillar", "topRight"},
+            {"pillar", "bottomLeft"},
+            {"pillar", "topLeft"},
+            {"pillar", "bottomRight"},
         },
     },
     combatRoom3 = {
@@ -51,13 +51,13 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("spiger", "leftCenter"),
-            Enemy:new("spiger", "rightCenter"),
-            Enemy:new("spiger", "center"),
+            {"spiger", "leftCenter"},
+            {"spiger", "rightCenter"},
+            {"spiger", "center"},
         },
         obstacles = {
-            Obstacle:new("pillar", "topCenter"),
-            Obstacle:new("pillar", "bottomCenter"),
+            {"pillar", "topCenter"},
+            {"pillar", "bottomCenter"},
         },
     },
     library = {
@@ -65,15 +65,15 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("librarian", "topCenter"),
-            Enemy:new("librarian", "bottomCenter"),
-            Enemy:new("lancer", "center")
+            {"librarian", "topCenter"},
+            {"librarian", "bottomCenter"},
+            {"lancer", "center"},
         },
         obstacles = {
-            Obstacle:new("pillar", "topRight"),
-            Obstacle:new("pillar", "bottomLeft"),
-            Obstacle:new("pillar", "topLeft"),
-            Obstacle:new("pillar", "bottomRight"),
+            {"pillar", "topRight"},
+            {"pillar", "bottomLeft"},
+            {"pillar", "topLeft"},
+            {"pillar", "bottomRight"},
         },
     },
     bookstore = {
@@ -81,13 +81,13 @@ roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            Enemy:new("librarian", "topRight"),
-            Enemy:new("librarian", "bottomRight"),
-            Enemy:new("librarian", "topLeft"),
-            Enemy:new("librarian", "bottomLeft"),
+            {"librarian", "topRight"},
+            {"librarian", "bottomRight"},
+            {"librarian", "topLeft"},
+            {"librarian", "bottomLeft"},
         },
         obstacles = {
-            Obstacle:new("pillar", "center"),
+            {"pillar", "center"},
         },
     },
 }
