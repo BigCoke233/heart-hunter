@@ -39,29 +39,37 @@ function map.generate(roomCount)
     table.insert(rooms, room1)
 
     for i = 2, roomCount do
-        local newRoom = Room:new(roomNames[math.random(#roomNames)])
+        local newRoom = Room:new(utils.any(roomNames))
 
         -- select an available room
         local previousRoom
-        local full = false
         repeat
-            previousRoom = rooms[math.random(#rooms)]
-            full = #previousRoom.doors >= 4
-        until not full
-
-        -- filter available directions
-        local ad = { Direction.LEFT, Direction.RIGHT, Direction.TOP, Direction.BOTTOM }
-        for _, door in ipairs(previousRoom.doors) do
-            table.remove(ad, door.direction)
-        end
+            previousRoom = utils.any(rooms)
+        until not previousRoom:isDoorFull()
 
         -- connect rooms
-        map.connectRoom(previousRoom, newRoom, ad[math.random(#ad)])
+        local doorless = previousRoom:getDoorlessDirections()
+        map.connectRoom(previousRoom, newRoom, utils.any(doorless))
 
         table.insert(rooms, newRoom)
     end
 
+    G.allRooms = rooms
     return rooms[1]
+end
+
+function map.continue()
+    local allCleared = true
+    for _, room in ipairs(G.allRooms) do
+        if not room.isCleared then
+            allCleared = false
+            break
+        end
+    end
+
+    local room = G.currentRoom
+    local newRoom = map.generate(5)
+    -- WIP
 end
 
 function map.update()

@@ -135,6 +135,18 @@ function Room:initObstacles()
     end
 end
 
+function Room:isDoorFull()
+    return #self.doors >= 4
+end
+
+function Room:getDoorlessDirections()
+    local doorless = { Direction.LEFT, Direction.RIGHT, Direction.TOP, Direction.BOTTOM }
+    for _, door in ipairs(self.doors) do
+        table.remove(doorless, door.direction)
+    end
+    return doorless
+end
+
 function Room:init()
     self:initEnemies()
     self:initObstacles()
