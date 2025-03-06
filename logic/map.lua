@@ -23,17 +23,9 @@ function map.switchRoom(to)
 end
 
 function map.generate(roomCount, initial)
-    local rooms = {}
-    local availableRooms = {}
-
-    local firstRoom
-    if initial then
-        firstRoom = Room:new("initialRoom")
-    else
-        firstRoom = Room:new(utils.any(roomNames))
-    end
-    table.insert(rooms, firstRoom)
-    table.insert(availableRooms, firstRoom)
+    local firstRoom = Room:new(initial and "initialRoom" or utils.any(roomNames))
+    local rooms = { firstRoom }
+    local availableRooms = { firstRoom }
 
     for i = 2, roomCount do
         local newRoom = Room:new(utils.any(roomNames))
@@ -57,19 +49,23 @@ end
 function map.continue(roomCount, from)
     -- continue game by extending the map
     local newMap = map.generate(roomCount or 5)
-    if not from then from = G.currentRoom end
+    local room = from or G.currentRoom
 
-    -- try extend from the last room
-    if not from.connect(newMap[1]) then
+    -- try extending from the last room
+    if not room:connect(newMap[1]) then
         -- if not doorless direction available in this room
         -- try extend from a random Room
         repeat
-            local room = utils.any(G.allRooms)
+            room = utils.any(G.allRooms)
             if room ~= from and not room:isDoorFull() then
                 room:connect(newMap[1])
                 break
             end
         until false
+    end
+
+    for _, newRoom in ipairs(newMap) do
+        table.insert(G.allRooms, newRoom)
     end
 end
 
@@ -97,10 +93,21 @@ function map.update()
         if room.type ~= roomType.INITIAL then
             G.roomCleared = G.roomCleared + 1
         end
+        print "room cleared"
+
+        local unclearedRooms = {}
+        for _, room in ipairs(G.allRooms) do
+            if not room.isCleared then
+                table.insert(unclearedRooms, room)
+            end
+        end
+
+        print("uncleared rooms: ", #unclearedRooms)
     end
 
     -- extend map if all rooms are cleared
     if map.allCleared() then
-        map.continue(5)
+        print "all cleared and try to continue"
+        map.continue()
     end
 end
