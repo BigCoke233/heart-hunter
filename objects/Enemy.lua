@@ -52,7 +52,7 @@ function Enemy:moveTo(x, y, dt)
 
     local function getDelta(axis, destination, direction)
         -- delta is either +1 or -1, represents the direction
-        local delta = (self[axis] < destination and 1) or (self[axis] > destination and -1)
+        local delta = (self[axis] < destination and 1) or (self[axis] > destination and -1) or 0
 
         -- check if the movement is blocked, if so delta is 0, meaning no movement
         local isBlocked = utils.isBlocked(self.body, self.x, self.y, direction, axis, dv*delta)
