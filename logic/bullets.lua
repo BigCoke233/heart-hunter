@@ -7,15 +7,17 @@ local bulletData = require "data.bulletData"
 function bullets.fire(bulletType, targetX, targetY, fireX, fireY)
     table.insert(G.shots, Shot:new(bulletType, targetX, targetY, fireX, fireY))
 
-    if(bulletData[bulletType]) then
-        bulletData[bulletType].afterShot()
+    local data = bulletData[bulletType]
+    if data and data.afterShot then
+        data.afterShot()
     end
 end
 
 function bullets.hit(name, x, y, enemyType)
+    local data = bulletData[name]
     -- x, y represents the position of the bullet when it hit the target
-    if bulletData[name] then
-        bulletData[name].afterHit(x, y, enemyType)
+    if data and data.afterHit then
+        data.afterHit(x, y, enemyType)
     end
 end
 
