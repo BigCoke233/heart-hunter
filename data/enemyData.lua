@@ -67,14 +67,23 @@ local enemyData = {
         },
         movePattern = "vertical",
     },
-    fairy = {
-        size = 8,
+    citrusLitulon = {
+        size = 16,
+        zoom = 1/16,
         speed = 60,
         health = 50,
-        appearance = {
-            color = { 251/255, 243/255, 185/255 }
-        }
-        ,
+        sprite = {
+            type = "spritesheet",
+            name = "citrus-litulon",
+            sheet = { row = 4, col = 4 },
+            totalFrames = 4,
+            frames = {
+                [Direction.RIGHT] = { 1, 2, 3, 4 },
+                [Direction.DOWN] = { 5, 6, 7, 8 },
+                [Direction.LEFT] = { 9, 10, 11, 12 },
+                [Direction.UP] = { 13, 14, 15, 16 }
+            },
+        },
         drops = {
             { type = "yellowheart", amount = 2, chances = 1 },
             { type = "shinyheart", amount = 1, chances = 0.2 }

@@ -30,9 +30,9 @@ local roomData = {
         enemies = {
             {"lancer", "leftCenter"},
             {"lancer", "rightCenter"},
-            {"fairy", "center"},
-            {"fairy", "center"},
-            {"fairy", "center"},
+            {"citrusLitulon", "center"},
+            {"citrusLitulon", "center"},
+            {"citrusLitulon", "center"},
         },
         obstacles = {
             {"pillar", "topRight"},
@@ -85,6 +85,18 @@ local roomData = {
             {"pillar", "center"},
         },
     },
+    fireflyForest = {
+        type = roomType.COMBAT,
+        width = config.defaultRoomW,
+        height = config.defaultRoomH,
+        enemies = {
+            {"citrusLitulon","random"},
+            {"citrusLitulon","random"},
+            {"citrusLitulon","random"},
+            {"citrusLitulon","random"},
+            {"citrusLitulon","random"},
+        }
+    }
 }
 
 return roomData
