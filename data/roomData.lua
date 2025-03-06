@@ -9,7 +9,8 @@ local roomData = {
         enemies = {},
         manualPlacementOnly = true
     },
-    combatRoom1 = {
+    lancerParty = {
+        name = "Lancers' Party",
         type = roomType.COMBAT,
         width = config.defaultRoomW,
         height = config.defaultRoomH,
@@ -23,16 +24,17 @@ local roomData = {
             {"pillar", "center"}
         },
     },
-    combatRoom2 = {
+    blueberries = {
+        name = "Blueberries",
         type = roomType.COMBAT,
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
             {"lancer", "leftCenter"},
             {"lancer", "rightCenter"},
+            {"citrusLitulon", "topCenter"},
             {"citrusLitulon", "center"},
-            {"citrusLitulon", "center"},
-            {"citrusLitulon", "center"},
+            {"citrusLitulon", "bottomCenter"},
         },
         obstacles = {
             {"pillar", "topRight"},
@@ -41,7 +43,8 @@ local roomData = {
             {"pillar", "bottomRight"},
         },
     },
-    combatRoom3 = {
+    spigerCave = {
+        name = "Spiger Cave",
         type = roomType.COMBAT,
         width = config.defaultRoomW,
         height = config.defaultRoomH,
@@ -56,6 +59,7 @@ local roomData = {
         },
     },
     library = {
+        name = "Library",
         type = roomType.COMBAT,
         width = config.defaultRoomW,
         height = config.defaultRoomH,
@@ -72,6 +76,7 @@ local roomData = {
         },
     },
     bookstore = {
+        name = "Book Store",
         type = roomType.COMBAT,
         width = config.defaultRoomW,
         height = config.defaultRoomH,
@@ -86,6 +91,7 @@ local roomData = {
         },
     },
     fireflyForest = {
+        name = "Firefly Forest",
         type = roomType.COMBAT,
         width = config.defaultRoomW,
         height = config.defaultRoomH,

@@ -32,4 +32,13 @@ function ui.roomClearedCounter()
     love.graphics.print("Room Cleared: " .. G.roomCleared, 0, 0)
 end
 
+function ui.roomName()
+    local text = G.currentRoom.name
+    local screenWidth = love.graphics.getWidth()
+    local font = love.graphics.getFont()
+    local textWidth = font:getWidth(text)
+
+    love.graphics.print(text, screenWidth - textWidth, 0)
+end
+
 return ui

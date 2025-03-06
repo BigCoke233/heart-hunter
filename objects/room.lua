@@ -22,7 +22,7 @@ function Room:new(name, w, h)
 
     local data = roomData[name]
     local obj = {
-        name = name or "defaultRoom",
+        name = data.name or "Initial Room",
         type = data.type or roomType.INITIAL,
         width = data.width or 0.85,
         height = data.height or 0.8,
