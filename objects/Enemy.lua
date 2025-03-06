@@ -75,9 +75,8 @@ end
 function Enemy:facing()
     local dx = self.x - G.player.x
     local dy = self.y - G.player.y
-    local angle = math.atan2(dy, dx)  -- 计算角度，弧度制
+    local angle = math.atan2(dy, dx)
 
-    -- 判断方向
     local dir
     if angle >= -math.pi / 4 and angle < math.pi / 4 then
         dir = Direction.LEFT
