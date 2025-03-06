@@ -19,21 +19,9 @@ local function initRenderer()
     local drawUI = require "render.draws.ui"
     local drawBackground = require "render.draws.background"
 
-    local renderees = {
-        {"background", drawBackground.room},
-        {"background", drawBackground.doors},
-        {"background", drawBackground.obstacles},
-        {"objects", drawObject.loot},
-        {"objects", drawObject.player},
-        {"objects", drawObject.enemies},
-        {"objects", drawObject.bullets},
-        {"ui", drawUI.ammoBar},
-        {"ui", drawUI.roomClearedCounter}
-    }
-
-    for _, renderee in ipairs(renderees) do
-        RenderManager:add(renderee[1], nil, renderee[2])
-    end
+    RenderManager:addFunctions("background", nil, drawBackground)
+    RenderManager:addFunctions("objects", nil, drawObject)
+    RenderManager:addFunctions("ui", nil, drawUI)
 end
 
 -- entry functions

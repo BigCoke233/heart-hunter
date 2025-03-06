@@ -7,6 +7,12 @@ function Renderer:new()
     return obj
 end
 
+function Renderer:addFunctions(layer, obj, drawFuncs)
+   for _, drawFunc in pairs(drawFuncs) do
+       self:add(layer, obj, drawFunc)
+   end
+end
+
 function Renderer:add(layer, obj, drawFunc)
     if not self.layers[layer] then
         self.layers[layer] = {}
