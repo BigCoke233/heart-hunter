@@ -23,12 +23,12 @@ function map.switchRoom(to)
 end
 
 function map.generate(roomCount, initial)
-    local firstRoom = Room:new(initial and "initialRoom" or utils.any(roomNames))
+    local firstRoom = Room:new(initial and "initialRoom" or nil)
     local rooms = { firstRoom }
     local availableRooms = { firstRoom }
 
     for i = 2, roomCount do
-        local newRoom = Room:new(utils.any(roomNames))
+        local newRoom = Room:new()
 
         -- select an available room and connect
         local prevRoom = utils.any(availableRooms)

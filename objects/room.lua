@@ -1,5 +1,7 @@
 require "data.directions"
 local roomData = require "data.roomData"
+local roomNames = require "data.roomNames"
+local roomType = require "data.roomType"
 
 local Enemy = require "objects.enemy"
 local Door = require "objects.door"
@@ -8,7 +10,7 @@ local Obstacle = require "objects.obstacle"
 local Room = {}
 Room.__index = Room
 
-function Room:new(name, w, h)
+function Room:new(name)
     local function readObjectList(data, objectName)
         local list = {}
         for _, object in ipairs(data) do
@@ -20,7 +22,7 @@ function Room:new(name, w, h)
         return list
     end
 
-    local data = roomData[name]
+    local data = roomData[name or utils.any(roomNames)]
     local obj = {
         name = data.name or "Initial Room",
         type = data.type or roomType.INITIAL,
