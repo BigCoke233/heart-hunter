@@ -49,23 +49,20 @@ end
 
 function Enemy:moveTo(x, y, dt)
     local dv = self.speed * dt
-    local dx, dy = 0, 0
 
-    local function getDirection(axis, playerPos, direction, blockAxis)
-        if self[axis] < playerPos then
-            if not utils.isBlocked(self.body, self.x, self.y, direction, blockAxis, dv) then
-                return 1
-            end
-        elseif self[axis] > playerPos then
-            if not utils.isBlocked(self.body, self.x, self.y, direction, blockAxis, dv) then
-                return -1
-            end
-        end
-        return 0
+    local function getDelta(axis, destination, direction)
+        -- delta is either +1 or -1, represents the direction
+        local delta = (self[axis] < destination and 1) or (self[axis] > destination and -1)
+
+        -- check if the movement is blocked, if so delta is 0, meaning no movement
+        local isBlocked = utils.isBlocked(self.body, self.x, self.y, direction, axis, dv*delta)
+        if isBlocked then delta = 0 end
+
+        return delta
     end
 
-    dx = getDirection("x", x, Direction.RIGHT, "x")
-    dy = getDirection("y", y, Direction.DOWN, "y")
+    local dx = getDelta("x", x, Direction.RIGHT)    -- RIGHT and LEFT means the same for isBlocked()
+    local dy = getDelta("y", y, Direction.DOWN)     -- the same for DOWN and UP
 
     self.x = self.x + dx * dv
     self.y = self.y + dy * dv
