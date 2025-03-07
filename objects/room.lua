@@ -134,33 +134,6 @@ function Room:getDoorlessDirections()
     return doorless
 end
 
--- initializers
-
-function Room:initEnemies()
-    for _, enemy in ipairs(self.enemies) do
-        local offset = enemy.body.r*2 + G.player.body.r*2 + config.summonMargin
-        if not enemy.x or not enemy.y then
-            enemy.x, enemy.y = self:getLocation(enemy.presetLocation or "random", offset)
-        end
-    end
-end
-
-function Room:initObstacles()
-    for _, obstacle in ipairs(self.obstacles) do
-        local offset = obstacle.body.w + G.player.body.r*2 + config.summonMargin
-        if not obstacle.x or not obstacle.y then
-            obstacle.x, obstacle.y = self:getLocation(obstacle.presetLocation or "random", offset)
-            obstacle.x = obstacle.x - obstacle.body.w / 2
-            obstacle.y = obstacle.y - obstacle.body.h / 2
-        end
-    end
-end
-
-function Room:init()
-    self:initEnemies()
-    self:initObstacles()
-end
-
 -- control functions
 
 function Room:addDoor(door)
@@ -191,6 +164,33 @@ function Room:connect(anotherRoom, way)
     anotherRoom:addDoor(door2)
 
     return door1, door2
+end
+
+-- initializers
+
+function Room:initEnemies()
+    for _, enemy in ipairs(self.enemies) do
+        local offset = enemy.body.r*2 + G.player.body.r*2 + config.summonMargin
+        if not enemy.x or not enemy.y then
+            enemy.x, enemy.y = self:getLocation(enemy.presetLocation or "random", offset)
+        end
+    end
+end
+
+function Room:initObstacles()
+    for _, obstacle in ipairs(self.obstacles) do
+        local offset = obstacle.body.w + G.player.body.r*2 + config.summonMargin
+        if not obstacle.x or not obstacle.y then
+            obstacle.x, obstacle.y = self:getLocation(obstacle.presetLocation or "random", offset)
+            obstacle.x = obstacle.x - obstacle.body.w / 2
+            obstacle.y = obstacle.y - obstacle.body.h / 2
+        end
+    end
+end
+
+function Room:init()
+    self:initEnemies()
+    self:initObstacles()
 end
 
 return Room
