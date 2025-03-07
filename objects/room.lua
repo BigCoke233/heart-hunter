@@ -147,13 +147,19 @@ function Room:connect(anotherRoom, way)
 
     -- determine directions
     -- if not specified, choose randomly
-    local directions
+    local directions = {}
     if type(way) == "string" then
         directions = Way[way]
     elseif type(way) == "number" then
         directions = Way[Ways[way]]
     else
-        directions = Way[Ways[utils.any(self:getDoorlessDirections())]]
+        local dd1 = self:getDoorlessDirections()
+        local dd2 = anotherRoom:getDoorlessDirections()
+
+        repeat
+            directions[1] = utils.any(dd1)
+            directions[2] = OppositeDirection[directions[1]]
+        until utils.contains(dd2, directions[2])
     end
     if not directions then return false end
 
