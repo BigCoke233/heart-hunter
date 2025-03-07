@@ -174,7 +174,14 @@ function Room:connect(anotherRoom, way)
 
     -- determine directions
     -- if not specified, choose randomly
-    local directions = Way[way or Ways[way or utils.any(self:getDoorlessDirections())]]
+    local directions
+    if type(way) == "string" then
+        directions = Way[way]
+    elseif type(way) == "number" then
+        directions = Way[Ways[way]]
+    else
+        directions = Way[Ways[utils.any(self:getDoorlessDirections())]]
+    end
     if not directions then return false end
 
     -- connect room with determined direction
