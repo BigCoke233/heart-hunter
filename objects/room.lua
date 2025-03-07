@@ -129,7 +129,7 @@ end
 function Room:getDoorlessDirections()
     local doorless = { Direction.LEFT, Direction.RIGHT, Direction.TOP, Direction.BOTTOM }
     for _, door in ipairs(self.doors) do
-        table.remove(doorless, door.direction)
+        table.remove(doorless, door.location)
     end
     return doorless
 end
