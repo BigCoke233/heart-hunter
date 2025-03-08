@@ -39,7 +39,7 @@ end
 
 function map.continue(roomCount, from)
     -- continue game by extending the map
-    local newMap = map.generate(roomCount or 5)
+    local newMap = map.generate(roomCount or 3)
     local room = from or G.currentRoom
 
     -- try extending from the last room
