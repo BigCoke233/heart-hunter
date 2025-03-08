@@ -41,4 +41,8 @@ function ui.roomName()
     love.graphics.print(text, screenWidth - textWidth, 0)
 end
 
+function ui.speakerText()
+    speaker.print()
+end
+
 return ui

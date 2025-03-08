@@ -20,6 +20,10 @@ function map.switchRoom(to)
     destination:init()
     G.currentRoom = destination
     G.enemies = G.currentRoom.enemies
+
+    if speaker.clearOnSwitchingRoom then
+        speaker.clear()
+    end
 end
 
 function map.generate(roomCount, initial)
@@ -39,7 +43,7 @@ end
 
 function map.continue(roomCount, from)
     -- continue game by extending the map
-    local newMap = map.generate(roomCount or 3)
+    local newMap = map.generate(roomCount or 3, true)
     local room = from or G.currentRoom
 
     -- try extending from the last room
@@ -58,6 +62,9 @@ function map.continue(roomCount, from)
     for _, newRoom in ipairs(newMap) do
         table.insert(G.allRooms, newRoom)
     end
+
+    G.mapExpanded = true
+    speaker.speak("A new door has opened.")
 end
 
 -- boolean functions
@@ -100,5 +107,12 @@ function map.update()
     if map.allCleared() then
         print "all cleared and try to continue"
         map.continue()
+    end
+
+    -- notify user if one's entered a new map
+    if G.currentRoom.type == roomType.INITIAL and
+        G.mapExpanded then
+        speaker.speak("You're in a new realm now. Try heading back.")
+        G.mapExpanded = false
     end
 end

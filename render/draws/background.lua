@@ -10,7 +10,9 @@ end
 function background.doors()
     for i, door in ipairs(G.currentRoom.doors) do
         if door ~= nil then
+            love.graphics.setColor(door.color or {1,1,1})
             door.body:draw(door.x, door.y)
+            utils.resetGraphics()
         end
     end
 end

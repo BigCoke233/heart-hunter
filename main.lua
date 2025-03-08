@@ -9,6 +9,7 @@ require "logic.map"
 require "utils.utils"
 
 require "render.sprite"
+require "render.speaker"
 local Renderer = require "render.renderer"
 
 -- initializers
@@ -35,6 +36,15 @@ function love.load()
 
     math.randomseed(os.time())
     initGame()
+
+    speaker.speak({
+        "welcome",
+        "press W, A, S, D to move",
+        "click mouse to rip out your heart",
+        "and, of course, shoot the enemies",
+        "you'll need to harvest their hearts too",
+        "good luck"
+    }, 2, true)
 end
 
 function love.draw()
@@ -44,7 +54,7 @@ end
 local controller = require "logic.controller"
 
 function love.update(dt)
-    local updates = { player, enemies, bullets, loot, map, controller }
+    local updates = { player, enemies, bullets, loot, map, controller, speaker }
     for _, entity in ipairs(updates) do
         entity.update(dt)
     end
