@@ -55,18 +55,20 @@ function map.continue(roomCount, from)
     local room = from or G.currentRoom
 
     -- try extending from the last room
-    if not room:connect(newMap[1]) then
+    local entranceDoor, exitDoor = room:connect(newMap[1])
+    if not entranceDoor or not exitDoor then
         -- if not doorless direction available in this room
         -- try extend from a random Room
         repeat
             room = utils.any(G.allRooms)
             if room ~= from and not room:isDoorFull() then
                 print("extended from a random room")
-                room:connect(newMap[1])
+                entranceDoor, exitDoor = room:connect(newMap[1])
                 break
             end
         until false
     end
+    newMap[1]:removeDoor(exitDoor.location)
 
     for _, newRoom in ipairs(newMap) do
         table.insert(G.allRooms, newRoom)
@@ -121,7 +123,7 @@ function map.update()
     -- notify user if one's entered a new map
     if G.currentRoom.type == roomType.INITIAL and
         G.mapExpanded then
-        speaker.speak("You're in a new realm now. Try heading back.")
+        speaker.speak("You're in a new realm now. There's no turning back.")
         G.mapExpanded = false
     end
 end

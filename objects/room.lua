@@ -165,6 +165,10 @@ function Room:addDoor(location, to)
     return door
 end
 
+function Room:removeDoor(location)
+    self.doors[location] = nil
+end
+
 function Room:connect(anotherRoom, way)
     if self:isDoorFull() or anotherRoom:isDoorFull() then
         return false
