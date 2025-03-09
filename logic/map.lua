@@ -3,6 +3,7 @@ local Room = require "objects.room"
 require "data.directions"
 local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
+local mapHelper = require "utils.mapHelper"
 
 map = {}
 
@@ -28,22 +29,29 @@ end
 
 function map.generate(roomCount, initial)
     local firstRoom = Room:new(initial and "initialRoom" or nil)
-    local rooms = { firstRoom }
+    local map = { firstRoom }
+    local available = utils.copy(map)
 
-    for i = 2, roomCount do
+    for i = 2, (roomCount or config.initialMapSize) do
+        -- connect the room with a new room
         local newRoom = Room:new()
-        if not utils.any(rooms):connect(newRoom) then
-            print("something wrong with connection")
+        local prevRoom = utils.any(available)
+        prevRoom:connect(newRoom)
+
+        if prevRoom:isDoorFull() then
+            table.remove(available, utils.indexof(available, prevRoom))
         end
-        table.insert(rooms, newRoom)
+
+        table.insert(map, newRoom)
+        table.insert(available, newRoom)
     end
 
-    return rooms
+    return map
 end
 
 function map.continue(roomCount, from)
     -- continue game by extending the map
-    local newMap = map.generate(roomCount or config.initialMapSize, true)
+    local newMap = map.generate(roomCount or config.extendedMapSize, true)
     local room = from or G.currentRoom
 
     -- try extending from the last room
@@ -53,6 +61,7 @@ function map.continue(roomCount, from)
         repeat
             room = utils.any(G.allRooms)
             if room ~= from and not room:isDoorFull() then
+                print("extended from a random room")
                 room:connect(newMap[1])
                 break
             end

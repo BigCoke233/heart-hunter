@@ -7,6 +7,8 @@ local Enemy = require "objects.enemy"
 local Door = require "objects.door"
 local Obstacle = require "objects.obstacle"
 
+local mapHelper = require "utils.mapHelper"
+
 local Room = {}
 Room.__index = Room
 
@@ -126,10 +128,25 @@ function Room:isDoorFull()
     return #self.doors >= 4
 end
 
+function Room:hasDoor(location)
+    return self.doors[location] ~= nil
+end
+
+function Room:getDooredDirections()
+    local doored = {}
+    for _, door in pairs(self.doors) do
+        table.insert(doored, door.location)
+    end
+    return doored
+end
+
 function Room:getDoorlessDirections()
-    local doorless = { Direction.LEFT, Direction.RIGHT, Direction.TOP, Direction.BOTTOM }
-    for _, door in ipairs(self.doors) do
-        table.remove(doorless, door.location)
+    local doored = self:getDooredDirections()
+    local doorless = {}
+    for direction = 1, 4 do
+        if not utils.contains(doored, direction) then
+            table.insert(doorless, direction)
+        end
     end
     return doorless
 end
@@ -137,11 +154,11 @@ end
 -- control functions
 
 function Room:addDoor(door)
-    if self.doors[door.location] then
+    if self:hasDoor(door.location) then
         print("door location unavailable")
         return false
     end
-    table.insert(self.doors, door)
+    self.doors[door.location] = door
 end
 
 function Room:connect(anotherRoom, way)
@@ -150,40 +167,23 @@ function Room:connect(anotherRoom, way)
     end
 
     -- determine directions
-    -- if not specified, choose randomly
     local directions = {}
     if type(way) == "string" then
         directions = Way[way]
     elseif type(way) == "number" then
         directions = Way[Ways[way]]
     else
-        local dd1 = self:getDoorlessDirections()
-        local dd2 = anotherRoom:getDoorlessDirections()
-
-        for _, dir1 in ipairs(dd1) do
-            local dir2 = OppositeDirection[dir1]
-            if (utils.contains(dd2, dir2)) then
-                directions = { dir1, dir2 }
-                break
-            end
-        end
-        if directions == {} or not utils.contains(dd2, directions[2]) then return false end
-        -- repeat
-        --     directions[1] = utils.any(dd1)
-        --     directions[2] = OppositeDirection[directions[1]]
-        -- until utils.contains(dd2, directions[2])
+        -- if not specified, choose randomly
+        local pairedDirections = mapHelper.getAvailablePairedDirections(self, anotherRoom)
+        directions = utils.any(pairedDirections)
     end
     if not directions then return false end
 
     -- connect room with determined direction
     local door1 = Door:new(directions[1], self, anotherRoom)
     local door2 = Door:new(directions[2], anotherRoom, self)
-
-    local doorResult1 = self:addDoor(door1)
-    local doorResult2 = anotherRoom:addDoor(door2)
-    if not doorResult1 or not doorResult2 then
-        return false
-    end
+    self:addDoor(door1)
+    anotherRoom:addDoor(door2)
 
     return door1, door2
 end
