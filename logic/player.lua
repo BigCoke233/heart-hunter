@@ -24,7 +24,7 @@ end
 -- state update functions
 
 local function playerEnters()
-    for _, door in ipairs(G.currentRoom.doors) do
+    for _, door in pairs(G.currentRoom.doors) do
         local entersDoor = door.body:collide(G.player.body, door.x, door.y, G.player.x, G.player.y) and
             G.currentRoom.isCleared
         if door ~= false and entersDoor then
