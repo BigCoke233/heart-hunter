@@ -3,7 +3,8 @@ local Room = require "objects.room"
 require "data.directions"
 local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
-local mapHelper = require "utils.mapHelper"
+
+local translator = require "i18n.translator"
 
 map = {}
 
@@ -75,7 +76,7 @@ function map.continue(roomCount, from)
     end
 
     G.mapExpanded = true
-    speaker.speak("A new door has opened.")
+    speaker.speak(translator.T("newDoor"))
 end
 
 -- boolean functions
@@ -123,7 +124,7 @@ function map.update()
     -- notify user if one's entered a new map
     if G.currentRoom.type == roomType.INITIAL and
         G.mapExpanded then
-        speaker.speak("You're in a new realm now. There's no turning back.")
+        speaker.speak(translator.T("newRealm"))
         G.mapExpanded = false
     end
 end

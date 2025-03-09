@@ -3,6 +3,7 @@ local Player = require "objects.player"
 -- global configurations
 config = {
     debug = false,
+    lang = "en",
 
     playerShieldTime = 3,
     lootSize = 5,

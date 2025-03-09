@@ -1,4 +1,5 @@
 local ui = {}
+local translator = require "i18n.translator"
 
 function ui.ammoBar()
     local height = 30
@@ -29,7 +30,7 @@ function ui.ammoBar()
 end
 
 function ui.roomClearedCounter()
-    love.graphics.print("Room Cleared: " .. G.roomCleared, 0, 0)
+    love.graphics.print(translator.T("roomCleared") .. G.roomCleared, 0, 0)
 end
 
 function ui.roomName()

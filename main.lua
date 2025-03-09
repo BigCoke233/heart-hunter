@@ -12,6 +12,8 @@ require "render.sprite"
 require "render.speaker"
 local Renderer = require "render.renderer"
 
+local translator = require "i18n.translator"
+
 -- initializers
 
 local function initRenderer()
@@ -31,20 +33,16 @@ function love.load()
     love.window.setIcon(love.image.newImageData("resources/sprites/redheart.png"))
     love.window.setTitle("Heart Hunter")
 
+    local myFont = love.graphics.newFont("resources/fonts/MZPXflat.ttf", 17)  -- 20 是字体大小
+    love.graphics.setFont(myFont)
+
     sprite.load()
     initRenderer()
 
     math.randomseed(os.time())
     initGame()
 
-    speaker.speak({
-        "welcome",
-        "press W, A, S, D to move",
-        "click mouse to rip out your heart",
-        "and, of course, shoot the enemies",
-        "you'll need to harvest their hearts too",
-        "good luck"
-    }, 2, true)
+    speaker.speak(translator.T("welcome"), 2, true)
 end
 
 function love.draw()
