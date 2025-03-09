@@ -153,12 +153,16 @@ end
 
 -- control functions
 
-function Room:addDoor(door)
-    if self:hasDoor(door.location) then
+function Room:addDoor(location, to)
+    if self:hasDoor(location) then
         print("door location unavailable")
         return false
     end
-    self.doors[door.location] = door
+
+    local door = Door:new(location, self, to)
+    self.doors[location] = door
+
+    return door
 end
 
 function Room:connect(anotherRoom, way)
@@ -180,12 +184,8 @@ function Room:connect(anotherRoom, way)
     if not directions then return false end
 
     -- connect room with determined direction
-    local door1 = Door:new(directions[1], self, anotherRoom)
-    local door2 = Door:new(directions[2], anotherRoom, self)
-    self:addDoor(door1)
-    anotherRoom:addDoor(door2)
-
-    return door1, door2
+    return self:addDoor(directions[1], anotherRoom),
+        anotherRoom:addDoor(directions[2], self)
 end
 
 -- initializers
