@@ -28,11 +28,14 @@ config = {
     defaultPlayerSpeed = 100,
     playerShootCooldown = 0.2,
     playerSize = 20,
+
+    initialMapSize = 7,
+    extendedMapSize = 5,
 }
 
 -- game default states
 function initGame()
-    local intialMap = map.generate(4, true)
+    local intialMap = map.generate(config.initialMapSize, true)
     G = {
         player = Player:new(),
         shots = {},
