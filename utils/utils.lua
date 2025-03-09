@@ -104,10 +104,3 @@ function utils.contains(tbl, x)
     end
     return false
 end
-
-function utils.shuffle(x)
-	for i = #x, 2, -1 do
-		local j = math.random(i)
-		x[i], x[j] = x[j], x[i]
-	end
-end

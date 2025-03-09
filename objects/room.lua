@@ -144,14 +144,6 @@ function Room:addDoor(door)
     table.insert(self.doors, door)
 end
 
-function Room:removeDoor(door)
-    for i, item in ipairs(self.doors) do
-        if item == door then
-            table.remove(self.doors, i)
-        end
-    end
-end
-
 function Room:connect(anotherRoom, way)
     if self:isDoorFull() or anotherRoom:isDoorFull() then
         return false
@@ -168,7 +160,6 @@ function Room:connect(anotherRoom, way)
         local dd1 = self:getDoorlessDirections()
         local dd2 = anotherRoom:getDoorlessDirections()
 
-        utils.shuffle(dd1)
         for _, dir1 in ipairs(dd1) do
             local dir2 = OppositeDirection[dir1]
             if (utils.contains(dd2, dir2)) then
