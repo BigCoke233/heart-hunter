@@ -137,6 +137,10 @@ end
 -- control functions
 
 function Room:addDoor(door)
+    if self.doors[door.location] then
+        print("door location unavailable")
+        return false
+    end
     table.insert(self.doors, door)
 end
 
@@ -183,8 +187,12 @@ function Room:connect(anotherRoom, way)
     -- connect room with determined direction
     local door1 = Door:new(directions[1], self, anotherRoom)
     local door2 = Door:new(directions[2], anotherRoom, self)
-    self:addDoor(door1)
-    anotherRoom:addDoor(door2)
+
+    local doorResult1 = self:addDoor(door1)
+    local doorResult2 = anotherRoom:addDoor(door2)
+    if not doorResult1 or not doorResult2 then
+        return false
+    end
 
     return door1, door2
 end
