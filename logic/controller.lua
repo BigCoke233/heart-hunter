@@ -16,25 +16,29 @@ end
 
 local function playerPressKeysToMoves(dt)
     local moveDirections = {
-        { key = "d", axis = "x", dir = Direction.RIGHT, delta = 1 },
-        { key = "a", axis = "x", dir = Direction.LEFT, delta = -1 },
-        { key = "w", axis = "y", dir = Direction.TOP, delta = -1 },
-        { key = "s", axis = "y", dir = Direction.BOTTOM, delta = 1 }
+        { keys = {"d","right"}, axis = "x", dir = Direction.RIGHT, delta = 1 },
+        { keys = {"a","left"}, axis = "x", dir = Direction.LEFT, delta = -1 },
+        { keys = {"w","up"}, axis = "y", dir = Direction.TOP, delta = -1 },
+        { keys = {"s","down"}, axis = "y", dir = Direction.BOTTOM, delta = 1 }
     }
 
     local keydown = love.keyboard.isDown
 
     for _, move in ipairs(moveDirections) do
         local dv = G.player.speed * dt * move.delta
-        if keydown(move.key) then
-            G.player.facing = move.dir
-            G.player.moving = true
+        for _, key in ipairs(move.keys) do
+            if keydown(key) then
+                G.player.facing = move.dir
+                G.player.moving = true
 
-            local delta = G.player.speed * dt * move.delta
-            if utils.isBlocked(G.player.body, G.player.x, G.player.y, move.dir, move.axis, dv) then
-                delta = 0
+                local delta = G.player.speed * dt * move.delta
+                if utils.isBlocked(G.player.body, G.player.x, G.player.y, move.dir, move.axis, dv) then
+                    delta = 0
+                end
+                G.player[move.axis] = G.player[move.axis] + delta
+
+                break
             end
-            G.player[move.axis] = G.player[move.axis] + delta
         end
     end
 
