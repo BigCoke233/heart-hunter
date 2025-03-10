@@ -69,7 +69,9 @@ function map.continue(roomCount, from)
             end
         until false
     end
-    newMap[1]:removeDoor(exitDoor.location)
+    if exitDoor then
+        newMap[1]:removeDoor(exitDoor.location)
+    end
 
     for _, newRoom in ipairs(newMap) do
         table.insert(G.allRooms, newRoom)
