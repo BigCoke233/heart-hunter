@@ -30,9 +30,9 @@ function Shot:update(dt)
 
     local shots = G.currentRoom.objects.shots
 
-    if utils.hitObstacle(self.x, self.y, self.body.r) then
-        table.remove(shots, utils.indexof(shots, self))
-    end
+    -- if utils.hitObstacle(self.x, self.y, self.body.r) then
+    --     table.remove(shots, utils.indexof(shots, self))
+    -- end
 end
 
 return Shot

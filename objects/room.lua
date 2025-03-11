@@ -32,8 +32,6 @@ function Room:new(name)
         type = data.type or roomType.INITIAL,
         width = data.width or 0.85,
         height = data.height or 0.8,
-        -- borders are automatically caculated afterwards
-        borders = {},
 
         objects = {
             enemies = data.enemies and readObjectList(data.enemies, "enemy") or {},
@@ -47,15 +45,6 @@ function Room:new(name)
     }
 
     setmetatable(obj, Room)
-
-    local function getBorders(obj)
-        local top = obj:getY()
-        local bottom = obj:getY() + obj:getHeight()
-        local left = obj:getX()
-        local right = obj:getX() + obj:getWidth()
-        return { left, right, top, bottom }
-    end
-    obj.borders = getBorders(obj)
 
     return obj
 end
@@ -221,9 +210,35 @@ function Room:initObstacles()
     end
 end
 
+function Room:addWalls()
+    local x, y, w, h = self:getX(), self:getY(), self:getWidth(), self:getHeight()
+    local thickness = 10
+    local walls = {}
+
+    local borders = {
+        { x = x, y = y + h / 2, w = thickness, h = h },
+        { x = x + w, y = y + h / 2, w = thickness, h = h },
+        { x = x + w / 2, y = y, w = w, h = thickness },
+        { x = x + w / 2, y = y + h, w = w, h = thickness }
+    }
+
+    for _, b in ipairs(borders) do
+        local wall = {
+            body = love.physics.newBody(G.world, b.x, b.y, "static"),
+            shape = love.physics.newRectangleShape(b.w, b.h),
+            fixture = nil
+        }
+        wall.fixture = love.physics.newFixture(wall.body, wall.shape)
+        table.insert(walls, wall)
+    end
+
+    return walls
+end
+
 function Room:init()
     self:initEnemies()
     self:initObstacles()
+    self.walls = self:addWalls()
 end
 
 function Room:update(dt)
