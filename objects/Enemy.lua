@@ -41,6 +41,17 @@ function Enemy:move(dt)
         self.stunned = self.stunned - dt
         return false
     end
+
+    if self.sticky and self.sticky > 0 then
+        self.sticky = self.sticky - dt
+        if not self.originalSpeed then
+            self.originalSpeed = self.speed
+        end
+        self.speed = self.originalSpeed / (self.sticky + 1)
+    elseif self.originalSpeed then
+        self.speed = self.originalSpeed
+    end
+
     if self.movePattern == "vertical" then
         self:moveVertical(G.player.x, dt)
     else self:moveTo(G.player.x, G.player.y, dt)
@@ -115,6 +126,10 @@ end
 
 function Enemy:stun(duration)
     self.stunned = duration
+end
+
+function Enemy:getSticky(duration)
+    self.sticky = duration
 end
 
 return Enemy

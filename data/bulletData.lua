@@ -40,6 +40,17 @@ local bulletData = {
             end
         end
     },
+    stickyheart = {
+        damage = 80,
+        afterShot = function ()
+        end,
+        afterHit = function (x, y, enemyType)
+            local slowed = enemies.getWithinRage(x, y, 100)
+            for _, enemy in ipairs(slowed) do
+                enemy:getSticky(5)
+            end
+        end
+    },
     greenheart = {
         damage = 100,
         afterShot = function ()

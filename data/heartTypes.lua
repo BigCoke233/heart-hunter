@@ -7,11 +7,11 @@ local heartTypes = {
     "brownheart",
     "giftheart",
     "greenheart",
-    "mendingheart",
     "purpleheart",
     "radiantheart",
     "redheart",
     "shinyheart",
+    "stickyheart",
     "twinheart",
     "whiteheart",
     "yellowheart"

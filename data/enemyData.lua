@@ -41,7 +41,9 @@ local enemyData = {
             },
         },
         drops = {
-            { type = "bigheart", amount = 1, chances = 1 }
+            { type = "purpleheart", amount = 1, chances = 1 },
+            { type = "stickyheart", amount = 1, chances = 0.5 },
+            { type = "bigheart", amount = 1, chances = 0.01 }
         },
     },
     librarian = {
