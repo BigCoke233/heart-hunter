@@ -16,11 +16,6 @@ function player.shoot(x, y)
     table.remove(hearts)
 end
 
-function player.speedUp(increment, duration)
-    G.player.speed = G.player.speed + increment
-    G.player.speedUpTill = G.time + duration
-end
-
 -- state update functions
 
 local function playerEnters()

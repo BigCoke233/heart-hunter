@@ -31,7 +31,7 @@ local bulletData = {
     shinyheart = {
         damage = 80,
         afterShot = function ()
-            player.speedUp(30, 10)
+            G.player:speedUp(30, 10)
         end,
         afterHit = function (x, y, enemyType)
             local stunned = enemies.getWithinRage(x, y, 100)

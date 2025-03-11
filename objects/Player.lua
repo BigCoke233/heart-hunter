@@ -30,4 +30,9 @@ function Player:isAlive()
     return #self.hearts ~= 0
 end
 
+function Player:speedUp(increment, duration)
+    self.speed = self.speed + increment
+    self.speedUpTill = G.time + duration
+end
+
 return Player
