@@ -49,6 +49,8 @@ end
 local controller = require "logic.controller"
 
 function love.update(dt)
+    G.world:update(dt)
+
     local updates = { player, map, controller, speaker }
     for _, entity in ipairs(updates) do
         entity.update(dt)

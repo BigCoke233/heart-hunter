@@ -1,4 +1,5 @@
 local Body = require "objects.Body"
+local physics = require "logic.physics"
 require "data.directions"
 
 local Player = {}
@@ -19,7 +20,19 @@ function Player.new()
         frameTimer = FrameTimer:new(config.frameRate, 2)
     }, Player)
 
+    physics.bodifyObject(G.world, player)
+
     return player
+end
+
+function Player:setX(x)
+    self.physicsBody:setX(x)
+    self.x = x
+end
+
+function Player:setY(y)
+    self.physicsBody:setY(y)
+    self.y = y
 end
 
 function Player:isShielded()

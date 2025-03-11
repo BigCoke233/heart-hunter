@@ -43,7 +43,7 @@ function Body:draw(x, y)
     if self.shape == "circle" then
         love.graphics.circle("fill", x, y, self.r)
     elseif self.shape == "rectangle" then
-        love.graphics.rectangle("fill", x, y, self.w, self.h)
+        love.graphics.rectangle("fill", x - self.w / 2, y - self.h / 2, self.w, self.h)
     end
 end
 

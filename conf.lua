@@ -4,5 +4,4 @@ function love.conf(t)
     t.window.title = "Heart Hunter"
     t.window.icon = "resources/sprites/redheart.png"
     t.modules.joystick = false
-    t.modules.physics = false
 end

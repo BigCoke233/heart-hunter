@@ -11,7 +11,7 @@ function background.doors()
     for i, door in pairs(G.currentRoom.doors) do
         if door ~= nil then
             love.graphics.setColor(door.color or {1,1,1})
-            door.body:draw(door.x, door.y)
+            door.body:draw(door.x + door.body.w / 2, door.y + door.body.h / 2)
             utils.resetGraphics()
         end
     end

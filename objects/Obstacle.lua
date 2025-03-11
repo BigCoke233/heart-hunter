@@ -2,6 +2,8 @@ require "data.directions"
 
 local Body = require "objects.Body"
 
+local physics = require "logic.physics"
+
 local Obstacle = {}
 Obstacle.__index = Obstacle
 

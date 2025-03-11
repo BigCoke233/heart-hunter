@@ -36,18 +36,17 @@ config = {
 
 -- game default states
 function initGame()
-    local intialMap = map.generate(config.initialMapSize, true)
     G = {
-        player = Player:new(),
-        shots = {},
-        enemies = {},
-        loots = {},
-
         time = 0,
         lastSummonTime = 0,
-
-        allRooms = intialMap,
-        currentRoom = intialMap[1], -- change amount of rooms here
         roomCleared = 0,
     }
+
+    love.physics.setMeter(64)
+    G.world = love.physics.newWorld(0, 0, true)
+
+    G.player = Player:new()
+
+    G.allRooms = map.generate(config.initialMapSize, true)
+    G.currentRoom = G.allRooms[1]
 end

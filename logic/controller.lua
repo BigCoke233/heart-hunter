@@ -15,32 +15,30 @@ local function playerPressKeysToArrangeHearts(key)
 end
 
 local function playerPressKeysToMoves(dt)
-    local moveDirections = {
-        { key = "d", axis = "x", dir = Direction.RIGHT, delta = 1 },
-        { key = "a", axis = "x", dir = Direction.LEFT, delta = -1 },
-        { key = "w", axis = "y", dir = Direction.TOP, delta = -1 },
-        { key = "s", axis = "y", dir = Direction.BOTTOM, delta = 1 }
+    local keydown = love.keyboard.isDown
+    local v = { x=0, y=0 }
+
+    local moves = {
+        { key = "d", facing = Direction.RIGHT, delta = 1, axis = "x" },
+        { key = "a", facing = Direction.LEFT, delta = -1, axis = "x" },
+        { key = "w", facing = Direction.TOP, delta = -1, axis = "y" },
+        { key = "s", facing = Direction.BOTTOM, delta = 1, axis = "y" }
     }
 
-    local keydown = love.keyboard.isDown
-
-    for _, move in ipairs(moveDirections) do
-        local dv = G.player.speed * dt * move.delta
+    for _, move in ipairs(moves) do
         if keydown(move.key) then
-            G.player.facing = move.dir
+            G.player.facing = move.facing
             G.player.moving = true
-
-            local delta = G.player.speed * dt * move.delta
-            if utils.isBlocked(G.player.body, G.player.x, G.player.y, move.dir, move.axis, dv) then
-                delta = 0
-            end
-            G.player[move.axis] = G.player[move.axis] + delta
+            v[move.axis] = move.delta * G.player.speed
         end
     end
 
-    if not keydown("a") and not keydown("s") and not keydown("d") and not keydown("w") then
+    if not (keydown("a") or keydown("s") or keydown("d") or keydown("w")) then
         G.player.moving = false
+        v.x, v.y = 0, 0
     end
+
+    G.player.physicsBody:setLinearVelocity(v.x, v.y)
 end
 
 local function playerClickMouseToShoot(dt)

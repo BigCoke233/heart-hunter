@@ -7,6 +7,8 @@ local Enemy = require "objects.enemy"
 local Door = require "objects.door"
 local Obstacle = require "objects.obstacle"
 
+local physics = require "logic.physics"
+
 local mapHelper = require "utils.mapHelper"
 
 local Room = {}
@@ -199,21 +201,23 @@ end
 
 function Room:initEnemies()
     for _, enemy in ipairs(self.objects.enemies) do
+
         local offset = enemy.body.r*2 + G.player.body.r*2 + config.summonMargin
         if not enemy.x or not enemy.y then
             enemy.x, enemy.y = self:getLocation(enemy.presetLocation or "random", offset)
         end
+        physics.bodifyObject(G.world, enemy)
     end
 end
 
 function Room:initObstacles()
-    for _, obstacle in ipairs(self.objects.obstacles) do
-        local offset = obstacle.body.w + G.player.body.r*2 + config.summonMargin
-        if not obstacle.x or not obstacle.y then
-            obstacle.x, obstacle.y = self:getLocation(obstacle.presetLocation or "random", offset)
-            obstacle.x = obstacle.x - obstacle.body.w / 2
-            obstacle.y = obstacle.y - obstacle.body.h / 2
+    for _, obs in ipairs(self.objects.obstacles) do
+        local offset = obs.body.w + G.player.body.r*2 + config.summonMargin
+        if not obs.x or not obs.y then
+            obs.x, obs.y = self:getLocation(obs.presetLocation or "random", offset)
         end
+
+        physics.bodifyObject(G.world, obs, { obs.body.w, obs.body.h }, "static")
     end
 end
 

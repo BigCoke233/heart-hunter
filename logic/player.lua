@@ -29,13 +29,13 @@ local function playerEnters()
             local doorH, doorW, playerR = door.body.h, door.body.w, G.player.body.r
             local roomX, roomY, roomW, roomH = G.currentRoom:getX(), G.currentRoom:getY(), G.currentRoom:getWidth(), G.currentRoom:getHeight()
             if door.location == Direction.LEFT then
-                G.player.x = roomX + roomW - playerR - doorW
+                G.player:setX(roomX + roomW - playerR - doorW)
             elseif door.location == Direction.RIGHT then
-                G.player.x = roomX + playerR + doorW
+                G.player:setX(roomX + playerR + doorW)
             elseif door.location == Direction.TOP then
-                G.player.y = roomY + roomH - playerR - doorH
+                G.player:setY(roomY + roomH - playerR - doorH)
             elseif door.location == Direction.BOTTOM then
-                G.player.y = roomY + playerR + doorH
+                G.player:setY(roomY + playerR + doorH)
             end
 
             break
@@ -58,7 +58,10 @@ end
 
 function player.update(dt)
    playerEnters()
-   playerBeingAttacked()
+   -- playerBeingAttacked()
+
+   G.player.x = G.player.physicsBody:getX()
+   G.player.y = G.player.physicsBody:getY()
 
     if G.player.speedUpTill and G.player.speedUpTill < G.time then
         G.player.speed = config.defaultPlayerSpeed

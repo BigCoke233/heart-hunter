@@ -2,6 +2,7 @@ require "data.directions"
 
 local Body = require "objects.Body"
 local enemyData = require "data.enemyData"
+local physics = require "logic.physics"
 
 require "logic.bullets"
 
@@ -64,24 +65,17 @@ function Enemy:move(dt)
 end
 
 function Enemy:moveTo(x, y, dt)
-    local dv = self.speed * dt
+    local dv = self.speed
 
-    local function getDelta(axis, destination, direction)
-        -- delta is either +1 or -1, represents the direction
-        local delta = (self[axis] < destination and 1) or (self[axis] > destination and -1) or 0
+    local dx, dy = x - self.physicsBody:getX(), y - self.physicsBody:getY()
+    local dist = math.sqrt(dx * dx + dy * dy)
 
-        -- check if the movement is blocked, if so delta is 0, meaning no movement
-        local isBlocked = utils.isBlocked(self.body, self.x, self.y, direction, axis, dv*delta)
-        if isBlocked then delta = 0 end
-
-        return delta
+    if dist > 0 then
+        dx, dy = dx / dist, dy / dist
     end
 
-    local dx = getDelta("x", x, Direction.RIGHT)    -- RIGHT and LEFT means the same for isBlocked()
-    local dy = getDelta("y", y, Direction.DOWN)     -- the same for DOWN and UP
-
-    self.x = self.x + dx * dv
-    self.y = self.y + dy * dv
+    local vx, vy = dx * dv, dy * dv
+    self.physicsBody:setLinearVelocity(vx, vy)
 end
 
 function Enemy:moveVertical(toX, dt)
@@ -163,6 +157,9 @@ function Enemy:update(dt)
     self:move(dt)
     self:getShot()
     self.frameTimer:update(dt)
+
+    self.x = self.physicsBody:getX()
+    self.y = self.physicsBody:getY()
 end
 
 return Enemy
