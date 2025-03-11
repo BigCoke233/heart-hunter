@@ -61,7 +61,7 @@ function draws.enemies()
 end
 
 function draws.loot()
-    for i, v in pairs(G.loots) do
+    for i, v in pairs(G.currentRoom.loots) do
         sprite.drawSquare(v.type, v, config.heartSize)
     end
 end
