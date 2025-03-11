@@ -212,7 +212,7 @@ end
 
 function Room:addWalls()
     local x, y, w, h = self:getX(), self:getY(), self:getWidth(), self:getHeight()
-    local thickness = 10
+    local thickness = 2
     local walls = {}
 
     local borders = {
