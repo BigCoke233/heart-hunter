@@ -43,4 +43,8 @@ function Obstacle:isMet(body, currentX, currentY, dv, dir)
     return self.body:collide(body, self.x, self.y, x, y)
 end
 
+function Obstacle:update(dt)
+    -- nothing yet
+end
+
 return Obstacle

@@ -21,7 +21,6 @@ function map.switchRoom(to)
 
     destination:init()
     G.currentRoom = destination
-    G.enemies = G.currentRoom.enemies
 
     if speaker.clearOnSwitchingRoom then
         speaker.clear()
@@ -100,7 +99,7 @@ function map.update()
     local room = G.currentRoom
 
     -- check if room is cleared
-    if #G.enemies==0 and not room.isCleared then
+    if #G.currentRoom.objects.enemies==0 and not room.isCleared then
         room.isCleared = true
         if room.type ~= roomType.INITIAL then
             G.roomCleared = G.roomCleared + 1

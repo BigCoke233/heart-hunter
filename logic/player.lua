@@ -46,7 +46,7 @@ end
 local function playerBeingAttacked()
     if (G.player:isShielded()) then return end
 
-    for _, enemy in pairs(G.enemies) do
+    for _, enemy in pairs(G.currentRoom.objects.enemies) do
         if not enemy.stunned
             and enemy.body:collide(G.player.body, enemy.x, enemy.y, G.player.x, G.player.y) then
             table.remove(G.player.hearts)

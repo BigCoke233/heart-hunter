@@ -24,14 +24,14 @@ function draws.player()
 end
 
 function draws.bullets()
-    for k, bullet in pairs(G.shots) do
+    for k, bullet in pairs(G.currentRoom.objects.shots) do
         local x, y, angle = bullet.x, bullet.y, bullet.orientation
         bullet.body:drawSprite(bullet.type, x, y, angle, config.bulletSize)
     end
 end
 
 function draws.enemies()
-    for _, enemy in pairs(G.enemies) do
+    for _, enemy in pairs(G.currentRoom.objects.enemies) do
         local data = enemyData[enemy.type]
         if data.sprite then
             -- show enemy size
@@ -61,8 +61,18 @@ function draws.enemies()
 end
 
 function draws.loot()
-    for i, v in pairs(G.currentRoom.loots) do
+    for i, v in pairs(G.currentRoom.objects.loots) do
         sprite.drawSquare(v.type, v, config.heartSize)
+    end
+end
+
+function draws.obstacles()
+    for _, obstacle in ipairs(G.currentRoom.objects.obstacles) do
+        if obstacle ~= nil then
+        love.graphics.setColor(0.85,0.85,0.85)
+        obstacle.body:draw(obstacle.x, obstacle.y)
+        utils.resetGraphics()
+        end
     end
 end
 

@@ -13,7 +13,7 @@ end
 
 function enemies.getWithinRage(x, y, range)
     local enemiesWithinRange = {}
-    for _, enemy in pairs(G.enemies) do
+    for _, enemy in pairs(G.currentRoom.objects.enemies) do
         if utils.distance(enemy.x, enemy.y, x, y) <= range then
             table.insert(enemiesWithinRange, enemy)
         end

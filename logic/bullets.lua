@@ -5,7 +5,10 @@ bullets = {}
 local bulletData = require "data.bulletData"
 
 function bullets.fire(bulletType, targetX, targetY, fireX, fireY)
-    table.insert(G.shots, Shot:new(bulletType, targetX, targetY, fireX, fireY))
+    table.insert(
+        G.currentRoom.objects.shots,
+        Shot:new(bulletType, targetX, targetY, fireX, fireY)
+    )
 
     local data = bulletData[bulletType]
     if data and data.afterShot then

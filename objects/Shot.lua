@@ -28,8 +28,10 @@ function Shot:update(dt)
     self.x = self.x + self.speed.x * dt
     self.y = self.y + self.speed.y * dt
 
+    local shots = G.currentRoom.objects.shots
+
     if utils.hitObstacle(self.x, self.y, self.body.r) then
-        table.remove(G.shots, utils.indexof(G.shots, self))
+        table.remove(shots, utils.indexof(shots, self))
     end
 end
 

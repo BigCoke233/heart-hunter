@@ -24,7 +24,7 @@ function utils.isBlocked(body, x, y, dir, axis, dv)
     end
 
     local function meetObstacle()
-        for _, obstacle in ipairs(G.currentRoom.obstacles) do
+        for _, obstacle in ipairs(G.currentRoom.objects.obstacles) do
             if obstacle:isMet(body, x, y, dv, dir) then
                 return true
             end
@@ -44,7 +44,7 @@ function utils.hitObstacle(x, y, r)
         return true
     end
 
-    for _, obstacle in ipairs(G.currentRoom.obstacles) do
+    for _, obstacle in ipairs(G.currentRoom.objects.obstacles) do
         if obstacle.body:collide(G.player.body, obstacle.x, obstacle.y, x, y) then
             return true
         end

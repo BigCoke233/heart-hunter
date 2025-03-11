@@ -138,7 +138,8 @@ function Enemy:getSticky(duration)
 end
 
 function Enemy:getShot()
-    for j, shot in pairs(G.shots) do
+    local shots = G.currentRoom.objects.shots
+    for j, shot in pairs(shots) do
         if self.body:collide(
             shot.body,
             self.x, self.y,
@@ -146,11 +147,12 @@ function Enemy:getShot()
         ) then
             -- kill entities
             self:getsAttacked(shot.damage)
+            local enemies = G.currentRoom.objects.enemies
             if (self:isDead()) then
-                table.remove(G.enemies, utils.indexof(G.enemies, self))
+                table.remove(enemies, utils.indexof(enemies, self))
             end
             -- kill shot
-            table.remove(G.shots, j)
+            table.remove(shots, j)
             -- bullet effect
             bullets.hit(shot.type, self.x, self.y, self.type)
         end

@@ -30,19 +30,30 @@ function Room:new(name)
         type = data.type or roomType.INITIAL,
         width = data.width or 0.85,
         height = data.height or 0.8,
-        enemies = data.enemies and readObjectList(data.enemies, "enemy") or {},
-        obstacles = data.obstacles and readObjectList(data.obstacles, "obstacle") or {},
-        loots = data.loots and readObjectList(data.loots, "loot") or {},
+        -- borders are automatically caculated afterwards
+        borders = {},
+
+        objects = {
+            enemies = data.enemies and readObjectList(data.enemies, "enemy") or {},
+            obstacles = data.obstacles and readObjectList(data.obstacles, "obstacle") or {},
+            loots = data.loots and readObjectList(data.loots, "loot") or {},
+            shots = {}
+        },
 
         doors = {},
         isCleared = false,
-        -- borders are automatically caculated afterwards
-        borders = {},
     }
 
     setmetatable(obj, Room)
 
-    obj.borders = obj:getBorders()
+    local function getBorders(obj)
+        local top = obj:getY()
+        local bottom = obj:getY() + obj:getHeight()
+        local left = obj:getX()
+        local right = obj:getX() + obj:getWidth()
+        return { left, right, top, bottom }
+    end
+    obj.borders = getBorders(obj)
 
     return obj
 end
@@ -63,14 +74,6 @@ end
 
 function Room:getY()
     return (love.graphics.getHeight() - self:getHeight()) / 2
-end
-
-function Room:getBorders()
-    local top = self:getY()
-    local bottom = self:getY() + self:getHeight()
-    local left = self:getX()
-    local right = self:getX() + self:getWidth()
-    return { left, right, top, bottom }
 end
 
 function Room:getLocation(location, offset)
@@ -195,7 +198,7 @@ end
 -- initializers
 
 function Room:initEnemies()
-    for _, enemy in ipairs(self.enemies) do
+    for _, enemy in ipairs(self.objects.enemies) do
         local offset = enemy.body.r*2 + G.player.body.r*2 + config.summonMargin
         if not enemy.x or not enemy.y then
             enemy.x, enemy.y = self:getLocation(enemy.presetLocation or "random", offset)
@@ -204,7 +207,7 @@ function Room:initEnemies()
 end
 
 function Room:initObstacles()
-    for _, obstacle in ipairs(self.obstacles) do
+    for _, obstacle in ipairs(self.objects.obstacles) do
         local offset = obstacle.body.w + G.player.body.r*2 + config.summonMargin
         if not obstacle.x or not obstacle.y then
             obstacle.x, obstacle.y = self:getLocation(obstacle.presetLocation or "random", offset)
@@ -220,7 +223,7 @@ function Room:init()
 end
 
 function Room:update(dt)
-    for _, group in ipairs({self.loots, self.enemies, G.shots}) do
+    for _, group in pairs(self.objects) do
         for _, obj in ipairs(group) do
             obj:update(dt)
         end
