@@ -3,6 +3,8 @@ require "data.directions"
 local Body = require "objects.Body"
 local enemyData = require "data.enemyData"
 
+require "logic.bullets"
+
 local Enemy = {}
 Enemy.__index = Enemy
 
@@ -133,6 +135,32 @@ end
 
 function Enemy:getSticky(duration)
     self.sticky = duration
+end
+
+function Enemy:getShot()
+    for j, shot in pairs(G.shots) do
+        if self.body:collide(
+            shot.body,
+            self.x, self.y,
+            shot.x, shot.y, shot.size
+        ) then
+            -- kill entities
+            self:getsAttacked(shot.damage)
+            if (self:isDead()) then
+                table.remove(G.enemies, utils.indexof(G.enemies, self))
+            end
+            -- kill shot
+            table.remove(G.shots, j)
+            -- bullet effect
+            bullets.hit(shot.type, self.x, self.y, self.type)
+        end
+    end
+end
+
+function Enemy:update(dt)
+    self:move(dt)
+    self:getShot()
+    self.frameTimer:update(dt)
 end
 
 return Enemy

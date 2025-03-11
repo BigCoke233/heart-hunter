@@ -20,14 +20,3 @@ function bullets.hit(name, x, y, enemyType)
         data.afterHit(x, y, enemyType)
     end
 end
-
-function bullets.update(dt)
-    for k, bullet in pairs(G.shots) do
-        bullet.x = bullet.x + bullet.speed.x * dt
-        bullet.y = bullet.y + bullet.speed.y * dt
-
-        if utils.hitObstacle(bullet.x, bullet.y, bullet.body.r) then
-            table.remove(G.shots, k)
-        end
-    end
-end

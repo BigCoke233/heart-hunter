@@ -16,4 +16,12 @@ function Loot:new(name, x, y)
     return obj
 end
 
+function Loot:update(dt)
+    local loots = G.currentRoom.loots
+    if self.body:collide(G.player.body, self.x, self.y, G.player.x, G.player.y) then
+        local pickedLoot = table.remove(loots, utils.indexof(loots, self))
+        table.insert(G.player.hearts, pickedLoot.type)
+    end
+end
+
 return Loot

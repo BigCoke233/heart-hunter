@@ -52,10 +52,12 @@ end
 local controller = require "logic.controller"
 
 function love.update(dt)
-    local updates = { player, enemies, bullets, loot, map, controller, speaker }
+    local updates = { player, map, controller, speaker }
     for _, entity in ipairs(updates) do
         entity.update(dt)
     end
+
+    G.currentRoom:update(dt)
 
     if not G.player:isAlive() then
         initGame()

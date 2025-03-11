@@ -219,4 +219,12 @@ function Room:init()
     self:initObstacles()
 end
 
+function Room:update(dt)
+    for _, group in ipairs({self.loots, self.enemies, G.shots}) do
+        for _, obj in ipairs(group) do
+            obj:update(dt)
+        end
+    end
+end
+
 return Room

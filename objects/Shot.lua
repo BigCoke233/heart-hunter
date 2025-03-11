@@ -24,4 +24,13 @@ function Shot:new(bulletType, targetX, targetY, fireX, fireY)
     return obj
 end
 
+function Shot:update(dt)
+    self.x = self.x + self.speed.x * dt
+    self.y = self.y + self.speed.y * dt
+
+    if utils.hitObstacle(self.x, self.y, self.body.r) then
+        table.remove(G.shots, utils.indexof(G.shots, self))
+    end
+end
+
 return Shot
