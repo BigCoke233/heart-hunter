@@ -1,20 +1,7 @@
 require "data.directions"
+local map = require "logic.map"
 
-player = {}
-
-function player.shoot(x, y)
-    if (#G.player.hearts == 0) then return end
-
-    local hearts = G.player.hearts
-
-    local currentBullet = hearts[#hearts]
-    if currentBullet == "redheart" or #hearts == 1 then
-        return
-    end
-
-    bullets.fire(currentBullet, x, y, G.player.x, G.player.y)
-    table.remove(hearts)
-end
+local player = {}
 
 -- state update functions
 
@@ -70,3 +57,5 @@ function player.update(dt)
 
     G.player.frameTimer:update(dt)
 end
+
+return player

@@ -1,5 +1,3 @@
-local Player = require "objects.player"
-
 -- global configurations
 config = {
     debug = false,
@@ -36,6 +34,14 @@ config = {
 
 -- game default states
 function initGame()
+    -- initialize random seed
+    math.randomseed(os.time())
+
+    -- lazy load dependencies
+    local Player = require "objects.player"
+    local map = require "logic.map"
+
+    -- initialize game state
     G = {
         time = 0,
         lastSummonTime = 0,

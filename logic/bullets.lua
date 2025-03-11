@@ -1,8 +1,7 @@
 local Shot = require "objects.shot"
-
-bullets = {}
-
 local bulletData = require "data.bulletData"
+
+local bullets = {}
 
 function bullets.fire(bulletType, targetX, targetY, fireX, fireY)
     table.insert(
@@ -23,3 +22,5 @@ function bullets.hit(name, x, y, enemyType)
         data.afterHit(x, y, enemyType)
     end
 end
+
+return bullets

@@ -1,14 +1,14 @@
 local Enemy = require "objects.enemy"
 local enemyNames = require "data.enemyNames"
 
-enemies = {}
+local enemies = {}
 
 function enemies.generate(count)
-    local enemies = {}
+    local enemyList = {}
     for i = 1, count do
-        table.insert(enemies, Enemy:new(utils.any(enemyNames)))
+        table.insert(enemyList, Enemy:new(utils.any(enemyNames)))
     end
-    return enemies
+    return enemyList
 end
 
 function enemies.getWithinRage(x, y, range)
@@ -20,3 +20,5 @@ function enemies.getWithinRage(x, y, range)
     end
     return enemiesWithinRange
 end
+
+return enemies

@@ -1,12 +1,10 @@
-local Room = require "objects.room"
-
 require "data.directions"
+local Room = require "objects.room"
 local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
-
 local translator = require "i18n.translator"
 
-map = {}
+local map = {}
 
 -- control functions
 
@@ -129,3 +127,5 @@ function map.update()
         G.mapExpanded = false
     end
 end
+
+return map

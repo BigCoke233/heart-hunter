@@ -1,4 +1,5 @@
 local enemyData = require "data.enemyData"
+local enemies = require "logic.enemies"
 
 local bulletData = {
     redheart = {
@@ -12,6 +13,7 @@ local bulletData = {
             local w, h = love.graphics.getWidth(), love.graphics.getHeight()
             local r = enemyData[enemyType].size + 20
 
+            local bullets = require "logic.bullets"
             -- split heart and shoot at 4 different angle
             if math.random(2) == 1 then
                 -- shoot like a X

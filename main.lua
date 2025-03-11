@@ -1,42 +1,24 @@
 require "config"
-
-require "logic.bullets"
-require "logic.player"
-require "logic.enemies"
-require "logic.loot"
-require "logic.map"
-
 require "utils.utils"
 
 require "render.sprite"
 require "render.speaker"
-local Renderer = require "render.renderer"
 
+local map = require "logic.map"
+local controller = require "logic.controller"
 local translator = require "i18n.translator"
+local player = require "logic.player"
 
--- initializers
-
-local function initRenderer()
-    RenderManager = Renderer:new()
-    local drawObject = require "render.draws.objects"
-    local drawUI = require "render.draws.ui"
-    local drawBackground = require "render.draws.background"
-
-    RenderManager:addFunctions("background", nil, drawBackground)
-    RenderManager:addFunctions("objects", nil, drawObject)
-    RenderManager:addFunctions("ui", nil, drawUI)
-end
-
--- entry functions
 
 function love.load()
     local myFont = love.graphics.newFont("resources/fonts/MZPXflat.ttf", 17)
     love.graphics.setFont(myFont)
 
     sprite.load()
-    initRenderer()
 
-    math.randomseed(os.time())
+    local Renderer = require "render.renderer"
+    RenderManager = Renderer.init()
+
     initGame()
 
     speaker.speak(translator.T("welcome"), 2, true)
@@ -46,22 +28,25 @@ function love.draw()
     RenderManager:draw()
 end
 
-local controller = require "logic.controller"
-
 function love.update(dt)
+    -- physics world move forward
     G.world:update(dt)
 
+    -- game logic updates
     local updates = { player, map, controller, speaker }
     for _, entity in ipairs(updates) do
         entity.update(dt)
     end
 
+    -- update objects in current room
     G.currentRoom:update(dt)
 
+    -- check if game has ended
     if not G.player:isAlive() then
         initGame()
     end
 
+    -- time update
     G.time = G.time + dt
 end
 

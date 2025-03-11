@@ -1,15 +1,11 @@
 require "data.directions"
-
 local Body = require "objects.Body"
+local Loot = require "objects.Loot"
 local enemyData = require "data.enemyData"
-local physics = require "logic.physics"
-
-require "logic.bullets"
+local FrameTimer = require "utils.frameTimer"
 
 local Enemy = {}
 Enemy.__index = Enemy
-
-local FrameTimer = require "utils.frameTimer"
 
 function Enemy:new(name, location)
     local data = enemyData[name]
@@ -35,11 +31,8 @@ function Enemy:new(name, location)
     return obj
 end
 
-function Enemy:isBlocked()
-
-end
-
 function Enemy:move(dt)
+    -- deal with stunned status
     if self.stunned and self.stunned > 0 then
         self.stunned = self.stunned - dt
         return false
@@ -47,6 +40,7 @@ function Enemy:move(dt)
         self.stunned = nil
     end
 
+    -- deal with sticky status
     if self.sticky and self.sticky > 0 then
         self.sticky = self.sticky - dt
         if not self.originalSpeed then
@@ -118,7 +112,8 @@ function Enemy:die()
         local temp = math.random(10) / 10
         if temp <= item.chances then
             local offset = (i - 1) * 5
-            loot.drop(self.x + offset, self.y + offset, item.type)
+            local lootItem = Loot:new(item.type, self.x + offset, self.y + offset)
+            table.insert(G.currentRoom.objects.loots, lootItem)
         end
     end
 
@@ -150,6 +145,7 @@ function Enemy:getShot()
             -- kill shot
             table.remove(shots, j)
             -- bullet effect
+            local bullets = require "logic.bullets"
             bullets.hit(shot.type, self.x, self.y, self.type)
         end
     end

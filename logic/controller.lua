@@ -1,4 +1,5 @@
 require "data.directions"
+local bullets = require "logic.bullets"
 
 local controller = {}
 

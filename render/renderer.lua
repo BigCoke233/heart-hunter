@@ -33,4 +33,19 @@ function Renderer:draw()
     end
 end
 
+-- initialization
+
+function Renderer.init()
+    local renderManager = Renderer:new()
+    local drawObject = require "render.draws.objects"
+    local drawUI = require "render.draws.ui"
+    local drawBackground = require "render.draws.background"
+
+    renderManager:addFunctions("background", nil, drawBackground)
+    renderManager:addFunctions("objects", nil, drawObject)
+    renderManager:addFunctions("ui", nil, drawUI)
+
+    return renderManager
+end
+
 return Renderer
