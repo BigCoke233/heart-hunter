@@ -40,6 +40,8 @@ function Enemy:move(dt)
     if self.stunned and self.stunned > 0 then
         self.stunned = self.stunned - dt
         return false
+    elseif self.stunned and self.stunned <= 0 then
+        self.stunned = nil
     end
 
     if self.sticky and self.sticky > 0 then
@@ -48,7 +50,8 @@ function Enemy:move(dt)
             self.originalSpeed = self.speed
         end
         self.speed = self.originalSpeed / (self.sticky + 1)
-    elseif self.originalSpeed then
+    elseif self.sticky and self.sticky <= 0 then
+        self.sticky = nil
         self.speed = self.originalSpeed
     end
 

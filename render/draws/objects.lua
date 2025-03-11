@@ -40,9 +40,18 @@ function draws.enemies()
                 enemy.body:draw(enemy.x, enemy.y)
                 utils.resetGraphics()
             end
+
+            -- add filter to indicate enemy status
+            if enemy.stunned then
+                love.graphics.setColor({1,0.7,0.5})
+            elseif enemy.sticky then
+                love.graphics.setColor({0.5,0.5,0.5})
+            end
+
             -- draw sprite
             local index = data.sprite.frames[enemy:facing()][enemy.frameTimer.currentFrame]
             enemy.body:drawQuad(data.sprite.name, index, enemy.x, enemy.y, nil, data.sprite.zoom)
+            utils.resetGraphics()
         elseif data.appearance.color then
             love.graphics.setColor(data.appearance.color or {1,1,1})
             enemy.body:draw(enemy.x, enemy.y)
