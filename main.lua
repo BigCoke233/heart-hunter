@@ -30,9 +30,6 @@ end
 -- entry functions
 
 function love.load()
-    love.window.setIcon(love.image.newImageData("resources/sprites/redheart.png"))
-    love.window.setTitle("Heart Hunter")
-
     local myFont = love.graphics.newFont("resources/fonts/MZPXflat.ttf", 17)
     love.graphics.setFont(myFont)
 
