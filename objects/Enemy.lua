@@ -121,6 +121,8 @@ function Enemy:die()
             loot.drop(self.x + offset, self.y + offset, item.type)
         end
     end
+
+    self.physicsBody:destroy()
 end
 
 function Enemy:stun(duration)
@@ -158,8 +160,10 @@ function Enemy:update(dt)
     self:getShot()
     self.frameTimer:update(dt)
 
-    self.x = self.physicsBody:getX()
-    self.y = self.physicsBody:getY()
+    if not self.physicsBody:isDestroyed() then
+        self.x = self.physicsBody:getX()
+        self.y = self.physicsBody:getY()
+    end
 end
 
 return Enemy
