@@ -23,7 +23,7 @@ function Loot:onContact(other)
     if other.objectType == "player" then
         local pickedLoot = table.remove(loots, utils.indexof(loots, self))
         table.insert(G.player.hearts, pickedLoot.type)
-        self.physicsBody:destroy()
+        G.BodyLifeCycleManager:destroy(self.physicsBody)
     end
 end
 

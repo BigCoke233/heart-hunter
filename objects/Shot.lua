@@ -37,7 +37,7 @@ end
 function Shot:die()
     local shots = G.currentRoom.objects.shots
     table.remove(shots, utils.indexof(shots, self))
-    self.physicsBody:destroy()
+    G.BodyLifeCycleManager:destroy(self.physicsBody)
 end
 
 function Shot:onContact(other, contact)

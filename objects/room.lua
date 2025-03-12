@@ -245,11 +245,11 @@ end
 function Room:removeAllBodies()
     for _, group in pairs(self.objects) do
         for _, obj in ipairs(group) do
-            obj.physicsBody:destroy()
+            G.BodyLifeCycleManager:destroy(obj.physicsBody)
         end
     end
     for _, wall in ipairs(self.walls) do
-        wall.body:destroy()
+        G.BodyLifeCycleManager:destroy(wall.body)
     end
 end
 

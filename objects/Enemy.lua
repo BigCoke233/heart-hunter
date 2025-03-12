@@ -120,7 +120,7 @@ function Enemy:die()
     end
 
     local enemies = G.currentRoom.objects.enemies
-    self.physicsBody:destroy()
+    G.BodyLifeCycleManager:destroy(self.physicsBody)
     table.remove(enemies, utils.indexof(enemies, self))
 end
 
