@@ -98,7 +98,6 @@ function map.update()
         if room.type ~= roomType.INITIAL then
             G.roomCleared = G.roomCleared + 1
         end
-        print "room cleared"
 
         local unclearedRooms = {}
         for _, room in ipairs(G.allRooms) do
@@ -106,8 +105,6 @@ function map.update()
                 table.insert(unclearedRooms, room)
             end
         end
-
-        print("uncleared rooms: ", #unclearedRooms)
     end
 
     -- extend map if all rooms are cleared
