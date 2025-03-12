@@ -53,3 +53,30 @@ function utils.contains(tbl, x)
     end
     return false
 end
+
+function utils.whoseBody(physicsBody)
+    -- check for objects in room
+    local objects = G.currentRoom.objects
+    for _, group in pairs(objects) do
+        for _, object in pairs(group) do
+            if object.physicsBody == physicsBody then
+                return object
+            end
+        end
+    end
+
+    -- check for player
+    if G.player.physicsBody == physicsBody then
+        return G.player
+    end
+
+    -- check for walls
+    local walls = G.currentRoom.walls
+    for _, wall in pairs(walls) do
+        if wall.body == physicsBody then
+            return wall
+        end
+    end
+
+    return nil
+end

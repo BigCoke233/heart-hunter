@@ -36,18 +36,16 @@ function Shot:die()
     self.physicsBody:destroy()
 end
 
-function Shot:onContact(otherBody, contact)
+function Shot:onContact(other, contact)
     -- when contact with enemy, deal damage
-    for _, enemy in ipairs(G.currentRoom.objects.enemies) do
-        if otherBody == enemy.physicsBody then
-            enemy:takeDamage(self.damage)
-            if bulletData[self.type] and bulletData[self.type].afterHit then
-                bulletData[self.type].afterHit(enemy.x, enemy.y, enemy.type)
-            end
+    if other.objectType == "enemy" then
+        other:takeDamage(self.damage)
+        if bulletData[self.type] and bulletData[self.type].afterHit then
+            bulletData[self.type].afterHit(other.x, other.y, other.type)
         end
     end
 
-    if otherBody == G.player.physicsBody then
+    if other.objectType == "player" then
         if not self.friendly then
             G.player:takeDamage(self.damage)
             self:die()

@@ -224,6 +224,7 @@ function Room:addWalls()
 
     for _, b in ipairs(borders) do
         local wall = {
+            objectType = "wall",
             body = love.physics.newBody(G.world, b.x, b.y, "static"),
             shape = love.physics.newRectangleShape(b.w, b.h),
             fixture = nil

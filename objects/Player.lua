@@ -10,6 +10,7 @@ Player.__index = Player
 
 function Player.new()
     local player = setmetatable({
+        objectType = "player",
         x = love.graphics.getWidth() / 2,
         y = love.graphics.getHeight() / 2,
         body = Body:new("circle", config.playerSize, nil, 1/16),
@@ -92,16 +93,14 @@ function Player:shoot(target)
     G.player.shootCooldown = G.time + config.playerShootCooldown
 end
 
-function Player:onContact(otherBody, contact)
+function Player:onContact(other, contact)
     -- detect contact with enemies
     -- if collision occurs, take it as an attack
-    for _, enemy in pairs(G.currentRoom.objects.enemies) do
-        if enemy.physicsBody == otherBody then
-            if not (enemy.stunned or G.player:isShielded()) then
-                table.remove(G.player.hearts)
-                -- shield this player
-                G.player.shieldedTill = G.time + config.playerShieldTime
-            end
+    if other.objectType == "enemy" then
+        if not (other.stunned or self:isShielded()) then
+            table.remove(self.hearts)
+            -- shield this player
+            self.shieldedTill = G.time + config.playerShieldTime
         end
     end
 end

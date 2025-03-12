@@ -10,6 +10,7 @@ Enemy.__index = Enemy
 function Enemy:new(name, location)
     local data = enemyData[name]
     local obj = {
+        objectType = "enemy",
         type = name,
         presetLocation = (type(location) == "string" and location) or nil,
         x = (type(location) == "table" and location.x) or nil,

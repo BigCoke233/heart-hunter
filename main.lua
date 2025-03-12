@@ -58,23 +58,12 @@ function love.keypressed(key)
 end
 
 function onContact(a, b, contact)
-    local playerBody = G.player.physicsBody
-
-    -- Determine if one of the bodies belongs to the player
-    if a:getBody() == playerBody or b:getBody() == playerBody then
-        -- Identify the other body
-        -- and deal with player body contact
-        local otherBody = (a:getBody() == playerBody) and b:getBody() or a:getBody()
-        G.player:onContact(otherBody, contact)
+    local objectA = utils.whoseBody(a:getBody())
+    local objectB = utils.whoseBody(b:getBody())
+    if objectA and objectA.onContact then
+        objectA:onContact(objectB, contact)
     end
-
-    -- Determine if one of the bodies belongs to a shot
-    for _, shot in ipairs(G.currentRoom.objects.shots) do
-        if a:getBody() == shot.physicsBody or b:getBody() == shot.physicsBody then
-            -- Identify the other body
-            -- and deal with shot body contact
-            local otherBody = (a:getBody() == shot.body) and b:getBody() or a:getBody()
-            shot:onContact(otherBody, contact)
-        end
+    if objectB and objectB.onContact then
+        objectB:onContact(objectA, contact)
     end
 end
