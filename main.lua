@@ -67,4 +67,14 @@ function onContact(a, b, contact)
         local otherBody = (a:getBody() == playerBody) and b:getBody() or a:getBody()
         G.player:onContact(otherBody, contact)
     end
+
+    -- Determine if one of the bodies belongs to a shot
+    for _, shot in ipairs(G.currentRoom.objects.shots) do
+        if a:getBody() == shot.physicsBody or b:getBody() == shot.physicsBody then
+            -- Identify the other body
+            -- and deal with shot body contact
+            local otherBody = (a:getBody() == shot.body) and b:getBody() or a:getBody()
+            shot:onContact(otherBody, contact)
+        end
+    end
 end

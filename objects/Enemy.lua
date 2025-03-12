@@ -95,7 +95,7 @@ function Enemy:facing()
     return dir
 end
 
-function Enemy:getsAttacked(damage)
+function Enemy:takeDamage(damage)
     self.health = self.health - damage
     if self:isDead() then
         self:die()
@@ -118,6 +118,7 @@ function Enemy:die()
     end
 
     self.physicsBody:destroy()
+    table.remove(G.currentRoom.objects.enemies, utils.indexof(G.currentRoom.objects.enemies, self))
 end
 
 function Enemy:stun(duration)
@@ -128,32 +129,8 @@ function Enemy:getSticky(duration)
     self.sticky = duration
 end
 
-function Enemy:getShot()
-    local shots = G.currentRoom.objects.shots
-    for j, shot in pairs(shots) do
-        if self.body:collide(
-            shot.body,
-            self.x, self.y,
-            shot.x, shot.y, shot.size
-        ) then
-            -- kill entities
-            self:getsAttacked(shot.damage)
-            local enemies = G.currentRoom.objects.enemies
-            if (self:isDead()) then
-                table.remove(enemies, utils.indexof(enemies, self))
-            end
-            -- kill shot
-            table.remove(shots, j)
-            -- bullet effect
-            local bullets = require "logic.bullets"
-            bullets.hit(shot.type, self.x, self.y, self.type)
-        end
-    end
-end
-
 function Enemy:update(dt)
     self:move(dt)
-    self:getShot()
     self.frameTimer:update(dt)
 
     if not self.physicsBody:isDestroyed() then
