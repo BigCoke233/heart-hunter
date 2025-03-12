@@ -5,16 +5,20 @@ local physics = require "logic.physics"
 local Shot = {}
 Shot.__index = Shot
 
-function Shot:new(bulletType, targetX, targetY, fireX, fireY, friendly)
-    local vx = targetX - fireX
-    local vy = targetY - fireY
+function Shot:new(bulletType, target, firer, friendly)
+    local vx = target.x - firer.x
+    local vy = target.y - firer.y
     local length = math.sqrt(vx*vx + vy*vy)
-    local sin, cos = vx / length, vy / length
+    local cos, sin = vx / length, vy / length
+
+    local offset = (config.bulletSize + (firer.physicsShape and firer.physicsShape:getRadius() or 0)) / 2
+    local fireX = firer.x + cos * offset
+    local fireY = firer.y + sin * offset
 
     local obj = {
         type = bulletType,
         x = fireX, y = fireY,
-        speed = { x = sin*config.bulletSpeed, y = cos*config.bulletSpeed },
+        speed = { x = cos*config.bulletSpeed, y = sin*config.bulletSpeed },
         orientation = math.asin(sin),
         body = Body:new("circle", config.bulletSize),
         damage = (bulletData[bulletType] and bulletData[bulletType].damage) or 100,
@@ -24,8 +28,8 @@ function Shot:new(bulletType, targetX, targetY, fireX, fireY, friendly)
     setmetatable(obj, Shot)
 
     physics.bodifyObject(G.world, obj, config.bulletSize)
-    obj.physicsBody:setLinearVelocity(obj.speed.x, obj.speed.y)
     obj.physicsBody:setMass(0.1)
+    obj.physicsBody:setLinearVelocity(obj.speed.x, obj.speed.y)
 
     return obj
 end

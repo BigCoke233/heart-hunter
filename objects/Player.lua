@@ -87,7 +87,7 @@ function Player:shoot(target)
     end
 
     -- shoot the bullet
-    bullets.fire(currentBullet, target.x, target.y, self.x, self.y)
+    bullets.fire(currentBullet, target, self)
     table.remove(self.hearts)
 
     G.player.shootCooldown = G.time + config.playerShootCooldown

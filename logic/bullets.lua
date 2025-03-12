@@ -3,10 +3,10 @@ local bulletData = require "data.bulletData"
 
 local bullets = {}
 
-function bullets.fire(bulletType, targetX, targetY, fireX, fireY)
+function bullets.fire(bulletType, target, firer)
     table.insert(
         G.currentRoom.objects.shots,
-        Shot:new(bulletType, targetX, targetY, fireX, fireY)
+        Shot:new(bulletType, target, firer)
     )
 
     local data = bulletData[bulletType]
