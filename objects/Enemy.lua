@@ -119,8 +119,9 @@ function Enemy:die()
         end
     end
 
+    local enemies = G.currentRoom.objects.enemies
     self.physicsBody:destroy()
-    table.remove(G.currentRoom.objects.enemies, utils.indexof(G.currentRoom.objects.enemies, self))
+    table.remove(enemies, utils.indexof(enemies, self))
 end
 
 function Enemy:stun(duration)
