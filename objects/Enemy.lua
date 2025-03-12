@@ -36,6 +36,7 @@ function Enemy:move(dt)
     -- deal with stunned status
     if self.stunned and self.stunned > 0 then
         self.stunned = self.stunned - dt
+        self.physicsBody:setLinearVelocity(0, 0)
         return false
     elseif self.stunned and self.stunned <= 0 then
         self.stunned = nil
