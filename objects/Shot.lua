@@ -18,7 +18,7 @@ function Shot:new(bulletType, targetX, targetY, fireX, fireY, friendly)
         orientation = math.asin(sin),
         body = Body:new("circle", config.bulletSize),
         damage = (bulletData[bulletType] and bulletData[bulletType].damage) or 100,
-        friendly = friendly or true
+        friendly = friendly == nil and true or friendly
     }
 
     setmetatable(obj, Shot)
