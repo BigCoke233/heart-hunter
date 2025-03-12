@@ -75,7 +75,7 @@ function Player:shoot(target)
         -- if no charging time is set, then set it and shoot no bullet
         if not G.player.chargingStarted then
             G.player.chargingStarted = G.time
-            return
+            return false
         end
         -- if charging time is set, then check if it's over 1 second
         -- if not, shoot no bullet
@@ -91,6 +91,8 @@ function Player:shoot(target)
     table.remove(self.hearts)
 
     G.player.shootCooldown = G.time + config.playerShootCooldown
+
+    return true
 end
 
 function Player:onContact(other, contact)

@@ -2,6 +2,7 @@ require "config"
 require "utils.utils"
 require "render.sprite"
 require "render.speaker"
+local audio = require "utils.audio"
 local map = require "logic.map"
 local bodyLifeCycleManager = require "utils.bodyLifecycleManager"
 local controller = require "logic.controller"
@@ -16,6 +17,9 @@ function love.load()
     sprite.load()
     local Renderer = require "render.renderer"
     RenderManager = Renderer.init()
+
+    -- load audio
+    audio.load()
 
     -- initialize game state
     initGame()
