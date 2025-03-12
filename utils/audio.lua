@@ -2,13 +2,13 @@ local audio = {}
 
 local resources = {
     projectile = "sound/projectile.wav",
-    intenseFight = "music/intenseFight.wav",
+    hit = "sound/hit.wav",
 }
 
 function audio.load()
     audioData = {}
     for name, path in pairs(resources) do
-        audioData[name] = love.audio.newSource("resources/" .. path, "stream")
+        audioData[name] = love.audio.newSource("resources/" .. path, "static")
     end
 end
 

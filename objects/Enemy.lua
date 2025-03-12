@@ -3,6 +3,7 @@ local Body = require "objects.Body"
 local Loot = require "objects.Loot"
 local enemyData = require "data.enemyData"
 local FrameTimer = require "utils.frameTimer"
+local audio = require "utils.audio"
 
 local Enemy = {}
 Enemy.__index = Enemy
@@ -109,6 +110,8 @@ function Enemy:isDead()
 end
 
 function Enemy:die()
+    audio.play("hit")
+
     -- drop loots
     for i, item in ipairs(enemyData[self.type].drops) do
         local temp = math.random(10) / 10
