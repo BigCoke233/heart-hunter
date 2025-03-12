@@ -1,4 +1,5 @@
 local Body = require "objects.Body"
+local physics = require "logic.physics"
 
 local Loot = {}
 Loot.__index = Loot
@@ -12,16 +13,22 @@ function Loot:new(name, x, y)
     }
 
     setmetatable(obj, Loot)
+    G.BodyLifeCycleManager:create(obj, config.lootSize, "static")
 
     return obj
 end
 
-function Loot:update(dt)
+function Loot:onContact(other)
     local loots = G.currentRoom.objects.loots
-    if self.body:collide(G.player.body, self.x, self.y, G.player.x, G.player.y) then
+    if other.objectType == "player" then
         local pickedLoot = table.remove(loots, utils.indexof(loots, self))
         table.insert(G.player.hearts, pickedLoot.type)
+        self.physicsBody:destroy()
     end
+end
+
+function Loot:update(dt)
+    -- nothing yet
 end
 
 return Loot

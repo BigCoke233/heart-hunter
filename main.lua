@@ -1,10 +1,9 @@
 require "config"
 require "utils.utils"
-
 require "render.sprite"
 require "render.speaker"
-
 local map = require "logic.map"
+local bodyLifeCycleManager = require "utils.bodyLifecycleManager"
 local controller = require "logic.controller"
 local translator = require "i18n.translator"
 
@@ -21,6 +20,8 @@ function love.load()
     -- initialize game state
     initGame()
 
+    -- body life cycle manager
+    G.BodyLifeCycleManager = bodyLifeCycleManager.new()
     -- set world callbacks
     G.world:setCallbacks(onContact)
 
@@ -33,7 +34,7 @@ end
 
 function love.update(dt)
     -- game state updates
-    local gameStates = { G.world, G.currentRoom, G.player }
+    local gameStates = { G.world, G.currentRoom, G.player, G.BodyLifeCycleManager }
     for _, state in ipairs(gameStates) do
         state:update(dt)
     end
