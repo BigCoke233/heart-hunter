@@ -8,15 +8,11 @@ local map = {}
 
 -- control functions
 
-function map.switchRoom(to)
-    local destination
+function map.switchRoom(destination)
+    -- unload current room
+    G.currentRoom:removeAllBodies()
 
-    if type(to) == "table" then
-        destination = to
-    elseif type(to) == "number" then
-        destination = G.currentRoom.doors[Direction[to]]
-    end
-
+    -- load new room
     destination:init()
     G.currentRoom = destination
 

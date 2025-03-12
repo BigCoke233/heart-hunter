@@ -242,6 +242,17 @@ function Room:init()
     self.walls = self:addWalls()
 end
 
+function Room:removeAllBodies()
+    for _, group in pairs(self.objects) do
+        for _, obj in ipairs(group) do
+            obj.physicsBody:destroy()
+        end
+    end
+    for _, wall in ipairs(self.walls) do
+        wall.body:destroy()
+    end
+end
+
 function Room:update(dt)
     for _, group in pairs(self.objects) do
         for _, obj in ipairs(group) do
