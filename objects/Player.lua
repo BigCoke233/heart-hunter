@@ -1,11 +1,12 @@
+require "data.directions"
 local Body = require "objects.Body"
 local physics = require "logic.physics"
-require "data.directions"
+local bullets = require "logic.bullets"
+local map = require "logic.map"
+local FrameTimer = require "utils.frameTimer"
 
 local Player = {}
 Player.__index = Player
-
-local FrameTimer = require "utils.frameTimer"
 
 function Player.new()
     local player = setmetatable({
@@ -25,6 +26,8 @@ function Player.new()
     return player
 end
 
+-- placement and location
+
 function Player:setX(x)
     self.physicsBody:setX(x)
     self.x = x
@@ -35,6 +38,13 @@ function Player:setY(y)
     self.y = y
 end
 
+function Player:move(v)
+    self.moving = (v.x ~= 0 or v.y ~= 0)
+    self.physicsBody:setLinearVelocity(v.x, v.y)
+end
+
+-- status getter
+
 function Player:isShielded()
     return self.shieldedTill >= G.time
 end
@@ -43,9 +53,95 @@ function Player:isAlive()
     return #self.hearts ~= 0
 end
 
+function Player:ammoCooling()
+    return G.player.shootCooldown and G.player.shootCooldown > G.time
+end
+
+-- control functions
+
 function Player:speedUp(increment, duration)
     self.speed = self.speed + increment
     self.speedUpTill = G.time + duration
+end
+
+function Player:shoot(target)
+    local hearts = self.hearts
+    local currentBullet = hearts[#hearts]
+
+    -- red hearts and the last heart will take some more time to shoot
+    if currentBullet == "redheart" or #hearts == 1 then
+        -- set a charging time to warn the player that this is a deadly move
+        -- if no charging time is set, then set it and shoot no bullet
+        if not G.player.chargingStarted then
+            G.player.chargingStarted = G.time
+            return
+        end
+        -- if charging time is set, then check if it's over 1 second
+        -- if not, shoot no bullet
+        if G.time - G.player.chargingStarted <= 1 then return
+        -- if time's up, reset timer and continue shooting
+        else
+            G.player.chargingStarted = nil
+        end
+    end
+
+    -- shoot the bullet
+    bullets.fire(currentBullet, target.x, target.y, self.x, self.y)
+    table.remove(self.hearts)
+
+    G.player.shootCooldown = G.time + config.playerShootCooldown
+end
+
+function Player:onContact(otherBody, contact)
+    -- detect contact with enemies
+    -- if collision occurs, take it as an attack
+    for _, enemy in pairs(G.currentRoom.objects.enemies) do
+        if enemy.physicsBody == otherBody then
+            if not (enemy.stunned or G.player:isShielded()) then
+                table.remove(G.player.hearts)
+                -- shield this player
+                G.player.shieldedTill = G.time + config.playerShieldTime
+            end
+        end
+    end
+end
+
+function Player:update(dt)
+    -- temp
+    self.x = self.physicsBody:getX()
+    self.y = self.physicsBody:getY()
+
+    -- deal with speed up time
+    if self.speedUpTill and self.speedUpTill < G.time then
+        self.speed = config.defaultPlayerSpeed
+        self.speedUpTill = nil
+    end
+
+    self.frameTimer:update(dt)
+
+    -- player enters door
+    for _, door in pairs(G.currentRoom.doors) do
+        local entersDoor = door.body:collide(self.body, door.x, door.y, self.x, self.y) and
+            G.currentRoom.isCleared
+        if door ~= false and entersDoor then
+            map.switchRoom(door.to)
+
+            -- update player position after entering a new room
+            local doorH, doorW, playerR = door.body.h, door.body.w, self.body.r
+            local roomX, roomY, roomW, roomH = G.currentRoom:getX(), G.currentRoom:getY(), G.currentRoom:getWidth(), G.currentRoom:getHeight()
+            if door.location == Direction.LEFT then
+                self:setX(roomX + roomW - playerR - doorW)
+            elseif door.location == Direction.RIGHT then
+                self:setX(roomX + playerR + doorW)
+            elseif door.location == Direction.TOP then
+                self:setY(roomY + roomH - playerR - doorH)
+            elseif door.location == Direction.BOTTOM then
+                self:setY(roomY + playerR + doorH)
+            end
+
+            break
+        end
+    end
 end
 
 return Player
