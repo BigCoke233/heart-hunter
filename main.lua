@@ -60,10 +60,12 @@ end
 function onContact(a, b, contact)
     local objectA = utils.whoseBody(a:getBody())
     local objectB = utils.whoseBody(b:getBody())
-    if objectA and objectA.onContact then
-        objectA:onContact(objectB, contact)
-    end
-    if objectB and objectB.onContact then
-        objectB:onContact(objectA, contact)
+    if objectA and objectB then
+        if objectA.onContact then
+            objectA:onContact(objectB, contact)
+        end
+        if objectB.onContact then
+            objectB:onContact(objectA, contact)
+        end
     end
 end
