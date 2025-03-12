@@ -40,7 +40,8 @@ local bulletData = {
             for _, enemy in ipairs(stunned) do
                 enemy:stun(1)
             end
-        end
+        end,
+        sound = "shootFlash"
     },
     stickyheart = {
         damage = 80,

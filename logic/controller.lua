@@ -1,5 +1,4 @@
 require "data.directions"
-local audio = require "utils.audio"
 
 local controller = {}
 
@@ -43,9 +42,7 @@ local function playerClickMouseToShoot(dt)
             x = love.mouse.getX(),
             y = love.mouse.getY()
         }
-        if G.player:shoot(target) then
-            audio.play("projectile")
-        end
+        G.player:shoot(target)
     else
         -- if player stopped pressing mouse
         -- reset charging timer

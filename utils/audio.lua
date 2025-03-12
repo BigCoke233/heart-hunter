@@ -1,7 +1,8 @@
 local audio = {}
 
 local resources = {
-    projectile = "sound/projectile.wav",
+    shootNormal = "sound/shoot_normal.wav",
+    shootFlash = "sound/shoot_flash.wav",
     hit = "sound/hit.wav",
 }
 

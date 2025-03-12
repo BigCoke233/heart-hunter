@@ -1,5 +1,6 @@
 local Shot = require "objects.shot"
 local bulletData = require "data.bulletData"
+local audio = require "utils.audio"
 
 local bullets = {}
 
@@ -13,6 +14,9 @@ function bullets.fire(bulletType, target, firer)
     if data and data.afterShot then
         data.afterShot()
     end
+
+    local audioName = data and data.sound or "shootNormal"
+    audio.play(audioName)
 end
 
 function bullets.hit(name, x, y, enemyType)
