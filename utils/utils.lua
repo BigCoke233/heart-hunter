@@ -71,10 +71,16 @@ function utils.whoseBody(physicsBody)
     end
 
     -- check for walls
-    local walls = G.currentRoom.walls
-    for _, wall in pairs(walls) do
+    for _, wall in pairs(G.currentRoom.walls) do
         if wall.body == physicsBody then
             return wall
+        end
+    end
+
+    -- check for doors
+    for _, door in pairs(G.currentRoom.doors) do
+        if door.physicsBody == physicsBody then
+            return door
         end
     end
 

@@ -4,7 +4,8 @@ local physics = require "logic.physics"
 function bodyLifeCycleManager.new()
     local self = setmetatable({
         toCreate = {},
-        toDestroy = {}
+        toDestroy = {},
+        toSetPosition = {}
     }, {__index = bodyLifeCycleManager})
     return self
 end
@@ -23,6 +24,13 @@ function bodyLifeCycleManager:destroy(object)
     )
 end
 
+function bodyLifeCycleManager:setPosition(object, axis, val)
+    table.insert(
+        self.toSetPosition,
+        {object = object, axis = axis, val = val}
+    )
+end
+
 function bodyLifeCycleManager:update(dt)
     if self.toCreate and #self.toCreate > 0 then
         for _, data in ipairs(self.toCreate) do
@@ -36,6 +44,17 @@ function bodyLifeCycleManager:update(dt)
             body:destroy()
         end
         self.toDestroy = {}
+    end
+
+    if self.toSetPosition and #self.toSetPosition > 0 then
+        for _, data in ipairs(self.toSetPosition) do
+            if data.axis == "x" then
+                data.object.physicsBody:setX(data.val)
+            elseif data.axis == "y" then
+                data.object.physicsBody:setY(data.val)
+            end
+        end
+        self.toSetPosition = {}
     end
 end
 

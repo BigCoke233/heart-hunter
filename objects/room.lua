@@ -195,7 +195,7 @@ function Room:initEnemies()
         if not enemy.x or not enemy.y then
             enemy.x, enemy.y = self:getLocation(enemy.presetLocation or "random", offset)
         end
-        physics.bodifyObject(G.world, enemy)
+        G.BodyLifeCycleManager:create(enemy)
     end
 end
 
@@ -206,7 +206,7 @@ function Room:initObstacles()
             obs.x, obs.y = self:getLocation(obs.presetLocation or "random", offset)
         end
 
-        physics.bodifyObject(G.world, obs, { obs.body.w, obs.body.h }, "static")
+        G.BodyLifeCycleManager:create(obs, { obs.body.w, obs.body.h }, "static")
     end
 end
 
@@ -225,11 +225,9 @@ function Room:addWalls()
     for _, b in ipairs(borders) do
         local wall = {
             objectType = "wall",
-            body = love.physics.newBody(G.world, b.x, b.y, "static"),
-            shape = love.physics.newRectangleShape(b.w, b.h),
-            fixture = nil
+            x = b.x, y = b.y
         }
-        wall.fixture = love.physics.newFixture(wall.body, wall.shape)
+        G.BodyLifeCycleManager:create(wall, { b.w, b.h }, "static")
         table.insert(walls, wall)
     end
 

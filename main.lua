@@ -4,11 +4,11 @@ require "render.sprite"
 require "render.speaker"
 local audio = require "utils.audio"
 local map = require "logic.map"
-local bodyLifeCycleManager = require "utils.bodyLifecycleManager"
 local controller = require "logic.controller"
 local translator = require "i18n.translator"
 
 function love.load()
+    G = {}
     -- load font
     local myFont = love.graphics.newFont("resources/fonts/MZPXflat.ttf", 17)
     love.graphics.setFont(myFont)
@@ -24,8 +24,6 @@ function love.load()
     -- initialize game state
     initGame()
 
-    -- body life cycle manager
-    G.BodyLifeCycleManager = bodyLifeCycleManager.new()
     -- set world callbacks
     G.world:setCallbacks(onContact)
 

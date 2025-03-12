@@ -119,28 +119,28 @@ function Player:update(dt)
     self.frameTimer:update(dt)
 
     -- player enters door
-    for _, door in pairs(G.currentRoom.doors) do
-        local entersDoor = door.body:collide(self.body, door.x, door.y, self.x, self.y) and
-            G.currentRoom.isCleared
-        if door ~= false and entersDoor then
-            map.switchRoom(door.to)
+    -- for _, door in pairs(G.currentRoom.doors) do
+    --     local entersDoor = door.body:collide(self.body, door.x, door.y, self.x, self.y) and
+    --         G.currentRoom.isCleared
+    --     if door ~= false and entersDoor then
+    --         map.switchRoom(door.to)
 
-            -- update player position after entering a new room
-            local doorH, doorW, playerR = door.body.h, door.body.w, self.body.r
-            local roomX, roomY, roomW, roomH = G.currentRoom:getX(), G.currentRoom:getY(), G.currentRoom:getWidth(), G.currentRoom:getHeight()
-            if door.location == Direction.LEFT then
-                self:setX(roomX + roomW - playerR - doorW)
-            elseif door.location == Direction.RIGHT then
-                self:setX(roomX + playerR + doorW)
-            elseif door.location == Direction.TOP then
-                self:setY(roomY + roomH - playerR - doorH)
-            elseif door.location == Direction.BOTTOM then
-                self:setY(roomY + playerR + doorH)
-            end
+    --         -- update player position after entering a new room
+    --         local doorH, doorW, playerR = door.body.h, door.body.w, self.body.r
+    --         local roomX, roomY, roomW, roomH = G.currentRoom:getX(), G.currentRoom:getY(), G.currentRoom:getWidth(), G.currentRoom:getHeight()
+    --         if door.location == Direction.LEFT then
+    --             self:setX(roomX + roomW - playerR - doorW)
+    --         elseif door.location == Direction.RIGHT then
+    --             self:setX(roomX + playerR + doorW)
+    --         elseif door.location == Direction.TOP then
+    --             self:setY(roomY + roomH - playerR - doorH)
+    --         elseif door.location == Direction.BOTTOM then
+    --             self:setY(roomY + playerR + doorH)
+    --         end
 
-            break
-        end
-    end
+    --         break
+    --     end
+    -- end
 end
 
 return Player

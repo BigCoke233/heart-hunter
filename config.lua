@@ -40,6 +40,7 @@ function initGame()
     -- lazy load dependencies
     local Player = require "objects.player"
     local map = require "logic.map"
+    local bodyLifeCycleManager = require "utils.bodyLifecycleManager"
 
     -- initialize game state
     G = {
@@ -50,6 +51,9 @@ function initGame()
 
     love.physics.setMeter(64)
     G.world = love.physics.newWorld(0, 0, true)
+
+    -- body life cycle manager
+    G.BodyLifeCycleManager = bodyLifeCycleManager.new()
 
     G.player = Player:new()
 
