@@ -50,6 +50,10 @@ local function playerClickMouseToShoot(dt)
     end
 end
 
+local function playerClickMouseToPunch(x, y)
+    G.player:punch({ x = x, y = y})
+end
+
 -- entry functions
 
 -- controller that needs constant press check
@@ -61,6 +65,12 @@ end
 -- controller that requires one key press
 function controller.keypressed(key)
     playerPressKeysToArrangeHearts(key)
+end
+
+function controller.mousereleased(x, y, button)
+    if button == 2 then
+        playerClickMouseToPunch(x, y)
+    end
 end
 
 return controller

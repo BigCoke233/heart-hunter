@@ -99,3 +99,34 @@ function utils.readObjectList(data, objectName)
     end
     return list
 end
+
+function utils.atan2(y, x)
+    if x > 0 then
+        return math.atan(y / x)
+    elseif x < 0 and y >= 0 then
+        return math.atan(y / x) + math.pi
+    elseif x < 0 and y < 0 then
+        return math.atan(y / x) - math.pi
+    elseif x == 0 and y > 0 then
+        return math.pi / 2
+    elseif x == 0 and y < 0 then
+        return -math.pi / 2
+    else
+        return 0  -- Undefined case (x = 0, y = 0)
+    end
+end
+
+function utils.angleToDirection(angle)
+    local dir
+    if angle >= -math.pi / 4 and angle < math.pi / 4 then
+        dir = Direction.LEFT
+    elseif angle >= math.pi / 4 and angle < 3 * math.pi / 4 then
+        dir = Direction.UP
+    elseif angle >= -3 * math.pi / 4 and angle < -math.pi / 4 then
+        dir = Direction.DOWN
+    else
+        dir = Direction.RIGHT
+    end
+
+    return dir
+end

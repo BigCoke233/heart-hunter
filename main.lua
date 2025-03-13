@@ -60,6 +60,10 @@ function love.keypressed(key)
     controller.keypressed(key)
 end
 
+function love.mousereleased(x, y, button)
+    controller.mousereleased(x, y, button)
+end
+
 function onContact(a, b, contact)
     local objectA = utils.whoseBody(a:getBody())
     local objectB = utils.whoseBody(b:getBody())

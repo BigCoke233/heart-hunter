@@ -81,20 +81,7 @@ end
 function Enemy:facing()
     local dx = self.x - G.player.x
     local dy = self.y - G.player.y
-    local angle = math.atan2(dy, dx)
-
-    local dir
-    if angle >= -math.pi / 4 and angle < math.pi / 4 then
-        dir = Direction.LEFT
-    elseif angle >= math.pi / 4 and angle < 3 * math.pi / 4 then
-        dir = Direction.UP
-    elseif angle >= -3 * math.pi / 4 and angle < -math.pi / 4 then
-        dir = Direction.DOWN
-    else
-        dir = Direction.RIGHT
-    end
-
-    return dir
+    return utils.angleToDirection(utils.atan2(dy, dx))
 end
 
 function Enemy:takeDamage(damage)

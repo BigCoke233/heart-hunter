@@ -26,7 +26,17 @@ config = {
 
     defaultPlayerSpeed = 100,
     playerShootCooldown = 0.2,
-    playerSize = 20,
+
+    player = {
+        punch = {
+            radius = 15,
+            angle = 120,
+            force = 1000,
+            damage = 10,
+            cooldown = 0.5
+        },
+        size = 20,
+    },
 
     initialMapSize = 7,
     extendedMapSize = 5,
