@@ -1,4 +1,5 @@
 require "data.directions"
+local audio = require "utils.audio"
 
 local enemyData = {
     lancer = {
@@ -122,6 +123,8 @@ local enemyData = {
             local Loot = require "objects.loot"
             local lootItem = Loot:new("brokenheart", shot.x, shot.y)
             table.insert(G.currentRoom.objects.loots, lootItem)
+
+            audio.play("hitGlass")
         end
     }
 }

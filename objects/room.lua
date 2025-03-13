@@ -7,8 +7,7 @@ local Enemy = require "objects.enemy"
 local Door = require "objects.door"
 local Obstacle = require "objects.obstacle"
 
-local physics = require "logic.physics"
-
+local audio = require "utils.audio"
 local mapHelper = require "utils.mapHelper"
 
 local Room = {}
@@ -42,6 +41,8 @@ function Room:new(name)
 
         doors = {},
         isCleared = false,
+
+        music = data.music or nil
     }
 
     setmetatable(obj, Room)
@@ -238,6 +239,13 @@ function Room:init()
     self:initEnemies()
     self:initObstacles()
     self.walls = self:addWalls()
+
+    -- play music
+    if self.music then
+        audio.music(self.music)
+    else
+        audio.stopMusic()
+    end
 end
 
 function Room:removeAllBodies()
