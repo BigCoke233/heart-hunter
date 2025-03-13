@@ -1,7 +1,7 @@
 require "data.directions"
 local physics = require "logic.physics"
 local bullets = require "logic.bullets"
-local map = require "logic.map"
+local audio = require "utils.audio"
 local FrameTimer = require "utils.frameTimer"
 
 local Player = {}
@@ -114,6 +114,13 @@ function Player:update(dt)
     if self.speedUpTill and self.speedUpTill < G.time then
         self.speed = config.defaultPlayerSpeed
         self.speedUpTill = nil
+    end
+
+    -- play warning sound if health is low
+    if #self.hearts <= 1 then
+        audio.play("warning", true, 0.5)
+    else
+        audio.stop("warning")
     end
 
     self.frameTimer:update(dt)

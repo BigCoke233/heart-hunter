@@ -5,7 +5,8 @@ local soundResources = {
     shootFlash = "shoot_flash.wav",
     hit = "hit.wav",
     hitGlass = "hit_glass.wav",
-    levelComplete = "level_complete.wav"
+    levelComplete = "level_complete.wav",
+    warning = "warning.wav"
 }
 
 local musicResources = {
@@ -24,9 +25,31 @@ function audio.load()
     end
 end
 
-function audio.play(name)
-    if AudioData[name] then
-        love.audio.play(AudioData[name])
+function audio.play(name, loop, volume)
+    local theAudio = AudioData[name]
+    if not theAudio then return end
+
+    if volume then
+        theAudio:setVolume(volume)
+    end
+
+    if loop then
+        if not theAudio:isLooping() then
+            theAudio:setLooping(true)
+            love.audio.play(theAudio)
+        end
+    else
+        love.audio.play(theAudio)
+    end
+end
+
+function audio.stop(name)
+    local theAudio = AudioData[name]
+    if not theAudio then return end
+
+    if theAudio:isPlaying() then
+        love.audio.stop(theAudio)
+        theAudio:setLooping(false)
     end
 end
 

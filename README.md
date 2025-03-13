@@ -13,6 +13,7 @@ mostly from freesound
 - [projectile.wav](https://freesound.org/people/jeckkech/sounds/391660/) by jeckkech
 - [hit.wav](https://freesound.org/people/Mrthenoronha/sounds/507703/) by Mrthenoronha
 - [Glass Hit](https://freesound.org/people/JohanDeecke/sounds/368326/)
+- [8-Bit - Time's up!](https://freesound.org/people/Breviceps/sounds/450617/)
 
 ### Music
 
