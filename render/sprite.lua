@@ -7,6 +7,9 @@ local sprites = {}
 local quads = {}
 
 local spriteTypes = heartTypes
+table.insert(spriteTypes, "spiderweb")
+table.insert(spriteTypes, "stunningstars")
+
 local spriteSheets = {
     { name = "apple", w = 32, h = 32 },
     { name = "lancer", w = 32, h = 32 },

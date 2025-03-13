@@ -97,13 +97,6 @@ function draws.enemies()
     for _, enemy in pairs(G.currentRoom.objects.enemies) do
         local data = enemyData[enemy.type]
         if data.sprite then
-            -- add filter to indicate enemy status
-            if enemy.stunned then
-                love.graphics.setColor({1,0.7,0.5})
-            elseif enemy.sticky then
-                love.graphics.setColor({0.5,0.5,0.5})
-            end
-
             -- handle quad index
             local index = data.sprite.frames[enemy:facing()][enemy.frameTimer.currentFrame]
             if enemy.type == "pokob" then
@@ -118,11 +111,21 @@ function draws.enemies()
                 end
             end
 
-            -- draw sprite
+            -- arguments
             local r = enemy.r
             local graphicR = r * enemy.zoom
             local x, y = enemy.x - r, enemy.y - r
+
+            -- draw sprite
             sprite.drawQuad(data.sprite.name, index, x, y, graphicR, graphicR, 0)
+
+            -- draw effects
+            if enemy.sticky then
+                sprite.draw("spiderweb", x, y, 0, r*2, r*2)
+            elseif enemy.stunned then
+                sprite.draw("stunningstars", x, y, 0, r*2, r*2)
+            end
+
             graphics.reset()
         end
         graphics.reset()
