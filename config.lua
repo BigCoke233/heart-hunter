@@ -43,6 +43,9 @@ function initGame()
     local Player = require "objects.player"
     local map = require "logic.map"
     local bodyLifeCycleManager = require "utils.bodyLifecycleManager"
+    local audio = require "utils.audio"
+
+    audio.stopMusic()
 
     -- initialize game state
     G = {
