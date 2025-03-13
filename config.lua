@@ -75,4 +75,6 @@ function initGame()
     G.allRooms = map.generate(config.initialMapSize, true)
     G.currentRoom = G.allRooms[1]
     G.currentRoom:init()
+
+    G.world:setCallbacks(onContact)
 end

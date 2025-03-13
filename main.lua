@@ -24,9 +24,6 @@ function love.load()
     -- initialize game state
     initGame()
 
-    -- set world callbacks
-    G.world:setCallbacks(onContact)
-
     speaker.speak(translator.T("welcome"), 2, true)
 end
 
