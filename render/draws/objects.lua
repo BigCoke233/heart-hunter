@@ -38,9 +38,6 @@ function draws.enemies()
     for _, enemy in pairs(G.currentRoom.objects.enemies) do
         local data = enemyData[enemy.type]
         if data.sprite then
-            -- show enemy size
-
-
             -- add filter to indicate enemy status
             if enemy.stunned then
                 love.graphics.setColor({1,0.7,0.5})
@@ -48,8 +45,21 @@ function draws.enemies()
                 love.graphics.setColor({0.5,0.5,0.5})
             end
 
-            -- draw sprite
+            -- handle quad index
             local index = data.sprite.frames[enemy:facing()][enemy.frameTimer.currentFrame]
+            if enemy.type == "pokob" then
+                -- pokob has different appearances in different health states
+                local healthRatio = enemy.health / enemy.maxHealth
+                local breakpoints = { 0.75, 0.5, 0.25, 0 }
+                for i, breakpoint in ipairs(breakpoints) do
+                    if healthRatio >= breakpoint then
+                        index = index + (i-1) * 12
+                        break
+                    end
+                end
+            end
+
+            -- draw sprite
             local r = enemy.r
             local graphicR = r * enemy.zoom
             local x, y = enemy.x - r, enemy.y - r

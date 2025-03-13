@@ -20,6 +20,7 @@ function Enemy:new(name, location)
         zoom = data.zoom or 1,
         speed = data.speed or nil,
         health = data.health or nil,
+        maxHealth = data.health or nil,
         stunned = false,
         frameTimer = FrameTimer:new(config.frameRate,
             (data.sprite and data.sprite.totalFrames) or 1),
