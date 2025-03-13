@@ -6,6 +6,7 @@ Obstacle.__index = Obstacle
 
 function Obstacle:new(name, location, body)
     local obj = {
+        objectType = "obstacle",
         name = name,
         presetLocation = (type(location) == "string" and location) or nil,
         x = (type(location) == "table" and location.x) or nil,

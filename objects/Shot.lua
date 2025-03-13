@@ -39,21 +39,28 @@ function Shot:die()
 end
 
 function Shot:onContact(other, contact)
+    local sort = other.objectType
+    local dieOnThisContact = true
+
     -- when contact with enemy, deal damage
-    if other.objectType == "enemy" then
+    if sort == "enemy" then
+        local data = bulletData[self.type]
         other:takeDamage(self.damage)
         other:onHit(self)
-        if bulletData[self.type] and bulletData[self.type].afterHit then
-            bulletData[self.type].afterHit(other.x, other.y, other.type)
+        if data and data.afterHit then
+            data.afterHit(other.x, other.y, other.type)
         end
     end
 
-    if other.objectType == "player" then
+    if sort == "player" then
         if not self.friendly then
             G.player:takeDamage(self.damage)
-            self:die()
+        else
+            dieOnThisContact = false
         end
-    else
+    end
+
+    if dieOnThisContact then
         self:die()
     end
 end
