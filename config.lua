@@ -31,7 +31,7 @@ config = {
         punch = {
             radius = 15,
             angle = 120,
-            force = 1000,
+            force = 200,
             damage = 10,
             cooldown = 0.5
         },

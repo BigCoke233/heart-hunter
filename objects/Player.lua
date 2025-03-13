@@ -127,6 +127,7 @@ function Player:punch(target)
         -- check if enemy is in range
         if distance <= attack_radius + enemy.r + self.r and angle_diff <= math.rad(attack_angle / 2) then
             enemy:takeDamage(config.player.punch.damage)
+            enemy.punched = G.time + config.player.punch.cooldown
             -- knock back enemy
             local normEdx, normEdy = edx / distance, edy / distance
             local knockbackX, knockbackY = normEdx * knockback_force, normEdy * knockback_force

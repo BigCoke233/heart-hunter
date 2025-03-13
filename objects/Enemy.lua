@@ -54,6 +54,11 @@ function Enemy:move(dt)
         self.speed = self.originalSpeed
     end
 
+    -- deal with punched status
+    if self.punched and self.punched > G.time then
+        return
+    end
+
     if self.movePattern == "vertical" then
         self:moveVertical(G.player.x, dt)
     else self:moveTo(G.player.x, G.player.y, dt)
