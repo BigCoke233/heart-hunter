@@ -243,8 +243,10 @@ function Room:init()
     -- play music
     if self.music then
         audio.music(self.music)
-    else
+    elseif self.music == "no" then
         audio.stopMusic()
+    else
+        audio.music(config.defaultMusic)
     end
 end
 

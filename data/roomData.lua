@@ -7,7 +7,8 @@ local roomData = {
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {},
-        manualPlacementOnly = true
+        manualPlacementOnly = true,
+        music = "no",
     },
     lancerParty = {
         name = "Lancers' Party",
@@ -115,8 +116,7 @@ local roomData = {
             {"lancer", "bottomCenter"},
             {"pokob", "center"},
             {"lancer", "center"},
-        },
-        music = "briskFight"
+        }
     },
 }
 

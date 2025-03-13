@@ -30,6 +30,8 @@ config = {
 
     initialMapSize = 7,
     extendedMapSize = 5,
+
+    defaultMusic = "briskFight"
 }
 
 -- game default states
