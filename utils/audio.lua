@@ -5,6 +5,7 @@ local soundResources = {
     shootFlash = "shoot_flash.wav",
     hit = "hit.wav",
     hitGlass = "hit_glass.wav",
+    levelComplete = "level_complete.wav"
 }
 
 local musicResources = {

@@ -1,8 +1,8 @@
 require "data.directions"
 local Room = require "objects.room"
-local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
 local translator = require "i18n.translator"
+local audio = require "utils.audio"
 
 local map = {}
 
@@ -95,8 +95,10 @@ function map.update()
     -- check if room is cleared
     if #G.currentRoom.objects.enemies==0 and not room.isCleared then
         room.isCleared = true
+
         if room.type ~= roomType.INITIAL then
             G.roomCleared = G.roomCleared + 1
+            audio.play("levelComplete")
         end
 
         local unclearedRooms = {}
