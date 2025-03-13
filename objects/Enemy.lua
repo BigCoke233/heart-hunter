@@ -1,6 +1,6 @@
 require "data.directions"
-local Body = require "objects.Body"
 local Loot = require "objects.Loot"
+local physics = require "logic.physics"
 local enemyData = require "data.enemyData"
 local FrameTimer = require "utils.frameTimer"
 local audio = require "utils.audio"
@@ -16,10 +16,8 @@ function Enemy:new(name, location)
         presetLocation = (type(location) == "string" and location) or nil,
         x = (type(location) == "table" and location.x) or nil,
         y = (type(location) == "table" and location.y) or nil,
-        body = Body:new("circle",
-            data.size or nil, nil,
-            data.zoom or 1
-        ),
+        r = data.size or nil,
+        zoom = data.zoom or 1,
         speed = data.speed or nil,
         health = data.health or nil,
         stunned = false,
@@ -139,10 +137,8 @@ function Enemy:update(dt)
     self:move(dt)
     self.frameTimer:update(dt)
 
-    if not self.physicsBody:isDestroyed() then
-        self.x = self.physicsBody:getX()
-        self.y = self.physicsBody:getY()
-    end
+    local data = physics.getObjectPosition(self)
+    self.x, self.y = data.x, data.y
 end
 
 return Enemy

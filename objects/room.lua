@@ -191,7 +191,7 @@ end
 function Room:initEnemies()
     for _, enemy in ipairs(self.objects.enemies) do
 
-        local offset = enemy.body.r*2 + G.player.body.r*2 + config.summonMargin
+        local offset = enemy.r*2 + G.player.r*2 + config.summonMargin
         if not enemy.x or not enemy.y then
             enemy.x, enemy.y = self:getLocation(enemy.presetLocation or "random", offset)
         end
@@ -201,12 +201,12 @@ end
 
 function Room:initObstacles()
     for _, obs in ipairs(self.objects.obstacles) do
-        local offset = obs.body.w + G.player.body.r*2 + config.summonMargin
+        local offset = obs.w + G.player.r*2 + config.summonMargin
         if not obs.x or not obs.y then
             obs.x, obs.y = self:getLocation(obs.presetLocation or "random", offset)
         end
 
-        G.BodyLifeCycleManager:create(obs, { obs.body.w, obs.body.h }, "static")
+        G.BodyLifeCycleManager:create(obs, { obs.w, obs.h }, "static")
     end
 end
 

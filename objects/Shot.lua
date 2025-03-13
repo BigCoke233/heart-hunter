@@ -1,4 +1,3 @@
-local Body = require "objects.Body"
 local bulletData = require "data.bulletData"
 local physics = require "logic.physics"
 
@@ -20,7 +19,7 @@ function Shot:new(bulletType, target, firer, friendly)
         x = fireX, y = fireY,
         speed = { x = cos*config.bulletSpeed, y = sin*config.bulletSpeed },
         orientation = math.asin(sin),
-        body = Body:new("circle", config.bulletSize),
+        r = config.bulletSize,
         damage = (bulletData[bulletType] and bulletData[bulletType].damage) or 100,
         friendly = friendly == nil and true or friendly
     }

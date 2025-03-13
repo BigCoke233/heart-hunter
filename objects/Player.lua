@@ -1,5 +1,4 @@
 require "data.directions"
-local Body = require "objects.Body"
 local physics = require "logic.physics"
 local bullets = require "logic.bullets"
 local map = require "logic.map"
@@ -13,7 +12,8 @@ function Player.new()
         objectType = "player",
         x = love.graphics.getWidth() / 2,
         y = love.graphics.getHeight() / 2,
-        body = Body:new("circle", config.playerSize, nil, 1/16),
+        r = config.playerSize,
+        zoom = 1/16,
         speed = config.defaultPlayerSpeed,
         shieldedTill = 0,
         hearts = { "redheart", "redheart", "redheart", "shinyheart", "shinyheart", "stickyheart" },

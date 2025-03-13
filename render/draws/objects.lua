@@ -20,8 +20,8 @@ function draws.player()
         index = moving[G.player.facing][cf]
     end
 
-    local r = G.player.body.r
-    local graphicR = r * G.player.body.zoom
+    local r = G.player.r
+    local graphicR = r * G.player.zoom
     local x, y = G.player.x - r, G.player.y - r
     sprite.drawQuad("apple", index, x, y, graphicR, graphicR, 0)
     graphics.reset()
@@ -50,8 +50,8 @@ function draws.enemies()
 
             -- draw sprite
             local index = data.sprite.frames[enemy:facing()][enemy.frameTimer.currentFrame]
-            local r = enemy.body.r
-            local graphicR = r * enemy.body.zoom
+            local r = enemy.r
+            local graphicR = r * enemy.zoom
             local x, y = enemy.x - r, enemy.y - r
             sprite.drawQuad(data.sprite.name, index, x, y, graphicR, graphicR, 0)
             graphics.reset()

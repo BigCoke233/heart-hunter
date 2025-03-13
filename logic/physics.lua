@@ -7,8 +7,8 @@ function physics.bodifyObject(world, object, shape, bodyType)
         object.physicsShape = love.physics.newCircleShape(shape)
     elseif type(shape) == "table" then
         object.physicsShape = love.physics.newRectangleShape(shape[1], shape[2])
-    elseif object.body.r then
-        object.physicsShape = love.physics.newCircleShape(object.body.r)
+    elseif object.r then
+        object.physicsShape = love.physics.newCircleShape(object.r)
     end
 
     object.fixture = love.physics.newFixture(object.physicsBody, object.physicsShape, 10)
@@ -17,6 +17,16 @@ function physics.bodifyObject(world, object, shape, bodyType)
     object.physicsBody:setLinearDamping(0)
     object.physicsBody:setActive(true)
     object.physicsBody:setMass(1)
+end
+
+function physics.getObjectPosition(object, rect)
+    local body = object.physicsBody or object.body or nil
+    local data = {}
+    if body and not body:isDestroyed() then
+        data.x = body:getX()
+        data.y = body:getY()
+    end
+    return data
 end
 
 return physics

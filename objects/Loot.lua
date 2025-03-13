@@ -1,4 +1,3 @@
-local Body = require "objects.Body"
 local physics = require "logic.physics"
 
 local Loot = {}
@@ -9,7 +8,7 @@ function Loot:new(name, x, y)
         x = x or nil,
         y = y or nil,
         type = name,
-        body = Body:new("circle", config.lootSize)
+        r = config.lootSize
     }
 
     setmetatable(obj, Loot)
