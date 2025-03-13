@@ -1,5 +1,4 @@
 local bulletData = require "data.bulletData"
-local physics = require "logic.physics"
 
 local Shot = {}
 Shot.__index = Shot
