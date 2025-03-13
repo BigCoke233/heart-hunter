@@ -86,3 +86,16 @@ function utils.whoseBody(physicsBody)
 
     return nil
 end
+
+function utils.readObjectList(data, objectName)
+    local list = {}
+    local Enemy = require("objects/enemy")
+    local Obstacle = require("objects/obstacle")
+    for _, object in ipairs(data) do
+        local objectType = object[1]
+        local objectPosition = object[2]
+        local obj = objectName == "enemy" and Enemy:new(objectType, objectPosition) or objectName == "obstacle" and Obstacle:new(objectType, objectPosition)
+        table.insert(list, obj)
+    end
+    return list
+end

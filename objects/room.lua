@@ -2,10 +2,7 @@ require "data.directions"
 local roomData = require "data.roomData"
 local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
-
-local Enemy = require "objects.enemy"
 local Door = require "objects.door"
-local Obstacle = require "objects.obstacle"
 
 local audio = require "utils.audio"
 local mapHelper = require "utils.mapHelper"
@@ -14,17 +11,6 @@ local Room = {}
 Room.__index = Room
 
 function Room:new(name)
-    local function readObjectList(data, objectName)
-        local list = {}
-        for _, object in ipairs(data) do
-            local objectType = object[1]
-            local objectPosition = object[2]
-            local obj = objectName == "enemy" and Enemy:new(objectType, objectPosition) or objectName == "obstacle" and Obstacle:new(objectType, objectPosition) or objectName == "item" and Item:new(objectType, objectPosition)
-            table.insert(list, obj)
-        end
-        return list
-    end
-
     local data = roomData[name or utils.any(roomNames)]
     local obj = {
         name = data.name or "Initial Room",
@@ -33,16 +19,20 @@ function Room:new(name)
         height = data.height or 0.8,
 
         objects = {
-            enemies = data.enemies and readObjectList(data.enemies, "enemy") or {},
-            obstacles = data.obstacles and readObjectList(data.obstacles, "obstacle") or {},
-            loots = data.loots and readObjectList(data.loots, "loot") or {},
+            enemies = data.enemies and utils.readObjectList(data.enemies, "enemy") or {},
+            obstacles = data.obstacles and utils.readObjectList(data.obstacles, "obstacle") or {},
+            loots = data.loots and utils.readObjectList(data.loots, "loot") or {},
             shots = {}
         },
 
         doors = {},
         isCleared = false,
 
-        music = data.music or nil
+        music = data.music or nil,
+
+        events = {
+            beforeClear = data.beforeClear or nil
+        }
     }
 
     setmetatable(obj, Room)
@@ -115,6 +105,12 @@ function Room:getLocation(location, offset)
             y = math.random(self:getY() + offset, self:getY() + self:getHeight() - offset),
         }
     }
+
+    local doorLocations = {}
+    for _, door in pairs(self.doors) do
+        table.insert(doorLocations, { x=door.x, y=door.y })
+    end
+    preset.anyDoor = utils.any(doorLocations)
 
     return preset[location].x, preset[location].y
 end

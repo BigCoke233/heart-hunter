@@ -94,17 +94,16 @@ function map.update()
 
     -- check if room is cleared
     if #G.currentRoom.objects.enemies==0 and not room.isCleared then
-        room.isCleared = true
-
-        if room.type ~= roomType.INITIAL then
-            G.roomCleared = G.roomCleared + 1
-            audio.play("levelComplete")
+        if G.currentRoom.events.beforeClear then
+            G.currentRoom.events.beforeClear()
         end
 
-        local unclearedRooms = {}
-        for _, room in ipairs(G.allRooms) do
-            if not room.isCleared then
-                table.insert(unclearedRooms, room)
+        if #G.currentRoom.objects.enemies==0 then
+            room.isCleared = true
+
+            if room.type ~= roomType.INITIAL then
+                G.roomCleared = G.roomCleared + 1
+                audio.play("levelComplete")
             end
         end
     end
