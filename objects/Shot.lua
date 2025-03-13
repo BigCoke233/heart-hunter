@@ -58,7 +58,7 @@ function Shot:onContact(other, contact)
 end
 
 function Shot:update(dt)
-    if self.physicsBody then
+    if self.physicsBody and not self.physicsBody:isDestroyed() then
         self.x = self.physicsBody:getX()
         self.y = self.physicsBody:getY()
     end
