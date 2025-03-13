@@ -42,8 +42,7 @@ local enemyData = {
         },
         drops = {
             { type = "purpleheart", amount = 1, chances = 1 },
-            { type = "stickyheart", amount = 1, chances = 0.5 },
-            { type = "bigheart", amount = 1, chances = 0.01 }
+            { type = "stickyheart", amount = 1, chances = 0.5 }
         },
     },
     librarian = {
@@ -90,6 +89,29 @@ local enemyData = {
             { type = "yellowheart", amount = 2, chances = 1 },
             { type = "shinyheart", amount = 1, chances = 0.2 }
         },
+    },
+    pokob = {
+        size = 30,
+        zoom = 1/16,
+        speed = 30,
+        health = 300,
+        sprite = {
+            type = "spritesheet",
+            name = "pokob",
+            sheet = { row = 4, col = 12 },
+            totalFrames = 4,
+            frames = {
+                [Direction.LEFT] = { 4, 5, 4, 6 },
+                [Direction.RIGHT] = { 1, 2, 1, 3 },
+                [Direction.DOWN] = { 7, 8, 7, 8 },
+                [Direction.UP] = { 11, 12, 11, 12 }
+            },
+        },
+        drops = {
+            { type = "bigheart", amount = 1, chances = 0.5 },
+            { type = "brokenheart", amount = 1, chances = 1 },
+            { type = "brokenheart", amount = 1, chances = 0.5 }
+       },
     }
 }
 

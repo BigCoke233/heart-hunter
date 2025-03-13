@@ -102,7 +102,21 @@ local roomData = {
             {"citrusLitulon","random"},
             {"citrusLitulon","random"},
         }
-    }
+    },
+    daddyAndSon = {
+        name = "Daddies and Sons",
+        type = roomType.COMBAT,
+        width = config.defaultRoomW,
+        height = config.defaultRoomH,
+        enemies = {
+            {"pokob", "topCenter"},
+            {"lancer", "topCenter"},
+            {"pokob", "bottomCenter"},
+            {"lancer", "bottomCenter"},
+            {"pokob", "center"},
+            {"lancer", "center"},
+        }
+    },
 }
 
 return roomData
