@@ -72,7 +72,7 @@ function utils.whoseBody(physicsBody)
 
     -- check for walls
     for _, wall in pairs(G.currentRoom.walls) do
-        if wall.body == physicsBody then
+        if wall.physicsBody == physicsBody then
             return wall
         end
     end
