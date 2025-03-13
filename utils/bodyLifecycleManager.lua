@@ -44,7 +44,9 @@ function bodyLifeCycleManager:update(dt)
 
     if self.toDestroy and #self.toDestroy > 0 then
         for _, body in ipairs(self.toDestroy) do
-            body:destroy()
+            if not body:isDestroyed() then
+                body:destroy()
+            end
         end
         self.toDestroy = {}
     end
