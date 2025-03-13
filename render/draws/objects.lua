@@ -4,6 +4,12 @@ require "data.directions"
 
 local draws = {}
 
+function draws.aloot()
+    for i, v in pairs(G.currentRoom.objects.loots) do
+        sprite.drawSquare(v.type, v, config.heartSize)
+    end
+end
+
 function draws.player()
     if G.player:isShielded() then
         love.graphics.setColor(0.4,0.4,0.4)
@@ -67,12 +73,6 @@ function draws.enemies()
             graphics.reset()
         end
         graphics.reset()
-    end
-end
-
-function draws.loot()
-    for i, v in pairs(G.currentRoom.objects.loots) do
-        sprite.drawSquare(v.type, v, config.heartSize)
     end
 end
 
