@@ -10,7 +10,60 @@ function draws.aloot()
     end
 end
 
+local function drawAttackPreview()
+    if not G.player then return end
+
+    local mx, my = love.mouse.getX(), love.mouse.getY()
+    local attack_radius = config.player.punch.radius + G.player.r/2
+    local attack_angle = config.player.punch.angle
+    local player_radius = G.player.r
+
+    -- calculate attack direction
+    local dx = mx - G.player.x
+    local dy = my - G.player.y
+    local attack_angle_rad = utils.atan2(dy, dx)
+
+    local start_angle = attack_angle_rad - math.rad(attack_angle / 2)
+    local end_angle = attack_angle_rad + math.rad(attack_angle / 2)
+
+    local arc_center_x = G.player.x + math.cos(attack_angle_rad)
+    local arc_center_y = G.player.y + math.sin(attack_angle_rad)
+
+    -- draw an arc indicating attack range
+    if G.player:punchCoolingDown() then
+        love.graphics.setColor(1, 0.2, 0.2, 0.3)
+    else
+        love.graphics.setColor(0.7, 0.7, 0.7, 0.3)
+    end
+    love.graphics.arc("fill", arc_center_x, arc_center_y, attack_radius, start_angle, end_angle)
+
+    -- arrow position
+    local arrow_length = attack_radius * 0.6
+    local arrow_x = G.player.x + math.cos(attack_angle_rad) * (player_radius + arrow_length)
+    local arrow_y = G.player.y + math.sin(attack_angle_rad) * (player_radius + arrow_length)
+
+    -- arrow angle
+    local arrow_side_angle = math.rad(20)
+    local left_x = arrow_x - math.cos(attack_angle_rad - arrow_side_angle) * (arrow_length * 0.3)
+    local left_y = arrow_y - math.sin(attack_angle_rad - arrow_side_angle) * (arrow_length * 0.3)
+
+    local right_x = arrow_x - math.cos(attack_angle_rad + arrow_side_angle) * (arrow_length * 0.3)
+    local right_y = arrow_y - math.sin(attack_angle_rad + arrow_side_angle) * (arrow_length * 0.3)
+
+    -- draw an arrow pointing to the aim
+    love.graphics.setColor(0.8,0.8,0.8)
+    love.graphics.line(G.player.x + math.cos(attack_angle_rad) * player_radius,
+                       G.player.y + math.sin(attack_angle_rad) * player_radius,
+                       arrow_x, arrow_y)
+    love.graphics.line(arrow_x, arrow_y, left_x, left_y)
+    love.graphics.line(arrow_x, arrow_y, right_x, right_y)
+
+    graphics.reset()
+end
+
 function draws.player()
+    drawAttackPreview()
+
     if G.player:isShielded() then
         love.graphics.setColor(0.4,0.4,0.4)
     else
