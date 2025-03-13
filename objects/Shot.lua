@@ -27,7 +27,7 @@ function Shot:new(bulletType, target, firer, friendly)
 
     setmetatable(obj, Shot)
 
-    G.BodyLifeCycleManager:create(obj, config.bulletSize, "dynamic", 0.1, self.speed)
+    G.BodyLifeCycleManager:create(obj, config.bulletSize, "dynamic")
 
     return obj
 end
