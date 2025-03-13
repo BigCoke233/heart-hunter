@@ -15,30 +15,6 @@ function Body:new(shape, sizeA, sizeB, zoom)
     return obj
 end
 
-function Body:collide(other, x1, y1, x2, y2)
-    if self.shape == "circle" and other.shape == "circle" then
-        -- circle to circle
-        local dx = x2 - x1
-        local dy = y2 - y1
-        local distance = math.sqrt(dx * dx + dy * dy)
-        return distance < (self.r + other.r)
-    elseif self.shape == "rectangle" and other.shape == "rectangle" then
-        -- rect to rect
-        return x1 < x2 + other.w and x1 + self.w > x2 and y1 < y2 + other.h and y1 + self.h > y2
-    elseif self.shape == "circle" and other.shape == "rectangle" then
-        -- circle to rect
-        local closestX = math.max(x2, math.min(x1, x2 + other.w))
-        local closestY = math.max(y2, math.min(y1, y2 + other.h))
-        local dx = x1 - closestX
-        local dy = y1 - closestY
-        return (dx * dx + dy * dy) < (self.r * self.r)
-    elseif self.shape == "rectangle" and other.shape == "circle" then
-        return other:collide(self, x2, y2, x1, y1)
-    end
-
-    return false
-end
-
 function Body:draw(x, y)
     if self.shape == "circle" then
         love.graphics.circle("fill", x, y, self.r)
