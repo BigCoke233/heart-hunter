@@ -21,14 +21,13 @@ function Shot:new(bulletType, target, firer, friendly)
         orientation = math.asin(sin),
         r = config.bulletSize,
         damage = (bulletData[bulletType] and bulletData[bulletType].damage) or 100,
+        mass = (bulletData[bulletType] and bulletData[bulletType].mass) or 0.1,
         friendly = friendly == nil and true or friendly
     }
 
     setmetatable(obj, Shot)
 
-    physics.bodifyObject(G.world, obj, config.bulletSize)
-    obj.physicsBody:setMass(0.1)
-    obj.physicsBody:setLinearVelocity(obj.speed.x, obj.speed.y)
+    G.BodyLifeCycleManager:create(obj, config.bulletSize, "dynamic", 0.1, self.speed)
 
     return obj
 end
@@ -59,10 +58,10 @@ function Shot:onContact(other, contact)
 end
 
 function Shot:update(dt)
-    -- self.x = self.x + self.speed.x * dt
-    -- self.y = self.y + self.speed.y * dt
-    self.x = self.physicsBody:getX()
-    self.y = self.physicsBody:getY()
+    if self.physicsBody then
+        self.x = self.physicsBody:getX()
+        self.y = self.physicsBody:getY()
+    end
 end
 
 return Shot

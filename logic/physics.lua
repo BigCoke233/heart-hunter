@@ -16,7 +16,10 @@ function physics.bodifyObject(world, object, shape, bodyType)
     object.physicsBody:setGravityScale(0)
     object.physicsBody:setLinearDamping(0)
     object.physicsBody:setActive(true)
-    object.physicsBody:setMass(1)
+    object.physicsBody:setMass(object.mass or 1)
+    object.physicsBody:setLinearVelocity(
+        type(object.speed) == "table" and object.speed.x or 0,
+        type(object.speed) == "table" and object.speed.y or 0)
 end
 
 function physics.getObjectPosition(object, rect)
