@@ -9,7 +9,8 @@ local soundResources = {
 }
 
 local musicResources = {
-    briskFight = "brisk_fight.wav"
+    briskFight = "brisk_fight.wav",
+    intenseFight = "intense_fight.wav"
 }
 
 function audio.load()
