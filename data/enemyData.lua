@@ -111,12 +111,18 @@ local enemyData = {
             { type = "bigheart", amount = 1, chances = 0.5 },
             { type = "brokenheart", amount = 1, chances = 1 },
             { type = "brokenheart", amount = 1, chances = 0.5 }
-       },
-       onHit = function(shot)
+        },
+        onHit = function(shot)
+            -- drop a broken heart when hit pokob
+            -- drop no heart if the heart itself is broken
+            if shot.type == "brokenheart" then
+                return
+            end
+
             local Loot = require "objects.loot"
             local lootItem = Loot:new("brokenheart", shot.x, shot.y)
             table.insert(G.currentRoom.objects.loots, lootItem)
-       end
+        end
     }
 }
 
