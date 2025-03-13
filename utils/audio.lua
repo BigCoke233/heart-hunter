@@ -11,7 +11,8 @@ local soundResources = {
 
 local musicResources = {
     briskFight = "brisk_fight.wav",
-    intenseFight = "intense_fight.wav"
+    intenseFight = "intense_fight.wav",
+    beginning = "beginning.wav"
 }
 
 function audio.load()
@@ -56,7 +57,10 @@ end
 function audio.music(name)
     if G.musicPlaying == name then
         return
+    elseif G.musicPlaying then
+        audio.stopMusic()
     end
+
     if AudioData[name] then
         love.audio.play(AudioData[name])
         G.musicPlaying = name

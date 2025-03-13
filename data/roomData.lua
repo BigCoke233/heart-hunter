@@ -8,7 +8,7 @@ local roomData = {
         height = config.defaultRoomH,
         enemies = {},
         manualPlacementOnly = true,
-        music = "no",
+        music = "beginning",
     },
     lancerParty = {
         name = "Lancers' Party",
