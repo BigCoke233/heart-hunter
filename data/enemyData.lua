@@ -112,6 +112,11 @@ local enemyData = {
             { type = "brokenheart", amount = 1, chances = 1 },
             { type = "brokenheart", amount = 1, chances = 0.5 }
        },
+       onHit = function(shot)
+            local Loot = require "objects.loot"
+            local lootItem = Loot:new("brokenheart", shot.x, shot.y)
+            table.insert(G.currentRoom.objects.loots, lootItem)
+       end
     }
 }
 

@@ -133,6 +133,12 @@ function Enemy:getSticky(duration)
     self.sticky = duration
 end
 
+function Enemy:onHit(shot)
+    if enemyData[self.type] and enemyData[self.type].onHit then
+        enemyData[self.type].onHit(shot)
+    end
+end
+
 function Enemy:update(dt)
     self:move(dt)
     self.frameTimer:update(dt)

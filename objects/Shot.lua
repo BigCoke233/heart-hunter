@@ -42,6 +42,7 @@ function Shot:onContact(other, contact)
     -- when contact with enemy, deal damage
     if other.objectType == "enemy" then
         other:takeDamage(self.damage)
+        other:onHit(self)
         if bulletData[self.type] and bulletData[self.type].afterHit then
             bulletData[self.type].afterHit(other.x, other.y, other.type)
         end
