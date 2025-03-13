@@ -12,7 +12,7 @@ function Loot:new(name, x, y)
     }
 
     setmetatable(obj, Loot)
-    G.BodyLifeCycleManager:create(obj, config.lootSize, "static")
+    G.BodyLifeCycleManager:create(obj, config.lootSize, "static", true)
 
     return obj
 end

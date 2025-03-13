@@ -10,10 +10,10 @@ function bodyLifeCycleManager.new()
     return self
 end
 
-function bodyLifeCycleManager:create(object, shape, bodyType)
+function bodyLifeCycleManager:create(object, shape, bodyType, sensor)
     table.insert(
         self.toCreate,
-        {object = object, shape = shape, bodyType = bodyType}
+        {object = object, shape = shape, bodyType = bodyType, sensor = sensor == nil and false or sensor}
     )
 end
 
@@ -35,6 +35,9 @@ function bodyLifeCycleManager:update(dt)
     if self.toCreate and #self.toCreate > 0 then
         for _, data in ipairs(self.toCreate) do
             physics.bodifyObject(G.world, data.object, data.shape, data.bodyType)
+            if data.sensor then
+                data.object.fixture:setSensor(true)
+            end
         end
         self.toCreate = {}
     end
