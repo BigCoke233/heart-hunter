@@ -98,6 +98,7 @@ function Player:onContact(other, contact)
     -- if collision occurs, take it as an attack
     if other.objectType == "enemy" then
         if not (other.stunned or self:isShielded()) then
+            audio.play("getsHit")
             table.remove(self.hearts)
             -- shield this player
             self.shieldedTill = G.time + config.playerShieldTime

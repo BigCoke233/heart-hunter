@@ -6,7 +6,8 @@ local soundResources = {
     hit = "hit.wav",
     hitGlass = "hit_glass.wav",
     levelComplete = "level_complete.wav",
-    warning = "warning.wav"
+    warning = "warning.wav",
+    getsHit = "gets_hit.wav"
 }
 
 local musicResources = {
