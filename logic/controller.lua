@@ -2,6 +2,11 @@ require "data.directions"
 
 local controller = {}
 
+function controller.ctrlKeyPressed()
+    local keydown = love.keyboard.isDown
+    return keydown("lgui") or keydown("rgui") or keydown("lctrl") or keydown("rctrl")
+end
+
 local function playerPressKeysToArrangeHearts(key)
     -- rearrange heart sequence with number keys
     local i = tonumber(key)
@@ -54,6 +59,14 @@ local function playerClickMouseToPunch(x, y)
     G.player:punch({ x = x, y = y})
 end
 
+-- settings
+
+local function switchLanguageSetting(key)
+    if key == "l" and controller.ctrlKeyPressed() then
+        config.lang = config.lang == "en" and "zh" or "en"
+    end
+end
+
 -- entry functions
 
 -- controller that needs constant press check
@@ -65,6 +78,7 @@ end
 -- controller that requires one key press
 function controller.keypressed(key)
     playerPressKeysToArrangeHearts(key)
+    switchLanguageSetting(key)
 end
 
 function controller.mousereleased(x, y, button)
