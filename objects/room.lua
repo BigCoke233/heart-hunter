@@ -228,7 +228,6 @@ function Room:addWalls()
 end
 
 function Room:spawnWave(wave)
-    speaker.speak(translator.T("waveStart"))
     for _, enemyName in ipairs(wave) do
         local enemy = Enemy:new(enemyName, "anyDoor")
         table.insert(self.objects.enemies, enemy)
@@ -244,7 +243,9 @@ function Room:beforeClear()
             self.currentWave = 1
         -- spawn next wave
         elseif self.currentWave <= #data.waves then
-            self:spawnWave(data.waves[self.currentWave])
+            local waveData = data.waves[self.currentWave]
+            speaker.speak(translator.T(waveData.message or "waveStart"))
+            self:spawnWave(waveData.mobs)
             self.currentWave = self.currentWave + 1
         else
             self.currentWave = nil
