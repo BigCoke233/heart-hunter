@@ -43,19 +43,22 @@ local roomData = {
             {"pillar", "bottomRight"},
         },
     },
-    spigerCave = {
-        name = "Spiger Cave",
+    tankParty = {
+        name = "Tank Party",
         type = roomType.COMBAT,
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            {"spiger", "leftCenter"},
-            {"spiger", "rightCenter"},
-            {"spiger", "center"},
+            {"spiger", "topRight"},
+            {"spiger", "topLeft"},
+            {"pokob", "bottomCenter"},
+            {"citrusLitulon", "leftCenter"},
+            {"citrusLitulon", "center"},
+            {"citrusLitulon", "rightCenter"},
         },
         obstacles = {
-            {"pillar", "topCenter"},
-            {"pillar", "bottomCenter"},
+            {"pillar", "leftCenter"},
+            {"pillar", "rightCenter"},
         },
     },
     library = {
@@ -66,13 +69,15 @@ local roomData = {
         enemies = {
             {"librarian", "topCenter"},
             {"librarian", "bottomCenter"},
-            {"lancer", "center"},
+            {"librarian", "center"},
         },
         obstacles = {
             {"pillar", "topRight"},
             {"pillar", "bottomLeft"},
             {"pillar", "topLeft"},
             {"pillar", "bottomRight"},
+            {"pillar", "leftCenter"},
+            {"pillar", "rightCenter"},
         },
     },
     bookstore = {
@@ -103,18 +108,22 @@ local roomData = {
             {"citrusLitulon","random"},
         }
     },
-    daddyAndSon = {
-        name = "Daddies and Sons",
+    NobodyWantsYou = {
+        name = "Nobody Wants You",
         type = roomType.COMBAT,
         width = config.defaultRoomW,
         height = config.defaultRoomH,
         enemies = {
-            {"pokob", "topCenter"},
-            {"lancer", "topCenter"},
+            {"pokob", "topLeft"},
+            {"lancer", "topLeft"},
+            {"lancer", "topLeft"},
             {"pokob", "bottomCenter"},
             {"lancer", "bottomCenter"},
-            {"pokob", "center"},
-            {"lancer", "center"},
+            {"lancer", "bottomCenter"},
+            {"pokob", "rightCenter"},
+            {"lancer", "rightCenter"},
+            {"lancer", "rightCenter"},
+            {"lancer", "center"}
         }
     },
 }
