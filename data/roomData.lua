@@ -87,6 +87,10 @@ local roomData = {
             {"librarian", "topCenter"},
             {"librarian", "bottomCenter"},
             {"librarian", "center"},
+            {"lancer","topLeft"},
+            {"lancer","topRight"},
+            {"lancer","bottomLeft"},
+            {"lancer","bottomRight"},
         },
         obstacles = {
             {"pillar", "topRight"},
