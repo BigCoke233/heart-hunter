@@ -40,7 +40,7 @@ function Player:setY(y)
 end
 
 function Player:move(v)
-    if self.dashing and self.dashing >= G.time then return end
+    if self.knocked and self.knocked >= G.time then return end
     self.moving = (v.x ~= 0 or v.y ~= 0)
     self.physicsBody:setLinearVelocity(v.x, v.y)
 end
@@ -148,6 +148,15 @@ function Player:onContact(other, contact)
         if not (other.stunned or self:isShielded()) then
             audio.play("getsHit")
             table.remove(self.hearts)
+            -- knock back Player
+            local ex, ey = other.x, other.y
+            local dx, dy = self.x - ex, self.y - ey
+            local distance = math.sqrt(dx * dx + dy * dy)
+            local normEdx, normEdy = dx / distance, dy / distance
+            local knockbackX, knockbackY = normEdx * config.player.knockback.force,
+                normEdy * config.player.knockback.force
+            self.knocked = G.time + config.player.knockback.duration
+            self.physicsBody:applyLinearImpulse(knockbackX, knockbackY)
             -- shield this player
             self.shieldedTill = G.time + config.playerShieldTime
         end

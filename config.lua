@@ -28,6 +28,7 @@ config = {
     playerShootCooldown = 0.2,
 
     player = {
+        size = 20,
         punch = {
             radius = 15,
             angle = 120,
@@ -36,7 +37,10 @@ config = {
             damageCoefficient = 10,
             cooldown = 0.5
         },
-        size = 20,
+        knockback = {
+            force = 200,
+            duration = 0.2
+        },
     },
 
     wave = {
