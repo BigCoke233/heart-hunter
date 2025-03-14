@@ -1,5 +1,5 @@
 require "data.directions"
-local Room = require "objects.room"
+local mapGen = require "logic.MapGenerator"
 local roomType = require "data.roomType"
 local translator = require "i18n.translator"
 local audio = require "utils.audio"
@@ -21,60 +21,7 @@ function map.switchRoom(destination)
     end
 end
 
-function map.generate(roomCount, initial)
-    local firstRoom = Room:new(initial and "initialRoom" or nil)
-    local map = { firstRoom }
-    local available = utils.copy(map)
-
-    for i = 2, (roomCount or config.initialMapSize) do
-        -- connect the room with a new room
-        local newRoom = Room:new()
-        local prevRoom = utils.any(available)
-        prevRoom:connect(newRoom)
-
-        if prevRoom:isDoorFull() then
-            table.remove(available, utils.indexof(available, prevRoom))
-        end
-
-        table.insert(map, newRoom)
-        table.insert(available, newRoom)
-    end
-
-    return map
-end
-
-function map.continue(roomCount, from)
-    -- continue game by extending the map
-    local newMap = map.generate(roomCount or config.extendedMapSize, true)
-    local room = from or G.currentRoom
-
-    -- try extending from the last room
-    local entranceDoor, exitDoor = room:connect(newMap[1])
-    if not entranceDoor or not exitDoor then
-        -- if not doorless direction available in this room
-        -- try extend from a random Room
-        repeat
-            room = utils.any(G.allRooms)
-            if room ~= from and not room:isDoorFull() then
-                print("extended from a random room")
-                entranceDoor, exitDoor = room:connect(newMap[1])
-                break
-            end
-        until false
-    end
-    if exitDoor then
-        newMap[1]:removeDoor(exitDoor.location)
-    end
-
-    for _, newRoom in ipairs(newMap) do
-        table.insert(G.allRooms, newRoom)
-    end
-
-    G.mapExpanded = true
-    speaker.speak(translator.T("newDoor"))
-end
-
--- boolean functions
+-- handle room clearance
 
 function map.allCleared()
     local allCleared = true
@@ -110,8 +57,8 @@ function map.update()
 
     -- extend map if all rooms are cleared
     if map.allCleared() then
-        print "all cleared and try to continue"
-        map.continue()
+        mapGen.continue()
+        speaker.speak(translator.T("newDoor"))
     end
 
     -- notify user if one's entered a new map

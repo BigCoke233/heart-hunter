@@ -51,7 +51,7 @@ function initGame()
 
     -- lazy load dependencies
     local Player = require "objects.player"
-    local map = require "logic.map"
+    local mapGen = require "logic.MapGenerator"
     local bodyLifeCycleManager = require "utils.bodyLifecycleManager"
     local audio = require "utils.audio"
 
@@ -72,7 +72,7 @@ function initGame()
 
     G.player = Player:new()
 
-    G.allRooms = map.generate(config.initialMapSize, true)
+    G.allRooms = mapGen.generate(config.initialMapSize, true)
     G.currentRoom = G.allRooms[1]
     G.currentRoom:init()
 
