@@ -93,7 +93,7 @@ function Shot:onContact(other, contact)
         else
             dieOnThisContact = true
             if math.random(3) == 1 then
-                local lootItem = Loot:new("brokenheart", other.x, other.y)
+                local lootItem = Loot:new("brokenheart", self.x, self.y)
                 table.insert(G.currentRoom.objects.loots, lootItem)
             end
         end
