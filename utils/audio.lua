@@ -14,6 +14,7 @@ local soundResources = {
 local musicResources = {
     briskFight = "brisk_fight.wav",
     intenseFight = "intense_fight.wav",
+    discoFight = "disco_fight.wav",
     beginning = "beginning.wav"
 }
 

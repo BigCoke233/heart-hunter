@@ -19,10 +19,14 @@ local roomData = {
             {"lancer", "topLeft"},
             {"lancer", "bottomRight"},
             {"lancer", "bottomLeft"},
+            {"lancer", "center"},
+            {"lancer", "center"},
+            {"lancer", "center"},
         },
         obstacles = {
             {"pillar", "center"}
         },
+        music = "discoFight"
     },
     blueberries = {
         name = "Blueberries",
@@ -60,6 +64,7 @@ local roomData = {
             {"pillar", "leftCenter"},
             {"pillar", "rightCenter"},
         },
+        music = "discoFight"
     },
     library = {
         name = "Library",

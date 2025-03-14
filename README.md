@@ -21,3 +21,4 @@ mostly from freesound
 
 - `briskFight` - [8-bit Brisk Music Loop.wav](https://freesound.org/people/EVRetro/sounds/583613/)
 - `beginning` - [Pixel Flute Melody Loop](https://freesound.org/people/orginaljun/sounds/531459/)
+- `discoFight` - [Raising heartbeats (Spicy version)](https://freesound.org/people/Victor_Natas/sounds/642313/)（CC0）
