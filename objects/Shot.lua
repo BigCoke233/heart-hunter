@@ -70,9 +70,22 @@ function Shot:onContact(other, contact)
         if not self.bounced then self.bounced = 0 end
         if self.bounced <= data.bouncy then
             dieOnThisContact = false
-            local dx = other.x - self.x
-            local dy = other.y - self.y
-            local angle = utils.atan2(dy, dx)
+
+            -- calculate diagonal direction
+            local dx = self.x - other.x
+            local dy = self.y - other.y
+            local angle
+
+            if math.abs(dx) > math.abs(dy) then
+                angle = math.pi / 4
+            else
+                angle = 3 * math.pi / 4
+            end
+
+            if math.random(2) == 1 then
+                angle = -angle
+            end
+
             self.physicsBody:setLinearVelocity(math.cos(angle) * config.bullet.speed,
                 math.sin(angle) * config.bullet.speed)
             self.bounced = self.bounced + 1
@@ -85,6 +98,7 @@ function Shot:onContact(other, contact)
             end
         end
     end
+
 
     if dieOnThisContact then
         self:die()
