@@ -5,7 +5,7 @@ local enemyData = {
     lancer = {
         size = 20,
         zoom = 1/16,
-        speed = 25,
+        speed = 35,
         health = 100,
         sprite = {
             type = "spritesheet",
@@ -25,9 +25,9 @@ local enemyData = {
         },
     },
     spiger = {
-        size = 35,
+        size = 30,
         zoom = 1/16,
-        speed = 10,
+        speed = 20,
         health = 150,
         sprite = {
             type = "spritesheet",
@@ -95,7 +95,7 @@ local enemyData = {
         size = 30,
         zoom = 1/16,
         speed = 30,
-        health = 300,
+        health = 250,
         sprite = {
             type = "spritesheet",
             name = "pokob",
@@ -115,9 +115,10 @@ local enemyData = {
         },
         onHit = function(shot)
             -- drop a broken heart when hit pokob
-            -- drop no heart if the heart itself is broken
+            -- there's a small chance to drop heart if the heart itself is broken
             if shot.type == "brokenheart" then
-                return
+                local temp = math.random(10)
+                if temp > 3 then return end
             end
 
             local Loot = require "objects.loot"
