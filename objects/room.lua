@@ -3,10 +3,8 @@ local roomData = require "data.roomData"
 local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
 local Door = require "objects.door"
-local MobSpawn = require "logic.MobSpawn"
 local audio = require "utils.audio"
 local mapHelper = require "utils.mapHelper"
-local translator = require "i18n.translator"
 
 local Room = {}
 Room.__index = Room
@@ -261,6 +259,7 @@ function Room:removeAllBodies()
     for _, wall in ipairs(self.walls) do
         G.BodyLifeCycleManager:destroy(wall.body)
     end
+    self.objects.shots = {}
 end
 
 function Room:update(dt)
