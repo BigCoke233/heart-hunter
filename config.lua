@@ -33,6 +33,7 @@ config = {
             angle = 120,
             force = 200,
             damage = 10,
+            damageCoefficient = 10,
             cooldown = 0.5
         },
         size = 20,
