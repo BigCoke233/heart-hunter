@@ -3,7 +3,7 @@ local roomData = require "data.roomData"
 local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
 local Door = require "objects.door"
-local Enemy = require "objects.enemy"
+local MobSpawn = require "logic.MobSpawn"
 local audio = require "utils.audio"
 local mapHelper = require "utils.mapHelper"
 local translator = require "i18n.translator"
@@ -227,35 +227,6 @@ function Room:addWalls()
     return walls
 end
 
-function Room:spawnWave(wave)
-    for _, enemyName in ipairs(wave) do
-        local enemy = Enemy:new(enemyName, "anyDoor")
-        table.insert(self.objects.enemies, enemy)
-        enemy:placeInRoom(self)
-    end
-end
-
-function Room:beforeClear()
-    local data = roomData[self.dataName]
-    -- if waves are set, handle waves
-    if data.waves then
-        if not self.currentWave then
-            self.currentWave = 1
-        -- spawn next wave
-        elseif self.currentWave <= #data.waves then
-            local waveData = data.waves[self.currentWave]
-            speaker.speak(translator.T(waveData.message or "waveStart"))
-            self:spawnWave(waveData.mobs)
-            self.currentWave = self.currentWave + 1
-        else
-            self.currentWave = nil
-            return true -- return true if all waves are cleared
-        end
-        return false
-    end
-
-    return true
-end
 
 function Room:init()
     -- handle objects that need to be placed

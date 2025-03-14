@@ -3,6 +3,7 @@ local mapGen = require "logic.MapGenerator"
 local roomType = require "data.roomType"
 local translator = require "i18n.translator"
 local audio = require "utils.audio"
+local MobSpawn = require "logic.MobSpawn"
 
 local map = {}
 
@@ -39,16 +40,18 @@ end
 function map.update()
     local room = G.currentRoom
 
-    -- check if room is cleared
-    if #G.currentRoom.objects.enemies==0 and not room.isCleared then
+    -- if room's cleared once or in a wave currently
+    -- try to summon mob waves
+    local waveGoingOn = room.currentWave and room.currentWave <= MobSpawn.waveNumber(room)
+    if (#room.objects.enemies==0 or waveGoingOn) and not room.isCleared then
         -- do not clear room if beforeClear event is not finished
-        if G.currentRoom.type == roomType.COMBAT
-            and not G.currentRoom:beforeClear() then
+        if room.type == roomType.COMBAT
+            and not MobSpawn.waves(G.currentRoom) then
             return
         end
         -- if after beforeClear event, there no enemy left_x
         -- then consider room cleared
-        if #G.currentRoom.objects.enemies==0 then
+        if #room.objects.enemies==0 and not room.currentWave then
             room.isCleared = true
             -- handle post-clear actions
             if room.type ~= roomType.INITIAL then
