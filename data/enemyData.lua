@@ -104,8 +104,8 @@ local enemyData = {
             frames = {
                 [Direction.LEFT] = { 4, 5, 4, 6 },
                 [Direction.RIGHT] = { 1, 2, 1, 3 },
-                [Direction.DOWN] = { 7, 8, 7, 8 },
-                [Direction.UP] = { 11, 12, 11, 12 }
+                [Direction.DOWN] = { 7, 8, 7, 9 },
+                [Direction.UP] = { 10, 11, 10, 12 }
             },
         },
         drops = {
