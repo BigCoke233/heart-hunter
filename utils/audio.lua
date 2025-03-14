@@ -8,7 +8,8 @@ local soundResources = {
     levelComplete = "level_complete.wav",
     warning = "warning.wav",
     getsHit = "gets_hit.wav",
-    punch = "punch.wav"
+    punch = "punch.wav",
+    door = "door.wav"
 }
 
 local musicResources = {

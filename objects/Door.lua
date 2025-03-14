@@ -1,5 +1,5 @@
 require "data.directions"
-local physics = require "logic.physics"
+local audio = require "utils.audio"
 
 local Door = {}
 Door.__index = Door
@@ -62,6 +62,8 @@ function Door:onContact(other)
 
         local axis, pos = positions[self.location][1], positions[self.location][2]
         G.BodyLifeCycleManager:setPosition(G.player, axis, pos)
+
+        audio.play("door")
     end
 end
 
