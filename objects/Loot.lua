@@ -5,6 +5,7 @@ Loot.__index = Loot
 
 function Loot:new(name, x, y)
     local obj = {
+        objectType = "loot",
         x = x or nil,
         y = y or nil,
         type = name,

@@ -59,6 +59,10 @@ function Shot:onContact(other, contact)
         end
     end
 
+    if sort == "loot" or sort == "shot" then
+        dieOnThisContact = false
+    end
+
     if dieOnThisContact then
         self:die()
     end
