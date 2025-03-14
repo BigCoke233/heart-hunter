@@ -185,28 +185,6 @@ end
 
 -- initializers
 
-function Room:initEnemies()
-    for _, enemy in ipairs(self.objects.enemies) do
-
-        local offset = enemy.r*2 + G.player.r*2 + config.summonMargin
-        if not enemy.x or not enemy.y then
-            enemy.x, enemy.y = self:getLocation(enemy.presetLocation or "random", offset)
-        end
-        G.BodyLifeCycleManager:create(enemy)
-    end
-end
-
-function Room:initObstacles()
-    for _, obs in ipairs(self.objects.obstacles) do
-        local offset = obs.w + G.player.r*2 + config.summonMargin
-        if not obs.x or not obs.y then
-            obs.x, obs.y = self:getLocation(obs.presetLocation or "random", offset)
-        end
-
-        G.BodyLifeCycleManager:create(obs, { obs.w, obs.h }, "static")
-    end
-end
-
 function Room:addWalls()
     local x, y, w, h = self:getX(), self:getY(), self:getWidth(), self:getHeight()
     local thickness = 2
@@ -232,8 +210,15 @@ function Room:addWalls()
 end
 
 function Room:init()
-    self:initEnemies()
-    self:initObstacles()
+    -- handle objects that need to be placed
+    for _, group in pairs(self.objects) do
+        for _, object in ipairs(group) do
+            if object.placeInRoom then
+                object:placeInRoom(self)
+            end
+        end
+    end
+
     self.walls = self:addWalls()
 
     -- play music

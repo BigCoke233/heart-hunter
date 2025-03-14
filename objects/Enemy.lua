@@ -32,6 +32,8 @@ function Enemy:new(name, location)
     return obj
 end
 
+-- enemy behaviors
+
 function Enemy:move(dt)
     -- deal with stunned status
     if self.stunned and self.stunned > 0 then
@@ -89,6 +91,8 @@ function Enemy:facing()
     return utils.angleToDirection(utils.atan2(dy, dx))
 end
 
+-- enemy life cycle
+
 function Enemy:takeDamage(damage)
     self.health = self.health - damage
     if self:isDead() then
@@ -118,6 +122,14 @@ function Enemy:die()
     table.remove(enemies, utils.indexof(enemies, self))
 end
 
+function Enemy:onHit(shot)
+    if enemyData[self.type] and enemyData[self.type].onHit then
+        enemyData[self.type].onHit(shot)
+    end
+end
+
+-- enemy status
+
 function Enemy:stun(duration)
     self.stunned = duration
 end
@@ -126,11 +138,17 @@ function Enemy:getSticky(duration)
     self.sticky = duration
 end
 
-function Enemy:onHit(shot)
-    if enemyData[self.type] and enemyData[self.type].onHit then
-        enemyData[self.type].onHit(shot)
+-- initializers
+
+function Enemy:placeInRoom(room)
+    local offset = self.r*2 + G.player.r*2 + config.summonMargin
+    if not self.x or not self.y then
+        self.x, self.y = room:getLocation(self.presetLocation or "random", offset)
     end
+    G.BodyLifeCycleManager:create(self)
 end
+
+-- entry function
 
 function Enemy:update(dt)
     self:move(dt)
