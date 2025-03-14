@@ -141,12 +141,9 @@ end
 function Player:onContact(other, contact)
     -- detect contact with enemies
     if other.objectType == "enemy" then
-        -- if player's dashing, deal damage to enemies
-        if self.dashing and self.dashing >= G.time then
-            other:takeDamage(config.player.dash.damage)
         -- if player's not shielded nor the enemy's stunned
         -- take the damage
-        elseif not (other.stunned or self:isShielded()) then
+        if not (other.stunned or self:isShielded()) then
             audio.play("getsHit")
             table.remove(self.hearts)
             -- shield this player
