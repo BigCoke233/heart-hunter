@@ -62,6 +62,16 @@ local roomData = {
             {"citrusLitulon", "center"},
             {"citrusLitulon", "rightCenter"},
         },
+        waves = {
+            {
+                message = "Prepare for some spider dance!",
+                mobs = { "spiger", "spiger", "spiger" }
+            },
+            {
+                message = "Is it paint or ketchup or blood?",
+                mobs = { "pokob", "pokob", "pokob" }
+            }
+        },
         obstacles = {
             {"pillar", "leftCenter"},
             {"pillar", "rightCenter"},
