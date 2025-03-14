@@ -70,6 +70,7 @@ function initGame()
     local audio = require "utils.audio"
 
     audio.stopMusic()
+    speaker.init()
 
     -- initialize game state
     G = {
