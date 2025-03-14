@@ -22,8 +22,8 @@ local roomData = {
             {"lancer", "random"},
         },
         waves = {
-            {"lancer","lancer","lancer"},
-            {"lancer","lancer","pokob","lancer"}
+            { mobs = {"lancer","lancer","lancer"} },
+            { mobs = {"lancer","lancer","pokob","lancer"} }
         },
         obstacles = {
             {"pillar", "center"}
@@ -113,6 +113,10 @@ local roomData = {
             {"citrusLitulon","random"},
             {"citrusLitulon","random"},
             {"citrusLitulon","random"},
+        },
+        waves = {
+            { mobs = {"spiger", "citrusLitulon", "citrusLitulon", "citrusLitulon", "citrusLitulon", "citrusLitulon"} },
+            { mobs = {"spgier", "spiger", "citrusLitulon", "citrusLitulon", "citrusLitulon"} }
         }
     },
     NobodyWantsYou = {
@@ -127,10 +131,21 @@ local roomData = {
             {"pokob", "bottomCenter"},
             {"lancer", "bottomCenter"},
             {"lancer", "bottomCenter"},
-            {"pokob", "rightCenter"},
-            {"lancer", "rightCenter"},
-            {"lancer", "rightCenter"},
-            {"lancer", "center"}
+            {"lancer", "rightCenter"}
+        },
+        waves = {
+            {
+                message = "You're not welcome here!",
+                mobs = {
+                    "pokob", "lancer", "lancer", "lancer", "lancer"
+                }
+            },
+            {
+                message = "Where's my son!",
+                mobs = {
+                    "pokob", "citrusLitulon", "citrusLitulon"
+                }
+            }
         }
     },
 }
