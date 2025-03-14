@@ -41,13 +41,16 @@ function map.update()
 
     -- check if room is cleared
     if #G.currentRoom.objects.enemies==0 and not room.isCleared then
-        if G.currentRoom.events.beforeClear then
-            G.currentRoom.events.beforeClear()
+        -- do not clear room if beforeClear event is not finished
+        if G.currentRoom.type == roomType.COMBAT
+            and not G.currentRoom:beforeClear() then
+            return
         end
-
+        -- if after beforeClear event, there no enemy left_x
+        -- then consider room cleared
         if #G.currentRoom.objects.enemies==0 then
             room.isCleared = true
-
+            -- handle post-clear actions
             if room.type ~= roomType.INITIAL then
                 G.roomCleared = G.roomCleared + 1
                 audio.play("levelComplete")

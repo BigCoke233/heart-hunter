@@ -3,16 +3,19 @@ local roomData = require "data.roomData"
 local roomNames = require "data.roomNames"
 local roomType = require "data.roomType"
 local Door = require "objects.door"
-
+local Enemy = require "objects.enemy"
 local audio = require "utils.audio"
 local mapHelper = require "utils.mapHelper"
+local translator = require "i18n.translator"
 
 local Room = {}
 Room.__index = Room
 
 function Room:new(name)
-    local data = roomData[name or utils.any(roomNames)]
+    local dataName = name or utils.any(roomNames)
+    local data = roomData[dataName]
     local obj = {
+        dataName = dataName,
         name = data.name or "Initial Room",
         type = data.type or roomType.INITIAL,
         width = data.width or 0.85,
@@ -29,10 +32,6 @@ function Room:new(name)
         isCleared = false,
 
         music = data.music or nil,
-
-        events = {
-            beforeClear = data.beforeClear or nil
-        }
     }
 
     setmetatable(obj, Room)
@@ -108,7 +107,26 @@ function Room:getLocation(location, offset)
 
     local doorLocations = {}
     for _, door in pairs(self.doors) do
-        table.insert(doorLocations, { x=door.x, y=door.y })
+        local doorX, doorY = door.x, door.y
+        local doorW, doorH = door.w, door.h
+
+        local lookupTable = {
+            [Direction.LEFT] = {
+                x = doorX + doorW, y = doorY
+            },
+            [Direction.RIGHT] = {
+                x = doorX - doorW, y = doorY
+            },
+            [Direction.TOP] = {
+                x = doorX, y = doorY + doorH
+            },
+            [Direction.BOTTOM] = {
+                x = doorX, y = doorY - doorH
+            },
+        }
+
+        local pos = lookupTable[door.location]
+        table.insert(doorLocations, { x=pos.x, y=pos.y })
     end
     preset.anyDoor = utils.any(doorLocations)
 
@@ -207,6 +225,35 @@ function Room:addWalls()
     end
 
     return walls
+end
+
+function Room:spawnWave(wave)
+    speaker.speak(translator.T("waveStart"))
+    for _, enemyName in ipairs(wave) do
+        local enemy = Enemy:new(enemyName, "anyDoor")
+        table.insert(self.objects.enemies, enemy)
+        enemy:placeInRoom(self)
+    end
+end
+
+function Room:beforeClear()
+    local data = roomData[self.dataName]
+    -- if waves are set, handle waves
+    if data.waves then
+        if not self.currentWave then
+            self.currentWave = 1
+        -- spawn next wave
+        elseif self.currentWave <= #data.waves then
+            self:spawnWave(data.waves[self.currentWave])
+            self.currentWave = self.currentWave + 1
+        else
+            self.currentWave = nil
+            return true -- return true if all waves are cleared
+        end
+        return false
+    end
+
+    return true
 end
 
 function Room:init()

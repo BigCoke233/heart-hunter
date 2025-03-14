@@ -10,7 +10,8 @@ local locales = {
             "you'll need to harvest their hearts too",
             "good luck"
         },
-        roomCleared = "Room cleared: "
+        roomCleared = "Room cleared: ",
+        waveStart = "New enemies are coming."
     },
     zh = {
         newRealm = "你进入了新的领域，没有回头路了",
@@ -23,7 +24,8 @@ local locales = {
             "你也需要收割他们的心脏",
             "祝你好运"
         },
-        roomCleared = "已清理房间："
+        roomCleared = "已清理房间：",
+        waveStart = "有人来了"
     }
 }
 

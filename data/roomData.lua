@@ -19,9 +19,11 @@ local roomData = {
             {"lancer", "topLeft"},
             {"lancer", "bottomRight"},
             {"lancer", "bottomLeft"},
-            {"lancer", "center"},
-            {"lancer", "center"},
-            {"lancer", "center"},
+            {"lancer", "random"},
+        },
+        waves = {
+            {"lancer","lancer","lancer"},
+            {"lancer","lancer","pokob","lancer"}
         },
         obstacles = {
             {"pillar", "center"}

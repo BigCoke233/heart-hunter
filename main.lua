@@ -33,7 +33,7 @@ end
 
 function love.update(dt)
     -- game state updates
-    local gameStates = { G.world, G.currentRoom, G.player, G.BodyLifeCycleManager }
+    local gameStates = { G.BodyLifeCycleManager, G.world, G.currentRoom, G.player }
     for _, state in ipairs(gameStates) do
         state:update(dt)
     end
