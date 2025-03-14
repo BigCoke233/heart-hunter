@@ -39,6 +39,10 @@ config = {
         size = 20,
     },
 
+    wave = {
+        mobSummonDelay = 1,
+    },
+
     initialMapSize = 7,
     extendedMapSize = 5,
 
