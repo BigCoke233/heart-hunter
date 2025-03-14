@@ -16,7 +16,7 @@ function Player.new()
         zoom = 1/16,
         speed = config.player.speed,
         shieldedTill = 0,
-        hearts = { "redheart", "redheart", "redheart", "shinyheart", "shinyheart", "stickyheart" },
+        hearts = { "purpleheart", "redheart", "redheart", "redheart", "shinyheart", "shinyheart", "stickyheart" },
         facing = Direction.DOWN,
         moving = false,
         frameTimer = FrameTimer:new(config.frameRate, 2)

@@ -90,6 +90,14 @@ local bulletData = {
             end
         end
     },
+    purpleheart = {
+        damage = 100,
+        bouncy = 3,
+        afterShot = function ()
+        end,
+        afterHit = function (x, y, enemyType)
+        end
+    },
     brokenheart = {
         damage = 50,
         afterShot = function ()

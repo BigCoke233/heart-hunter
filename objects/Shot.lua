@@ -1,4 +1,5 @@
 local bulletData = require "data.bulletData"
+local Loot = require "objects.loot"
 
 local Shot = {}
 Shot.__index = Shot
@@ -39,11 +40,11 @@ end
 
 function Shot:onContact(other, contact)
     local sort = other.objectType
+    local data = bulletData[self.type]
     local dieOnThisContact = true
 
     -- when contact with enemy, deal damage
     if sort == "enemy" then
-        local data = bulletData[self.type]
         other:takeDamage(self.damage)
         other:onHit(self)
         if data and data.afterHit then
@@ -61,6 +62,28 @@ function Shot:onContact(other, contact)
 
     if sort == "loot" or sort == "shot" then
         dieOnThisContact = false
+    end
+
+    -- bouncy heart
+    if sort ~= "player" and data and data.bouncy then
+        -- if heart can still bounce
+        if not self.bounced then self.bounced = 0 end
+        if self.bounced <= data.bouncy then
+            dieOnThisContact = false
+            local dx = other.x - self.x
+            local dy = other.y - self.y
+            local angle = utils.atan2(dy, dx)
+            self.physicsBody:setLinearVelocity(math.cos(angle) * config.bullet.speed,
+                math.sin(angle) * config.bullet.speed)
+            self.bounced = self.bounced + 1
+        -- if not, then die or break
+        else
+            dieOnThisContact = true
+            if math.random(3) == 1 then
+                local lootItem = Loot:new("brokenheart", other.x, other.y)
+                table.insert(G.currentRoom.objects.loots, lootItem)
+            end
+        end
     end
 
     if dieOnThisContact then
