@@ -1,4 +1,3 @@
-require "objects.Enemy"
 local roomType = require "data.roomType"
 
 local roomData = {
