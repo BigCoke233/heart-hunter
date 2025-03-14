@@ -241,12 +241,14 @@ function Room:init()
     self.walls = self:addWalls()
 
     -- play music
-    if self.music then
-        audio.music(self.music)
-    elseif self.music == "no" then
-        audio.stopMusic()
-    else
-        audio.music(config.defaultMusic)
+    if not self.isCleared then
+        if self.music then
+            audio.music(self.music)
+        elseif self.music == "no" then
+            audio.stopMusic()
+        else
+            audio.music(config.defaultMusic)
+        end
     end
 end
 
