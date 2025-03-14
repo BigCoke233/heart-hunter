@@ -14,19 +14,43 @@ local bulletData = {
             local r = enemyData[enemyType].size + 20
 
             local bullets = require "logic.bullets"
-            -- split heart and shoot at 4 different angle
-            if math.random(2) == 1 then
-                -- shoot like a X
-                bullets.fire("redheart", { x = x-2*r, y = y-2*r }, {x = x-r, y = y-r})
-                bullets.fire("redheart", { x = x+2*r, y = y+2*r }, {x = x+r, y = y+r})
-                bullets.fire("redheart", { x = x-2*r, y = y+2*r }, {x = x-r, y = y+r})
-                bullets.fire("redheart", { x = x+2*r, y = y-2*r }, {x = x+r, y = y-r})
-            else
-                -- shoot like a cross
-                bullets.fire("redheart", { x = x, y = 0 }, { x = x, y = y-r })
-                bullets.fire("redheart", { x = x, y = h }, { x = x, y = y+r })
-                bullets.fire("redheart", { x = 0, y = y }, { x = x-r, y = y })
-                bullets.fire("redheart", { x = w, y = y }, { x = x+r, y = y })
+            -- split heart and shoot at 8 different angle
+            local shoottingDirections = {
+                {
+                    target = { x = x-2*r, y = y-2*r },
+                    firer = {x = x-r, y = y-r},
+                },
+                {
+                    target = { x = x+2*r, y = y+2*r },
+                    firer = {x = x+r, y = y+r},
+                },
+                {
+                    target = { x = x+2*r, y = y-2*r },
+                    firer = {x = x+r, y = y-r},
+                },
+                {
+                    target = { x = x-2*r, y = y+2*r },
+                    firer = {x = x-r, y = y+r},
+                },
+                {
+                    target = { x = x, y = 0 },
+                    firer = { x = x, y = y-r },
+                },
+                {
+                    target = { x = x, y = h },
+                    firer = { x = x, y = y+r },
+                },
+                {
+                    target = { x = 0, y = y },
+                    firer = { x = x-r, y = y },
+                },
+                {
+                    target = { x = w, y = y },
+                    firer = { x = x+r, y = y },
+                }
+            }
+            for _, direction in ipairs(shoottingDirections) do
+                bullets.fire("brokenheart", direction.target, direction.firer)
             end
         end
     },
