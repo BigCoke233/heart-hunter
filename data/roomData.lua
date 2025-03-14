@@ -116,7 +116,7 @@ local roomData = {
         },
         waves = {
             { mobs = {"spiger", "citrusLitulon", "citrusLitulon", "citrusLitulon", "citrusLitulon", "citrusLitulon"} },
-            { mobs = {"spgier", "spiger", "citrusLitulon", "citrusLitulon", "citrusLitulon"} }
+            { mobs = {"spiger", "spiger", "citrusLitulon", "citrusLitulon", "citrusLitulon"} }
         }
     },
     NobodyWantsYou = {
