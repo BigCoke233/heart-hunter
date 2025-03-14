@@ -27,6 +27,10 @@ function Loot:onContact(other)
     end
 end
 
+function Loot:placeInRoom()
+    G.BodyLifeCycleManager:create(self, config.lootSize, "static", true)
+end
+
 function Loot:update(dt)
     -- nothing yet
 end
