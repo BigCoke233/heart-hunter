@@ -3,7 +3,6 @@ config = {
     debug = false,
     lang = "zh",
 
-    playerShieldTime = 3,
     lootSize = 5,
     heartSize = 15,
 
@@ -19,16 +18,20 @@ config = {
     defaultRoomW = 0.85,
     defaultRoomH = 0.8,
 
-    bulletSpeed = 300,
-    bulletSize = 15,
-
     summonMargin = 30,
 
-    defaultPlayerSpeed = 100,
-    playerShootCooldown = 0.2,
+    bullet = {
+        speed = 300,
+        size = 15,
+    },
 
     player = {
         size = 20,
+        speed = 100,
+        shieldTime = 3,
+        shoot = {
+            cooldown = 0.2,
+        },
         punch = {
             radius = 15,
             angle = 120,
@@ -47,8 +50,10 @@ config = {
         mobSummonDelay = 1,
     },
 
-    initialMapSize = 7,
-    extendedMapSize = 5,
+    map = {
+        initialRoomCount = 7,
+        extendedRoomCount = 5,
+    },
 
     defaultMusic = "briskFight"
 }
@@ -81,7 +86,7 @@ function initGame()
 
     G.player = Player:new()
 
-    G.allRooms = mapGen.generate(config.initialMapSize, true)
+    G.allRooms = mapGen.generate(config.map.initialRoomCount, true)
     G.currentRoom = G.allRooms[1]
     G.currentRoom:init()
 

@@ -14,7 +14,7 @@ function Player.new()
         y = love.graphics.getHeight() / 2,
         r = config.player.size,
         zoom = 1/16,
-        speed = config.defaultPlayerSpeed,
+        speed = config.player.speed,
         shieldedTill = 0,
         hearts = { "redheart", "redheart", "redheart", "shinyheart", "shinyheart", "stickyheart" },
         facing = Direction.DOWN,
@@ -91,7 +91,7 @@ function Player:shoot(target)
     bullets.fire(currentBullet, target, self)
     table.remove(self.hearts)
 
-    self.shootCooldown = G.time + config.playerShootCooldown
+    self.shootCooldown = G.time + config.player.shoot.cooldown
 end
 
 function Player:punchCoolingDown()
@@ -158,7 +158,7 @@ function Player:onContact(other, contact)
             self.knocked = G.time + config.player.knockback.duration
             self.physicsBody:applyLinearImpulse(knockbackX, knockbackY)
             -- shield this player
-            self.shieldedTill = G.time + config.playerShieldTime
+            self.shieldedTill = G.time + config.player.shieldTime
         end
     end
 end
@@ -170,7 +170,7 @@ function Player:update(dt)
 
     -- deal with speed up time
     if self.speedUpTill and self.speedUpTill < G.time then
-        self.speed = config.defaultPlayerSpeed
+        self.speed = config.player.speed
         self.speedUpTill = nil
     end
 

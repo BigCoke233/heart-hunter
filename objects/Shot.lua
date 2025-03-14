@@ -9,16 +9,16 @@ function Shot:new(bulletType, target, firer, friendly)
     local length = math.sqrt(vx*vx + vy*vy)
     local cos, sin = vx / length, vy / length
 
-    local offset = (config.bulletSize + (firer.physicsShape and firer.physicsShape:getRadius() or 0)) / 2
+    local offset = (config.bullet.size + (firer.physicsShape and firer.physicsShape:getRadius() or 0)) / 2
     local fireX = firer.x + cos * offset
     local fireY = firer.y + sin * offset
 
     local obj = {
         type = bulletType,
         x = fireX, y = fireY,
-        speed = { x = cos*config.bulletSpeed, y = sin*config.bulletSpeed },
+        speed = { x = cos*config.bullet.speed, y = sin*config.bullet.speed },
         orientation = math.asin(sin),
-        r = config.bulletSize,
+        r = config.bullet.size,
         damage = (bulletData[bulletType] and bulletData[bulletType].damage) or 100,
         mass = (bulletData[bulletType] and bulletData[bulletType].mass) or 0.1,
         friendly = friendly == nil and true or friendly
@@ -26,7 +26,7 @@ function Shot:new(bulletType, target, firer, friendly)
 
     setmetatable(obj, Shot)
 
-    G.BodyLifeCycleManager:create(obj, config.bulletSize, "dynamic")
+    G.BodyLifeCycleManager:create(obj, config.bullet.size, "dynamic")
 
     return obj
 end

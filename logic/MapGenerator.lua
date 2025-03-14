@@ -7,7 +7,7 @@ function mapGenerator.generate(roomCount, initial)
     local map = { firstRoom }
     local available = utils.copy(map)
 
-    for i = 2, (roomCount or config.initialMapSize) do
+    for i = 2, (roomCount or config.map.initialRoomCount) do
         -- connect the room with a new room
         local newRoom = Room:new()
         local prevRoom = utils.any(available)
@@ -26,7 +26,7 @@ end
 
 function mapGenerator.continue(roomCount, from)
     -- continue game by extending the map
-    local newMap = mapGenerator.generate(roomCount or config.extendedMapSize, true)
+    local newMap = mapGenerator.generate(roomCount or config.map.extendedRoomCount, true)
     local room = from or G.currentRoom
 
     -- try extending from the last room

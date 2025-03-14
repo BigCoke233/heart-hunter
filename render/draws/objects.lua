@@ -89,7 +89,7 @@ end
 function draws.bullets()
     for k, bullet in pairs(G.currentRoom.objects.shots) do
         local x, y, angle = bullet.x, bullet.y, bullet.orientation
-        sprite.draw(bullet.type, x, y, angle, config.bulletSize, config.bulletSize)
+        sprite.draw(bullet.type, x, y, angle, config.bullet.size, config.bullet.size)
     end
 end
 
