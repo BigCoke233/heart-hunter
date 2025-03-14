@@ -1,5 +1,6 @@
 local enemyData = require "data.enemyData"
 local enemies = require "logic.enemies"
+local audio = require "utils.audio"
 
 local bulletData = {
     redheart = {
@@ -86,6 +87,18 @@ local bulletData = {
             local stunned = enemies.getWithinRage(x, y, 100)
             for _, enemy in ipairs(stunned) do
                 enemy.movePattern = "vertical"
+            end
+        end
+    },
+    brokenheart = {
+        damage = 50,
+        afterShot = function ()
+        end,
+        afterHit = function (x, y, enemyType)
+            local affected = enemies.getWithinRage(x, y, 50)
+            for _, enemy in ipairs(affected) do
+                enemy:takeDamage(10)
+                audio.play("hitGlass")
             end
         end
     }
