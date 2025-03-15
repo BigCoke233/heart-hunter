@@ -1,10 +1,9 @@
 require "data.directions"
-local physics = require "logic.physics"
 
 local Obstacle = {}
 Obstacle.__index = Obstacle
 
-function Obstacle:new(name, location, body)
+function Obstacle:new(name, location)
     local obj = {
         objectType = "obstacle",
         name = name,
