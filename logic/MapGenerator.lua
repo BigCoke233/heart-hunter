@@ -31,18 +31,7 @@ function mapGenerator.continue(roomCount, from)
 
     -- try extending from the last room
     local entranceDoor, exitDoor = room:connect(newMap[1])
-    if not entranceDoor or not exitDoor then
-        -- if not doorless direction available in this room
-        -- try extend from a random Room
-        repeat
-            room = utils.any(G.allRooms)
-            if room ~= from and not room:isDoorFull() then
-                print("extended from a random room")
-                entranceDoor, exitDoor = room:connect(newMap[1])
-                break
-            end
-        until false
-    end
+
     if exitDoor then
         newMap[1]:removeDoor(exitDoor.location)
     end
