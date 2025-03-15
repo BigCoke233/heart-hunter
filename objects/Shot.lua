@@ -15,6 +15,7 @@ function Shot:new(bulletType, target, firer, friendly)
     local fireY = firer.y + sin * offset
 
     local obj = {
+        objectType = "shot",
         type = bulletType,
         x = fireX, y = fireY,
         speed = { x = cos*config.bullet.speed, y = sin*config.bullet.speed },

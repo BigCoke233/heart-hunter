@@ -236,6 +236,10 @@ function Room:init()
         end
     end
 
+    for _, door in pairs(self.doors) do
+        G.BodyLifeCycleManager:create(door, { door.w, door.h }, "static")
+    end
+
     self.walls = self:addWalls()
 
     -- play music
@@ -250,15 +254,23 @@ function Room:init()
     end
 end
 
-function Room:removeAllBodies()
+function Room:unload()
     for _, group in pairs(self.objects) do
         for _, obj in ipairs(group) do
             G.BodyLifeCycleManager:destroy(obj.physicsBody)
         end
+        group = {}
     end
+
     for _, wall in ipairs(self.walls) do
-        G.BodyLifeCycleManager:destroy(wall.body)
+        G.BodyLifeCycleManager:destroy(wall.physicsBody)
     end
+    self.walls = {}
+
+    for _, door in pairs(self.doors) do
+        G.BodyLifeCycleManager:destroy(door.physicsBody)
+    end
+
     self.objects.shots = {}
 end
 

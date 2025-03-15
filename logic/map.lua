@@ -11,7 +11,7 @@ local map = {}
 
 function map.switchRoom(destination)
     -- unload current room
-    G.currentRoom:removeAllBodies()
+    G.currentRoom:unload()
 
     -- load new room
     destination:init()

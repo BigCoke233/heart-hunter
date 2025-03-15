@@ -22,6 +22,7 @@ end
 
 function Door:new(location, within, to)
     local obj = {
+        objectType = "door",
         location = location,
         size = config.graphics.doorSize,
         thickness = config.graphics.doorThickness,
@@ -33,7 +34,6 @@ function Door:new(location, within, to)
     setmetatable(obj, Door)
 
     calculateDoorLocation(obj)
-    G.BodyLifeCycleManager:create(obj, { obj.w, obj.h }, "static")
 
     return obj
 end
