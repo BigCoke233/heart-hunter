@@ -31,7 +31,7 @@ function mapGenerator.continue(roomCount, from)
 
     -- try extending from the last room
     local entranceDoor, exitDoor = room:connect(newMap[1])
-
+    G.BodyLifeCycleManager:create(entranceDoor, { entranceDoor.w, entranceDoor.h }, "static")
     if exitDoor then
         newMap[1]:removeDoor(exitDoor.location)
     end
