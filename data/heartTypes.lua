@@ -1,19 +1,17 @@
 local heartTypes = {
-    "arrowheart",
+    "arrowheart",   -- no effect
     "bigheart",
-    "blockheart",
     "blueheart",
     "brokenheart",
     "brownheart",
     "giftheart",
     "greenheart",
     "purpleheart",
-    "radiantheart",
     "redheart",
     "shinyheart",
     "stickyheart",
-    "twinheart",
-    "whiteheart",
+    "twinheart",    -- no effect
+    "whiteheart",   -- no effect
     "yellowheart"
 }
 
