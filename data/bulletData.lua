@@ -1,6 +1,7 @@
 local enemyData = require "data.enemyData"
 local enemies = require "logic.enemies"
 local audio = require "utils.audio"
+local translator = require "i18n.translator"
 
 local bulletData = {
     redheart = {
@@ -108,6 +109,17 @@ local bulletData = {
                 enemy:takeDamage(10)
                 audio.play("hitGlass")
             end
+        end
+    },
+    giftheart = {
+        damage = 0,
+        afterShot = function ()
+            local heartTypes = require "data.heartTypes"
+            speaker.speak(translator.T("giftHeartSpeech"))
+            table.insert(G.player.hearts, utils.any(heartTypes))
+            audio.play("getsItem")
+        end,
+        afterHit = function (x, y, enemyType)
         end
     }
 }

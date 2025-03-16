@@ -11,7 +11,8 @@ local locales = {
             "good luck"
         },
         roomCleared = "Room cleared: ",
-        waveStart = "New enemies are coming."
+        waveStart = "New enemies are coming.",
+        giftHeartSpeech = "You've received a gift!"
     },
     zh = {
         newRealm = "你进入了新的领域，没有回头路了",
@@ -25,7 +26,8 @@ local locales = {
             "祝你好运"
         },
         roomCleared = "已清理房间：",
-        waveStart = "有人来了"
+        waveStart = "有人来了",
+        giftHeartSpeech = "你收到了礼物！"
     }
 }
 
