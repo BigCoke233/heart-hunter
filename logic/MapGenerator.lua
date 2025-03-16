@@ -84,8 +84,15 @@ function mapGenerator.init(G)
     G.currentRoom = G.allRooms[1]
 
     -- add random initial loot
-    for i=1, config.map.initialHeartCount do
-        table.insert(G.currentRoom.objects.loots, Loot:random())
+    local heartCount = math.random(
+        config.map.initialHeartCount.min,
+        config.map.initialHeartCount.max
+    )
+    for i=1, heartCount do
+        table.insert(
+            G.currentRoom.objects.loots,
+            Loot:random(G.currentRoom:getLocation("random", 100))
+        )
     end
 
     -- initialize room
