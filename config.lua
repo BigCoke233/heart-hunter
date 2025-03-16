@@ -54,7 +54,7 @@ config = {
         initialRoomCount = 7,
         extendedRoomCount = 5,
         initialHeartCount = {
-            min = 2, max = 4
+            min = 1, max = 3
         },
     },
 
