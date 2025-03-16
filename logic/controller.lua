@@ -14,9 +14,20 @@ local function playerChangeNextBullet(key)
         G.player.nextBullet = G.player.nextBullet +1
     end
 
+    -- shortcut: press number key to move to a specific index
     local i = tonumber(key)
     if i ~= nil then
         G.player.nextBullet = i
+    end
+
+    -- shortcut: press ctrl/command + q/e
+    -- to quickly move to the start/end of the heart sequence
+    if controller.ctrlKeyPressed() then
+        if key == "q" then
+            G.player.nextBullet = 1
+        elseif key == "e" then
+            G.player.nextBullet = #G.player.hearts
+        end
     end
 end
 
