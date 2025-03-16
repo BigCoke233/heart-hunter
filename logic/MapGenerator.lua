@@ -82,6 +82,7 @@ function mapGenerator.init(G)
     -- generate map
     G.allRooms = mapGenerator.generate(config.map.initialRoomCount, true)
     G.currentRoom = G.allRooms[1]
+    G.currentRoom.isExplored = true
 
     -- add random initial loot
     local heartCount = math.random(
