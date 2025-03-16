@@ -28,12 +28,45 @@ function mapGenerator.continue(roomCount, from)
     -- continue game by extending the map
     local newMap = mapGenerator.generate(roomCount or config.map.extendedRoomCount, true)
     local room = from or G.currentRoom
-
-    -- try extending from the last room
-    local entranceDoor, exitDoor = room:connect(newMap[1])
-    G.BodyLifeCycleManager:create(entranceDoor, { entranceDoor.w, entranceDoor.h }, "static")
-    if exitDoor then
-        newMap[1]:removeDoor(exitDoor.location)
+    
+    -- attempt to find an available room
+    local connected = false
+    local attempts = 0
+    local maxAttempts = 10
+    
+    while not connected and attempts < maxAttempts do
+        -- if doorfull
+        if room:isDoorFull() then
+            -- find an available room
+            for _, existingRoom in ipairs(G.allRooms) do
+                if not existingRoom:isDoorFull() then
+                    room = existingRoom
+                    break
+                end
+            end
+        end
+        
+        -- try to connect
+        local entranceDoor, exitDoor = room:connect(newMap[1])
+        if entranceDoor then
+            connected = true
+            if entranceDoor then
+                G.BodyLifeCycleManager:create(entranceDoor, { entranceDoor.w, entranceDoor.h }, "static")
+            end
+            if exitDoor then
+                newMap[1]:removeDoor(exitDoor.location)
+            end
+        else
+            -- if failed, generate a new map
+            newMap = mapGenerator.generate(roomCount or config.map.extendedRoomCount, true)
+        end
+        
+        attempts = attempts + 1
+    end
+    
+    if not connected then
+        print("Warning: Failed to connect new rooms after " .. maxAttempts .. " attempts")
+        return false
     end
 
     for _, newRoom in ipairs(newMap) do
@@ -41,6 +74,7 @@ function mapGenerator.continue(roomCount, from)
     end
 
     G.mapExpanded = true
+    return true
 end
 
 return mapGenerator
