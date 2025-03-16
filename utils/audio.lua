@@ -12,6 +12,7 @@ local soundResources = {
     punch = "punch.wav",
     door = "door.wav",
     fart = "fart.wav",
+    spring = "spring.wav"
 }
 
 local musicResources = {

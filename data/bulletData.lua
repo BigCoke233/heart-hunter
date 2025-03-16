@@ -97,6 +97,7 @@ local bulletData = {
         afterShot = function ()
         end,
         afterHit = function (x, y, enemyType)
+            audio.play("spring")
         end
     },
     brokenheart = {
