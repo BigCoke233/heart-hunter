@@ -9,9 +9,17 @@ end
 
 local function playerChangeNextBullet(key)
     if key == "q" then
-        G.player.nextBullet = G.player.nextBullet -1
+        if G.player.nextBullet == 1 then
+            G.player.nextBullet = #G.player.hearts
+        else
+            G.player.nextBullet = G.player.nextBullet -1
+        end
     elseif key == "e" then
-        G.player.nextBullet = G.player.nextBullet +1
+        if G.player.nextBullet == #G.player.hearts then
+            G.player.nextBullet = 1
+        else
+            G.player.nextBullet = G.player.nextBullet +1
+        end
     end
 
     -- shortcut: press number key to move to a specific index
