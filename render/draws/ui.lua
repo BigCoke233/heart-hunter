@@ -24,6 +24,11 @@ function ui.ammoBar()
             utils.resetGraphics()
         end
 
+        if i == G.player.nextBullet then
+            heartR = heartR * 1.2
+            utils.resetGraphics()
+        end
+
         -- draw heart
         sprite.drawSquare(v, position, heartR)
     end

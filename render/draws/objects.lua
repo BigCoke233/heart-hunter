@@ -1,6 +1,7 @@
 local enemyData = require "data.enemyData"
 local graphics = require "utils.graphics"
 require "data.directions"
+require "render.sprite"
 
 local draws = {}
 

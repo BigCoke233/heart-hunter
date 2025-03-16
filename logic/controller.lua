@@ -7,15 +7,11 @@ function controller.ctrlKeyPressed()
     return keydown("lgui") or keydown("rgui") or keydown("lctrl") or keydown("rctrl")
 end
 
-local function playerPressKeysToArrangeHearts(key)
-    -- rearrange heart sequence with number keys
-    local i = tonumber(key)
-    local hearts = G.player.hearts
-    local length = #hearts
-    if i ~= nil and hearts[i] then
-        -- move selected heart to the end
-        local temp = table.remove(hearts, i)
-        table.insert(hearts, temp)
+local function playerChangeNextBullet(key)
+    if key == "q" then
+        G.player.nextBullet = G.player.nextBullet -1
+    elseif key == "e" then
+        G.player.nextBullet = G.player.nextBullet +1
     end
 end
 
@@ -77,7 +73,7 @@ end
 
 -- controller that requires one key press
 function controller.keypressed(key)
-    playerPressKeysToArrangeHearts(key)
+    playerChangeNextBullet(key)
     switchLanguageSetting(key)
 end
 

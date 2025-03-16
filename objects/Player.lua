@@ -19,10 +19,12 @@ function Player.new()
         hearts = { "purpleheart", "redheart", "redheart", "redheart", "shinyheart", "shinyheart", "stickyheart" },
         facing = Direction.DOWN,
         moving = false,
-        frameTimer = FrameTimer:new(config.frameRate, 2)
+        frameTimer = FrameTimer:new(config.frameRate, 2),
     }, Player)
 
     physics.bodifyObject(G.world, player)
+
+    player.nextBullet = #player.hearts
 
     return player
 end
@@ -68,7 +70,7 @@ end
 
 function Player:shoot(target)
     local hearts = self.hearts
-    local currentBullet = hearts[#hearts]
+    local currentBullet = hearts[self.nextBullet]
 
     -- red hearts and the last heart will take some more time to shoot
     if currentBullet == "redheart" or #hearts == 1 then
@@ -89,7 +91,8 @@ function Player:shoot(target)
 
     -- shoot the bullet
     bullets.fire(currentBullet, target, self)
-    table.remove(self.hearts)
+    table.remove(self.hearts, self.nextBullet)
+    self.nextBullet = self.nextBullet - 1
 
     self.shootCooldown = G.time + config.player.shoot.cooldown
 end
