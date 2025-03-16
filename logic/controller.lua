@@ -13,6 +13,11 @@ local function playerChangeNextBullet(key)
     elseif key == "e" then
         G.player.nextBullet = G.player.nextBullet +1
     end
+
+    local i = tonumber(key)
+    if i ~= nil then
+        G.player.nextBullet = i
+    end
 end
 
 local function playerPressKeysToMoves(dt)
