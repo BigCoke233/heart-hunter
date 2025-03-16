@@ -10,7 +10,8 @@ local soundResources = {
     getsHit = "gets_hit.wav",
     getsItem = "gets_item.wav",
     punch = "punch.wav",
-    door = "door.wav"
+    door = "door.wav",
+    fart = "fart.wav",
 }
 
 local musicResources = {

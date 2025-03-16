@@ -121,6 +121,12 @@ local bulletData = {
         end,
         afterHit = function (x, y, enemyType)
         end
+    },
+    brownheart = {
+        damage = 200,
+        afterShot = function ()
+            audio.play("fart")
+        end,
     }
 }
 
