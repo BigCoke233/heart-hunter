@@ -1,4 +1,4 @@
-local physics = require "logic.physics"
+local heartTypes = require "data.heartTypes"
 
 local Loot = {}
 Loot.__index = Loot
@@ -16,6 +16,11 @@ function Loot:new(name, x, y)
     G.BodyLifeCycleManager:create(obj, config.lootSize, "static", true)
 
     return obj
+end
+
+function Loot:random(x, y)
+    local type = utils.any(heartTypes)
+    return Loot:new(type, x, y)
 end
 
 function Loot:onContact(other)

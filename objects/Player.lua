@@ -16,7 +16,7 @@ function Player.new()
         zoom = 1/16,
         speed = config.player.speed,
         shieldedTill = 0,
-        hearts = { "purpleheart", "redheart", "redheart", "redheart", "shinyheart", "shinyheart", "stickyheart" },
+        hearts = { "redheart", "redheart", "redheart" },
         facing = Direction.DOWN,
         moving = false,
         frameTimer = FrameTimer:new(config.frameRate, 2),
@@ -27,6 +27,10 @@ function Player.new()
     player.nextBullet = #player.hearts
 
     return player
+end
+
+function Player.init(G)
+    G.player = Player:new()
 end
 
 -- placement and location

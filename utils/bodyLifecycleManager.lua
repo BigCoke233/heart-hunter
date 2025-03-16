@@ -10,6 +10,10 @@ function bodyLifeCycleManager.new()
     return self
 end
 
+function bodyLifeCycleManager.init(G)
+    G.BodyLifeCycleManager = bodyLifeCycleManager.new()
+end
+
 function bodyLifeCycleManager:create(object, shape, bodyType, sensor)
     table.insert(
         self.toCreate,

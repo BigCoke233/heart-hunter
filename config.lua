@@ -53,6 +53,7 @@ config = {
     map = {
         initialRoomCount = 7,
         extendedRoomCount = 5,
+        initialHeartCount = 3,
     },
 
     defaultMusic = "briskFight"
@@ -68,9 +69,7 @@ function initGame()
     local mapGen = require "logic.MapGenerator"
     local bodyLifeCycleManager = require "utils.bodyLifecycleManager"
     local audio = require "utils.audio"
-
-    audio.stopMusic()
-    speaker.init()
+    local physics = require "logic.physics"
 
     -- initialize game state
     G = {
@@ -79,17 +78,11 @@ function initGame()
         roomCleared = 0,
     }
 
-    love.physics.setMeter(64)
-    G.world = love.physics.newWorld(0, 0, true)
-
-    -- body life cycle manager
-    G.BodyLifeCycleManager = bodyLifeCycleManager.new()
-
-    G.player = Player:new()
-
-    G.allRooms = mapGen.generate(config.map.initialRoomCount, true)
-    G.currentRoom = G.allRooms[1]
-    G.currentRoom:init()
-
-    G.world:setCallbacks(onContact)
+    -- initialize other components
+    audio.stopMusic()
+    speaker.init()
+    physics.init(G)
+    bodyLifeCycleManager.init(G)
+    Player.init(G)
+    mapGen.init(G)
 end

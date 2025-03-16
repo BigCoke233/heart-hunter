@@ -1,5 +1,11 @@
 local physics = {}
 
+function physics.init(G)
+    love.physics.setMeter(64)
+    G.world = love.physics.newWorld(0, 0, true)
+    G.world:setCallbacks(onContact)
+end
+
 function physics.bodifyObject(world, object, shape, bodyType)
     object.physicsBody = love.physics.newBody(world, object.x, object.y, bodyType or "dynamic")
 

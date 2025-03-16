@@ -1,4 +1,5 @@
 local Room = require "objects.room"
+local Loot = require "objects.loot"
 
 local mapGenerator = {}
 
@@ -28,12 +29,12 @@ function mapGenerator.continue(roomCount, from)
     -- continue game by extending the map
     local newMap = mapGenerator.generate(roomCount or config.map.extendedRoomCount, true)
     local room = from or G.currentRoom
-    
+
     -- attempt to find an available room
     local connected = false
     local attempts = 0
     local maxAttempts = 10
-    
+
     while not connected and attempts < maxAttempts do
         -- if doorfull
         if room:isDoorFull() then
@@ -45,7 +46,7 @@ function mapGenerator.continue(roomCount, from)
                 end
             end
         end
-        
+
         -- try to connect
         local entranceDoor, exitDoor = room:connect(newMap[1])
         if entranceDoor then
@@ -60,10 +61,10 @@ function mapGenerator.continue(roomCount, from)
             -- if failed, generate a new map
             newMap = mapGenerator.generate(roomCount or config.map.extendedRoomCount, true)
         end
-        
+
         attempts = attempts + 1
     end
-    
+
     if not connected then
         print("Warning: Failed to connect new rooms after " .. maxAttempts .. " attempts")
         return false
@@ -75,6 +76,20 @@ function mapGenerator.continue(roomCount, from)
 
     G.mapExpanded = true
     return true
+end
+
+function mapGenerator.init(G)
+    -- generate map
+    G.allRooms = mapGenerator.generate(config.map.initialRoomCount, true)
+    G.currentRoom = G.allRooms[1]
+
+    -- add random initial loot
+    for i=1, config.map.initialHeartCount do
+        table.insert(G.currentRoom.objects.loots, Loot:random())
+    end
+
+    -- initialize room
+    G.currentRoom:init()
 end
 
 return mapGenerator
