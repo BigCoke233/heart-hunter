@@ -123,8 +123,12 @@ function draws.enemies()
             -- draw effects
             if enemy.sticky then
                 sprite.draw("spiderweb", x, y, 0, r*2, r*2)
-            elseif enemy.stunned then
+            end
+            if enemy.stunned then
                 sprite.draw("stunningstars", x, y, 0, r*2, r*2)
+            end
+            if enemy.type ~= "librarian" and enemy.movePattern == "vertical" then
+                sprite.draw("verticalMove", x, y, 0, r*2, r*2)
             end
 
             graphics.reset()

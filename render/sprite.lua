@@ -9,6 +9,7 @@ local quads = {}
 local spriteTypes = utils.copy(heartTypes)
 table.insert(spriteTypes, "spiderweb")
 table.insert(spriteTypes, "stunningstars")
+table.insert(spriteTypes, "verticalMove")
 
 local spriteSheets = {
     { name = "apple", w = 32, h = 32 },
