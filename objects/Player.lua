@@ -94,6 +94,10 @@ function Player:shoot(target)
     table.remove(self.hearts, self.nextBullet)
     self.nextBullet = self.nextBullet - 1
 
+    if self.nextBullet <= 0 then
+        self.nextBullet = #self.hearts
+    end
+
     self.shootCooldown = G.time + config.player.shoot.cooldown
 end
 
@@ -143,6 +147,20 @@ function Player:punch(target)
     audio.play("punch")
 end
 
+function Player:loseHeart()
+    if self.nextBullet == #self.hearts then
+        self.nextBullet = self.nextBullet - 1
+    end
+    table.remove(self.hearts)
+end
+
+function Player:gainHeart(name)
+    if self.nextBullet == #self.hearts then
+        self.nextBullet = self.nextBullet + 1
+    end
+    table.insert(self.hearts, name)
+end
+
 function Player:onContact(other, contact)
     -- detect contact with enemies
     if other.objectType == "enemy" then
@@ -150,7 +168,7 @@ function Player:onContact(other, contact)
         -- take the damage
         if not (other.stunned or self:isShielded()) then
             audio.play("getsHit")
-            table.remove(self.hearts)
+            self:loseHeart()
             -- knock back Player
             local ex, ey = other.x, other.y
             local dx, dy = self.x - ex, self.y - ey
