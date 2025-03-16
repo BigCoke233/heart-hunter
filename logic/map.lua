@@ -16,6 +16,7 @@ function map.switchRoom(destination)
     -- load new room
     destination:init()
     G.currentRoom = destination
+    G.currentRoom.isExplored = true
 
     if speaker.clearOnSwitchingRoom then
         speaker.clear()

@@ -28,6 +28,7 @@ function Room:new(name)
 
         doors = {},
         isCleared = false,
+        isExplored = false,
 
         music = data.music or nil,
     }
