@@ -19,6 +19,8 @@ mostly from freesound
 - [Door close undergroundtrain (One Shot)](https://freesound.org/people/julius_galla/sounds/195772/) by julius_galla
 - [Yoink](https://freesound.org/people/Fupicat/sounds/538148/)
 - [Fart 55.wav](https://freesound.org/people/Jagadamba/sounds/253847/)
+- [Spring](https://freesound.org/people/7103/sounds/575784/)
+- [Game Over](https://freesound.org/people/EVRetro/sounds/533034/)
 
 ### Music
 
