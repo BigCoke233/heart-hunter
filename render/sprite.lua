@@ -6,7 +6,7 @@ sprite = {}
 local sprites = {}
 local quads = {}
 
-local spriteTypes = heartTypes
+local spriteTypes = utils.copy(heartTypes)
 table.insert(spriteTypes, "spiderweb")
 table.insert(spriteTypes, "stunningstars")
 
