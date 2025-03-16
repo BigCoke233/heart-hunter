@@ -12,7 +12,9 @@ local locales = {
         },
         roomCleared = "Room cleared: ",
         waveStart = "New enemies are coming.",
-        giftHeartSpeech = "You've received a gift!"
+        giftHeartSpeech = "You've received a gift!",
+        gameOver = "Game Over",
+        pressSpaceToRestart = "Press [Space] to Restart"
     },
     zh = {
         newRealm = "你进入了新的领域，没有回头路了",
@@ -27,7 +29,9 @@ local locales = {
         },
         roomCleared = "已清理房间：",
         waveStart = "有人来了",
-        giftHeartSpeech = "你收到了礼物！"
+        giftHeartSpeech = "你收到了礼物！",
+        gameOver = "游戏结束",
+        pressSpaceToRestart = "按[空格键]重新开始"
     }
 }
 

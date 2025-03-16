@@ -12,7 +12,8 @@ local soundResources = {
     punch = "punch.wav",
     door = "door.wav",
     fart = "fart.wav",
-    spring = "spring.wav"
+    spring = "spring.wav",
+    gameover = "gameover.wav"
 }
 
 local musicResources = {
@@ -78,6 +79,12 @@ function audio.stopMusic()
     if G.musicPlaying then
         love.audio.stop(AudioData[G.musicPlaying])
         G.musicPlaying = nil
+    end
+end
+
+function audio.stopAll()
+    for _, audio in pairs(AudioData) do
+        audio:stop()
     end
 end
 
