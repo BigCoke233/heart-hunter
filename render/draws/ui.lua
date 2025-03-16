@@ -16,7 +16,7 @@ function ui.ammoBar()
         -- draw circle behind it to indicate the progress
         local chargingStarted = G.player.chargingStarted
         local chargingTime = G.time - (chargingStarted or 0)
-        if chargingStarted and i==#hearts then
+        if chargingStarted and i==G.player.nextBullet then
             local arc = math.pi * 2 * (chargingTime or 0)
             love.graphics.setColor(1,0,0,0.6)
             love.graphics.arc("fill", position.x+heartR/2, position.y+heartR/2,
