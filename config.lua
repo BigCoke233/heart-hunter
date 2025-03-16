@@ -58,6 +58,15 @@ config = {
         },
     },
 
+    ui = {
+        minimap = {
+            mapSize = 100,
+            roomSize = 25,
+            padding = 10,
+            lineWidth = 2,
+        }
+    },
+
     defaultMusic = "briskFight"
 }
 
