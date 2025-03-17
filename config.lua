@@ -1,7 +1,7 @@
 -- global configurations
 config = {
     debug = false,
-    lang = "zh",
+    lang = "en",
 
     lootSize = 5,
     heartSize = 15,
