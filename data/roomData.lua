@@ -1,4 +1,5 @@
 local roomType = require "data.roomType"
+local translator = require "i18n.translator"
 
 local roomData = {
     initialRoom = {
@@ -64,11 +65,11 @@ local roomData = {
         },
         waves = {
             {
-                message = "Prepare for some spider dance!",
+                message = translator.T("tankPartyWaveMessage1"),
                 mobs = { "spiger", "spiger", "spiger" }
             },
             {
-                message = "Is it paint or ketchup or blood?",
+                message = translator.T("tankPartyWaveMessage2"),
                 mobs = { "pokob", "pokob", "pokob" }
             }
         },
@@ -149,13 +150,13 @@ local roomData = {
         },
         waves = {
             {
-                message = "You're not welcome here!",
+                message = translator.T("nwyWaveMessage1"),
                 mobs = {
                     "pokob", "lancer", "lancer", "lancer", "lancer"
                 }
             },
             {
-                message = "Where's my son!",
+                message = translator.T("nwyWaveMessage2"),
                 mobs = {
                     "pokob", "citrusLitulon", "citrusLitulon"
                 }

@@ -13,8 +13,15 @@ local locales = {
         roomCleared = "Room cleared: ",
         waveStart = "New enemies are coming.",
         giftHeartSpeech = "You've received a gift!",
+
         gameOver = "Game Over",
-        pressSpaceToRestart = "Press [Space] to Restart"
+        pressSpaceToRestart = "Press [Space] to Restart",
+
+        tankPartyWaveMessage1 = "Prepare for some spider dance!",
+        tankPartyWaveMessage2 = "Is it paint or ketchup or blood?",
+
+        nwyWaveMessage1 = "You're not welcome here!",
+        nwyWaveMessage2 = "Where's my son!",
     },
     zh = {
         newRealm = "你进入了新的领域，没有回头路了",
@@ -31,7 +38,13 @@ local locales = {
         waveStart = "有人来了",
         giftHeartSpeech = "你收到了礼物！",
         gameOver = "游戏结束",
-        pressSpaceToRestart = "按[空格键]重新开始"
+        pressSpaceToRestart = "按[空格键]重新开始",
+
+        tankPartyWaveMessage1 = "准备好迎接蜘蛛舞！",
+        tankPartyWaveMessage2 = "里面装的是油漆还是番茄酱还是血？",
+
+        nwyWaveMessage1 = "这里不欢迎你！",
+        nwyWaveMessage2 = "你把我儿子怎么了？！",
     }
 }
 
