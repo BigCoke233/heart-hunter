@@ -1,5 +1,5 @@
 require "data.directions"
-local Loot = require "objects.Loot"
+local Loot = require "objects.loot"
 local physics = require "logic.physics"
 local enemyData = require "data.enemyData"
 local FrameTimer = require "utils.frameTimer"

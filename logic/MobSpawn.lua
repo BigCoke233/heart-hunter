@@ -1,4 +1,4 @@
-local Enemy = require "objects.Enemy"
+local Enemy = require "objects.enemy"
 local roomData = require "data.roomData"
 local translator = require "i18n.translator"
 
