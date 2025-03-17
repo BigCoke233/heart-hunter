@@ -81,7 +81,7 @@ local bulletData = {
         end
     },
     greenheart = {
-        damage = 100,
+        damage = 90,
         afterShot = function ()
         end,
         afterHit = function (x, y, enemyType)

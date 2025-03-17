@@ -50,7 +50,7 @@ local enemyData = {
         size = 30,
         zoom = 1/16,
         speed = 90,
-        health = 100,
+        health = 90,
         sprite = {
             type = "spritesheet",
             name = "librarian",
@@ -87,8 +87,9 @@ local enemyData = {
             },
         },
         drops = {
-            { type = "yellowheart", amount = 2, chances = 1 },
-            { type = "shinyheart", amount = 1, chances = 0.2 }
+            { type = "yellowheart", amount = 1, chances = 0.5 },
+            { type = "shinyheart", amount = 1, chances = 0.5 },
+            { type = "shinyheart", amount = 1, chances = 0.2 },
         },
     },
     pokob = {
