@@ -5,8 +5,9 @@ local locales = {
         welcome = {
             "welcome",
             "press W, A, S, D to move",
-            "click mouse to rip out your heart",
+            "left-click to rip out your heart",
             "and, of course, shoot the enemies",
+            "if you need, right-click to punch",
             "you'll need to harvest their hearts too",
             "good luck"
         },
@@ -29,8 +30,9 @@ local locales = {
         welcome = {
             "欢迎",
             "按 W, A, S, D 移动",
-            "点击鼠标掏出你的心脏",
+            "点击鼠标左键掏出你的心脏",
             "当然，还要射杀敌人",
+            "如果需要，可以右键击打敌人",
             "你也需要收割他们的心脏",
             "祝你好运"
         },
