@@ -82,6 +82,10 @@ function love.mousereleased(x, y, button)
     controller.mousereleased(x, y, button)
 end
 
+function love.wheelmoved(x, y)
+    controller.wheelmoved(x, y)
+end
+
 function onContact(a, b, contact)
     local objectA = utils.whoseBody(a:getBody())
     local objectB = utils.whoseBody(b:getBody())

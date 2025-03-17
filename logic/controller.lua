@@ -107,4 +107,12 @@ function controller.mousereleased(x, y, button)
     end
 end
 
+function controller.wheelmoved(x, y)
+    if y > 0 then
+        playerChangeNextBullet("q")
+    elseif y < 0 then
+        playerChangeNextBullet("e")
+    end
+end
+
 return controller
