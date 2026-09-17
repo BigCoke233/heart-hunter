@@ -1,3 +1,5 @@
+Play on [itch.io](https://eltrac.itch.io/heart-hunter)
+
 ## Resources
 
 ### Images
